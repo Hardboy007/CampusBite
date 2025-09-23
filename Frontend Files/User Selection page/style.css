@@ -1,0 +1,44 @@
+/* Base styles */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Martel+Sans&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap');
+body{
+    margin: 0;
+    font-family: "Montserrat Alternates", sans-serif;
+    background-color: linear-gradient(to right, #f5f7fa, #c3cfe2);
+    color: #333;
+}
+
+/* Container for the whole layout */
+.container{
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* Subtitle styling */
+.subtitle{
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+/* Wrapper for both cards */
+.card-wrapper{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Individual role card  */
+.role-card{
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 30px;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* Hover effect for card: lift up */
+.role-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20 px rgba(0,0,0,0.2);
+}
