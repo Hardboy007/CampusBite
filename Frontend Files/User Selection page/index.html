@@ -2,42 +2,116 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Welcome — CampusBite</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Welcome to CampusBite</h1>
-        <p class="subtitle">Choose your role to get started</p>
+        <!-- Hero / Header -->
+        <h1>Welcome to <span class="brand">CampusBite</span></h1>
+        <p class="subtitle">Choose your role and get started.</p>
 
+        <!-- Role Selection Cards -->
         <div class="card-wrapper">
-            <!-- Cafe Owner Card -->
+            <!-- Customer Card -->
             <div class="role-card">
-                <h2>I'm a Cafe Owner</h2>
-                <p>Manage your cafe, menu, and orders from students</p>
-                <ul>
-                    <li>Track sales and analytics</li>
-                    <li>Manage customer orders</li>
-                    <li>Update menu and pricing</li>
-                </ul>
-                <button class="role-btn owner-btn">Continue as Owner</button>
+                <div class="card-content">
+                    <h2>I'm a Customer</h2>
+                    <p class="muted">Quick orders • Track status • Pickup faster</p>
+                    <ul>
+                        <li>Browse campus cafes</li>
+                        <li>Quick order placement</li>
+                        <li>Track order status</li>
+                    </ul>
+                    <form method="POST" action="/user-selection">
+                        <input type="hidden" name="role" value="student">
+                        <button type="submit" class="role-btn customer-btn">Continue as Customer</button>
+                    </form>
+                </div>
             </div>
-            <!-- Student Card -->
+
+            <!-- Canteen Staff Card -->
             <div class="role-card">
-                <h2>I'm a Student</h2>
-                <p>Browse cafes and order your favorite food on campus</p>
-                <ul>
-                    <li>Browse campus cafes</li>
-                    <li>Quick order placement</li>
-                    <li>Track order status</li>
-                </ul>
-                <button class="role-btn student-btn">Continue as Student</button>
+                <div class="card-content">
+                    <h2>I'm Canteen Staff</h2>
+                    <p class="muted">Manage orders • Update menu • Mark ready</p>
+                    <ul>
+                        <li>Manage customer orders</li>
+                        <li>Update availability</li>
+                        <li>Update menu and pricing</li>
+                    </ul>
+                    <form method="POST" action="/user-selection">
+                        <input type="hidden" name="role" value="canteen">
+                        <button type="submit" class="role-btn owner-btn">Continue as Staff</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
+    <section class="highlight">
+        <div class="highlight-content">
+            <h1>Smart dining, made simple</h1>
+            <p>No long queues, no confusion — just quick bites and clear updates.</p>
+        </div>
+        <img src="images/burger.avif" alt="Burger" class="side-img img-left top">
+        <img src="images/momos.avif" alt="Momos" class="side-img img-left bottom">
+        <img src="images/pizza.avif" alt="Pizza" class="side-img img-right top">
+        <img src="images/chhole bhature.png" alt="Chhole Bhature" class="side-img img-right bottom">
+    </section>
+
+    <div class="seperation"></div>
+
+    <section class="feature-section-bg">
+        <div class="features">
+            <h1 class="features-title">What's waiting for you on our website?</h1>
+            <p class="features-subtitle">Skip the waiting, explore your cravings, and order smarter with us.</p>
+
+            <div class="features-wrapper">
+                <div class="features-left">
+                    <div class="feature">
+                        <img src="images/healthy.avif" alt="Healthy" />
+                        <p>Healthy</p>
+                    </div>
+                    <div class="feature">
+                        <img src="images/veg mode.avif" alt="Veg mode" />
+                        <p>Veg Mode</p>
+                    </div>
+                    <div class="feature">
+                        <img src="images/gourmet.avif" alt="Gourmet" />
+                        <p>Gourmet</p>
+                    </div>
+                </div>
+
+                <div class="mobile-image hidden">
+                    <img src="images/mobile.avif" alt="Mobile" />
+                    <div class="feature-center">
+                        <img src="images/schedule.avif" alt="Schedule" />
+                        <p>Schedule your order</p>
+                    </div>
+                </div>
+
+                <div class="features-right">
+                    <div class="feature">
+                        <img src="images/offers.avif" alt="Offers" />
+                        <p>Offers</p>
+                    </div>
+                    <div class="feature">
+                        <img src="images/collections.avif" alt="Collections" />
+                        <p>Collections</p>
+                    </div>
+                    <div class="feature">
+                        <img src="images/plan party.avif" alt="Plan Party" />
+                        <p>Plan a Party</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="script.js"></script>
 </body>
 
 </html>

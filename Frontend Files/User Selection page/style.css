@@ -1,44 +1,363 @@
 /* Base styles */
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Martel+Sans&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap');
-body{
+/* root me variables define krte h jisse bar bar same color na likhna pade */
+:root{
+  --bg1: #FFF4EA;    /* light warm */
+  --bg2: #FFEDD5;    /* slightly deeper */
+  --accent: #FF7A4A; /* coral/orange */
+  --accent-2: #FFB56B; /* soft orange */
+  --teal: #2AB7A9;   /* teal for contrast */
+  --muted:#6b7280;
+  --card:#ffffff;
+  --glass: rgba(255,255,255,0.8);
+}
+html, body{
+    height: 100%;
     margin: 0;
     font-family: "Montserrat Alternates", sans-serif;
-    background-color: linear-gradient(to right, #f5f7fa, #c3cfe2);
-    color: #333;
+    background: linear-gradient(180deg,var(--bg1),var(--bg2));
+    color: #111;
 }
-
 /* Container for the whole layout */
 .container{
     text-align: center;
-    padding: 40px 20px;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 28px;
+}
+
+.brand {
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  -webkit-background-clip: text;    /*gradient ko sirf text ke shape ke andar apply krte h baaki background me nhi*/
+  background-clip: text;
+  color: transparent;       /*normal color text hatake gradient hi dikhe*/
+}
+h1 { 
+    font-size: 32px; 
+    margin: 0; 
+    font-weight: 700; 
 }
 
 /* Subtitle styling */
 .subtitle{
+    color: var(--muted); 
+    margin-top: 8px;
     font-size: 1.2rem;
     margin-bottom: 30px;
-    color: #555;
 }
 
 /* Wrapper for both cards */
 .card-wrapper{
     display: flex;
+    overflow: visible;
     justify-content: center;
     gap: 40px;
+    align-items: start;
+    margin-top: 20px;
     flex-wrap: wrap;
 }
 
 /* Individual role card  */
 .role-card{
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: block;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.6s ease-out forwards;
+    animation-delay: 0.3s;
+    border-radius: 16px;
+    background-color: #ffffff;
+    border: 2px solid transparent;
+    box-shadow: 0 8px 24px rgba(16,24,40,0.1);
     padding: 30px;
     width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
+}
+/* each card will appear with different delay on loading  */
+.role-card:nth-child(1){
+    animation-delay: 0.3s;
+}
+.role-card:nth-child(2){
+    animation-delay: 0.5s;
+}
+/* page load hone pr cards slide hoke appear honge */
+@keyframes slideUp{
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 /* Hover effect for card: lift up */
 .role-card:hover{
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20 px rgba(0,0,0,0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    background: linear-gradient(#ffffff, #ffffff) padding-box,
+                linear-gradient(45deg, var(--accent), var(--accent-2)) border-box;
+    border: 2px solid transparent;
+    background-clip: padding-box, border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.card-content { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+.card-content h2 { 
+    margin: 0; 
+    font-size: 20px; 
+    color: #0f172a; 
+}
+.muted { 
+    color: var(--muted); 
+    font-size: 13px; 
+    margin-top: 6px; 
+}
+.role-card ul { 
+    margin: 4px 0 0 18px;
+    color: var(--muted);  
+}
+.role-card li { 
+    margin: 4px 0; 
+}
+/* Role button base style */
+.role-btn{
+    margin-top: 20px;
+    align-self: flex-start;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #6c63ff;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.customer-btn {
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  color: white;
+  box-shadow: 0 6px 18px rgba(255,122,74,0.18);
+}
+.owner-btn {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid rgba(255,122,74,0.4);
+  box-shadow: none;
+}
+/* Hover effect for buttons: light purple + lift */
+.role-btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(108,99,255,0.3);
+}
+
+.highlight{
+    position: relative;
+    text-align: center;
+    padding: 100px 20px;
+    background: #fff; 
+}
+
+.highlight-content{
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.highlight h1 {
+  font-size: 35px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.highlight p {
+  font-size: 20px;
+  color: var(--muted);
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.side-img{
+    position: absolute;
+    width: 140px;
+    opacity: 0;
+    transform: translateY(50px) rotate(-13deg);
+    animation: fadeSlideUp 1s ease-out forwards;
+}
+
+.img-left{
+    left: 5%;
+}
+
+.img-right{
+    right: 5%;
+}
+
+.top{
+    top: 8%;
+}
+
+.bottom{
+    bottom: 6%;
+}
+
+/* food items animation */
+@keyframes fadeSlideUp{
+    to{
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* seperation line */
+.seperation{
+    position: relative;
+    height: 30px;
+    background: linear-gradient(to bottom, #eb6f6f, #fbe4e4);
+    border-top: 4px solid #e84949;
+    /* arc shape */
+    border-radius: 50% / 100% 100% 0 0;
+    overflow: hidden;
+    margin-top: -25px;
+}
+
+/* website features */
+.feature-section-bg {
+    width: 100%;
+    background: linear-gradient(135deg, #ffffff, #ffedef);
+    padding: 60px 0; /* vertical space above & below */
+}
+.features{
+    padding: 0px 20px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+
+}
+.features h1{
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: rgb(239 79 95);
+    margin-bottom: 10px;
+}
+.features p{
+    max-width: 450px;
+    margin: 0 auto 40px;
+    font-size: 1.2rem;
+    color: var(--muted);
+}
+.features-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+.features-left, 
+.features-right{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.feature{
+    background: white;
+    padding: 10px;
+    border-radius: 35px;
+    box-shadow: 0 6px 15px rgba(0 0 0 / 0.1);
+    width: 110px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+}
+.feature img{
+    width: 600px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+.feature p{
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #3e3c3c;
+}
+
+/* mobile image and centre feature */
+.mobile-image{
+    position: relative;
+    max-width: 250px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgb(0 0 0 / 0.15);
+    opacity: 0;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+.mobile-image.hidden {
+    opacity: 0;
+    transform: translateY(80px); /* Start position: moved down */
+}
+.mobile-image.visible {
+    opacity: 1;
+    transform: translateY(0); /* Final position */
+}
+.mobile-image img{
+    width: 100%;
+    border-radius: 30px;
+    box-shadow: 0 15px 40px rgb(0 0 0 / 0.15);
+}
+.mobile-image::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    pointer-events: none; /* Optional: so it doesn't block clicks */
+}
+.feature-center{
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    width: 100px;
+    height: 150px;
+    box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+}
+.feature-center img {
+    width: 105px;
+    height: 80px;
+    margin-bottom: 30px;
+}
+.feature-center p {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+/* Responsive */
+@media (max-width: 900px) {
+  .card-wrapper { grid-template-columns: 1fr; }
+  h1 { font-size: 26px; }
+  .container { padding: 18px; margin: 20px; }
+  .features-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    .features-left, .features-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+    }
 }
