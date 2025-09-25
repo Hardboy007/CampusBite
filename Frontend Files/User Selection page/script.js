@@ -15,6 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {   //jab pura html co
     }, {
         threshold: 0.4, // jab element ka 40% part dikhne lage tab trigger kro
     });
-    
+
     observer.observe(mobileImage);      //mobile image ko observe krna shuru kro
 });
