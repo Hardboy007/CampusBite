@@ -421,6 +421,221 @@ footer{
     font-size: 14px;
     color: #888;
 }
+
+/* now, trying the login form in this page only with blurrish background */
+/* Overlay Background */
+.overlay{
+    position: fixed;        /*stays in place if you scroll page*/
+    top: 0;
+    left: 0;
+    width: 100vw;           /*overlay*/
+    height: 100vh;
+    background-color: rgba(0,0,0,0.4);
+    backdrop-filter: blur(2px);
+    z-index: 99;            /*Brings this overlay above almost everything else on the page*/
+    display: none;          /*initially hides the overlay until login clicked*/
+}
+
+/* Modal Container */
+.loginModal{
+    position: fixed;
+    top: 50%;       /*viewport k center me fixed*/
+    left: 50%;      /*viewport k center me fixed*/
+    transform: translate(-50%, -50%);  /*(-50,-50)modal ko apne center se position krta h*/
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(12px);
+    padding: 30px 25px;
+    border-radius: 20px;
+    width: 360px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    z-index: 100;  /*Is modal ko overlay ke upar laata hai (overlay ka z-index 99 tha, modal 100, matlab modal overlay se aage dikhai dega).*/
+    display: none;  /*modal ko initially chhupa diya*/
+    animation: slideIn 0.4s ease-out;
+}
+/* animation */
+@keyframes slideIn{
+    from{
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.8);
+        /* Modal thoda upar (-60% top) se start hota hai, chhota (scale(0.8)) aur fully transparent (opacity: 0). */
+    }
+    to{
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        /* Modal apne center mein aata hai (-50%, -50%), original size pe (scale(1)) aur fully visible hota hai (opacity: 1). */
+    }
+    /* Ye animation modal ke smoothly slide karke fade in hone ka effect deta hai. */
+}
+
+/* Close Button */
+.close-btn{
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 22px;
+    font-weight: 500;
+    color: #444;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.close-btn:hover {
+    color: #fe5959;
+}
+/* Modal Title */
+.loginModal h2{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+/* Modal subtitle */
+.login-title{
+    text-align: center;
+    font-size: 13px;
+    color: #333;
+}
+.remember{
+    font-size: 14.6px;
+    color: #333;
+    padding: 35px 30px;
+    font-size: 13px;
+}
+.forgot{
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 13px;
+}
+/* input group */
+.input-group{
+    position: relative;
+    margin-bottom: 15px;
+}
+.input-group .icon{
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #666;
+    width: 20px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.error-msg {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+    display: none;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #888;
+    cursor: pointer;
+}
+.toggle-password:hover {
+    color: #333;
+}
+.input-group input{
+    width: calc(100% - 51px);
+    padding: 10px 10px 10px 40px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    background: rgba(255,255,255,0.95);
+    outline: none;
+    transition: box-shadow 0.2s ease;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.05);
+}
+.input-group input:focus{
+    box-shadow: 0 0 5px var(--accent);
+}
+
+/* Login button */
+.login-btn{
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+}
+.login-btn:hover{
+    background: linear-gradient(90deg, var(--accent-2), var(--accent));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* alternate options to sign in */
+.altr-signin-label{
+    text-align: center;
+    margin-top: 30px;
+}
+.altr-signin-label p{
+    font-size: 15px;
+    color: #555;
+}
+.altr-signin{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    gap: 20px;
+}
+.google, .phn-num{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 180px;
+    padding: 10px 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: "Montserrat Alternates", sans-serif;
+    font-weight: 500;
+    color: #272727;
+}
+.google{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.google:hover {
+  background: linear-gradient(to right, #f98880, #c94141);
+  transform: scale(1.02);
+  transition: all 0.4s ease;
+}
+.phn-num:hover {
+  background: linear-gradient(to right, #929191, #474444);
+  transform: scale(1.02);
+  transition: all 0.4s ease;
+}
+
+/* manual sign up */
+.signup{
+    margin-top: 20px;
+    font-size: 14px;
+}
+.signup a{
+    text-decoration: none;
+    color: #007bff;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .card-wrapper { grid-template-columns: 1fr; }

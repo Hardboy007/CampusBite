@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Welcome — CampusBite</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -52,6 +54,46 @@
         </div>
     </div>
 
+    <!-- Glass Login Modal -->
+    <div id="overlay" class="overlay"></div>
+
+    <div id="loginModal" class="loginModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal()">x</span>
+            <h2>Login as Customer</h2>
+            <p class="login-title">Enter your credentials to access your account</p>
+
+            <!-- Error Message (empty by default) -->
+            <p id="loginError" class="error-msg"></p>
+            <!-- username -->
+            <div class="input-group">
+                <b class="fas fa-envelope icon"></b>
+                <input type="text" id="username" placeholder="Email Id">
+            </div>
+
+            <!-- password -->
+            <div class="input-group">
+                <b class="fas fa-lock icon"></b>
+                <input type="password" id="password" placeholder="Password">
+                <span class="fas fa-eye-slash toggle-password" onclick="togglePassword()"></span>
+            </div>
+
+            <div class="options">
+                <label class="remember"><input type="checkbox" />Remember me</label>
+                <a href="#" class="forgot">Forgot Password?</a>
+            </div>
+
+            <button class="login-btn" onclick="login()">Login</button>
+            <div class="altr-signin-label"><p>Or Continue With</p></div>
+
+            <div class="altr-signin">
+                <button class="google">Google</button>
+                <button class="phn-num">Get OTP</button>
+            </div>
+
+            <p class="signup">Don't have an account? <a href="#">Sign up here</a></p>
+        </div>
+    </div>
 
     <section class="highlight">
         <div class="highlight-content">
