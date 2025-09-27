@@ -20,16 +20,24 @@ document.addEventListener("DOMContentLoaded", function () {   //jab pura html co
 });
 
 
-// Open modal on "Continue as Customer"
+// Open Customer Modal
 document.querySelector(".customer-btn").addEventListener("click", function (e) {
-    e.preventDefault();      //prevent form submit
-    document.getElementById("overlay").style.display = "block";
-    document.getElementById("loginModal").style.display = "block";
+    e.preventDefault();
+    document.getElementById("customerOverlay").style.display = "block";
+    document.getElementById("customerModal").style.display = "block";
 });
-//close modal ❌
-function closeModal() {
-    document.getElementById("overlay").style.display = "none";
-    document.getElementById("loginModal").style.display = "none";
+
+// Open Staff Modal
+document.querySelector(".staff-btn").addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("staffOverlay").style.display = "block";
+    document.getElementById("staffModal").style.display = "block";
+});
+
+// Close Modal (reusable function)
+function closeModal(modalId, overlayId) {
+    document.getElementById(modalId).style.display = "none";
+    document.getElementById(overlayId).style.display = "none";
 }
 
 //Login form submission (UPDATED)
