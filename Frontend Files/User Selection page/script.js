@@ -46,7 +46,7 @@ function login(){
         errorMsg.style.display = "block";
         return;
     }
-}
+}  
 
 
 //for eye toggle for password
