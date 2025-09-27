@@ -32,23 +32,23 @@ function closeModal() {
     document.getElementById("loginModal").style.display = "none";
 }
 
-//login functionality
+//Login form submission (UPDATED)
 const loginForm = document.getElementById("loginForm");
-if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
+if (loginForm) {        //agar page pe form hai tabhi ye code chale
+    loginForm.addEventListener("submit", function (e) {            //Jab user submit id wala (login button click) karega, ye function run hoga
 
-        const email = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
+        const email = document.getElementById("username").value.trim();     //.trim() lagaya taaki extra spaces hat jaye.
+        const password = document.getElementById("password").value.trim();  //.trim() lagaya taaki extra spaces hat jaye.
         const errorMsg = document.getElementById("loginError");
 
         // Hide previous error
-        errorMsg.style.display = "none";
-        errorMsg.textContent = "";
+        errorMsg.style.display = "none";    //Pehle ke error ko clear kar diya (agar koi pehle dikh raha tha to).
+        errorMsg.textContent = "";          //error ka text hata dena.
 
         if (!email || !password) {
             e.preventDefault();       //STOP form submission
             errorMsg.textContent = "Please enter both email and password.";
-            errorMsg.style.display = "block";
+            errorMsg.style.display = "block";       //Error box visible kar diya.
             return;         //form submit na ho
         }
     });
