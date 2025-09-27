@@ -1,25 +1,34 @@
 /* Base styles */
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Martel+Sans&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap');
+
 /* root me variables define krte h jisse bar bar same color na likhna pade */
-:root{
-  --bg1: #FFF4EA;    /* light warm */
-  --bg2: #FFEDD5;    /* slightly deeper */
-  --accent: #FF7A4A; /* coral/orange */
-  --accent-2: #FFB56B; /* soft orange */
-  --teal: #2AB7A9;   /* teal for contrast */
-  --muted:#6b7280;
-  --card:#ffffff;
-  --glass: rgba(255,255,255,0.8);
+:root {
+    --bg1: #FFF4EA;
+    /* light warm */
+    --bg2: #FFEDD5;
+    /* slightly deeper */
+    --accent: #FF7A4A;
+    /* coral/orange */
+    --accent-2: #FFB56B;
+    /* soft orange */
+    --teal: #2AB7A9;
+    /* teal for contrast */
+    --muted: #6b7280;
+    --card: #ffffff;
+    --glass: rgba(255, 255, 255, 0.8);
 }
-html, body{
+
+html,
+body {
     height: 100%;
     margin: 0;
     font-family: "Montserrat Alternates", sans-serif;
-    background: linear-gradient(180deg,var(--bg1),var(--bg2));
+    background: linear-gradient(180deg, var(--bg1), var(--bg2));
     color: #111;
 }
+
 /* Container for the whole layout */
-.container{
+.container {
     text-align: center;
     max-width: 1100px;
     margin: 40px auto;
@@ -27,27 +36,30 @@ html, body{
 }
 
 .brand {
-  background: linear-gradient(90deg,var(--accent),var(--accent-2));
-  -webkit-background-clip: text;    /*gradient ko sirf text ke shape ke andar apply krte h baaki background me nhi*/
-  background-clip: text;
-  color: transparent;       /*normal color text hatake gradient hi dikhe*/
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    /*gradient ko sirf text ke shape ke andar apply krte h baaki background me nhi*/
+    background-clip: text;
+    color: transparent;
+    /*normal color text hatake gradient hi dikhe*/
 }
-h1 { 
-    font-size: 32px; 
-    margin: 0; 
-    font-weight: 700; 
+
+h1 {
+    font-size: 32px;
+    margin: 0;
+    font-weight: 700;
 }
 
 /* Subtitle styling */
-.subtitle{
-    color: var(--muted); 
+.subtitle {
+    color: var(--muted);
     margin-top: 8px;
     font-size: 1.2rem;
     margin-bottom: 30px;
 }
 
 /* Wrapper for both cards */
-.card-wrapper{
+.card-wrapper {
     display: flex;
     overflow: visible;
     justify-content: center;
@@ -58,7 +70,7 @@ h1 {
 }
 
 /* Individual role card  */
-.role-card{
+.role-card {
     display: block;
     cursor: pointer;
     overflow: hidden;
@@ -70,59 +82,69 @@ h1 {
     border-radius: 16px;
     background-color: #ffffff;
     border: 2px solid transparent;
-    box-shadow: 0 8px 24px rgba(16,24,40,0.1);
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.1);
     padding: 30px;
     width: 300px;
     transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
 }
+
 /* each card will appear with different delay on loading  */
-.role-card:nth-child(1){
+.role-card:nth-child(1) {
     animation-delay: 0.3s;
 }
-.role-card:nth-child(2){
+
+.role-card:nth-child(2) {
     animation-delay: 0.5s;
 }
+
 /* page load hone pr cards slide hoke appear honge */
-@keyframes slideUp{
+@keyframes slideUp {
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
+
 /* Hover effect for card: lift up */
-.role-card:hover{
+.role-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
     background: linear-gradient(#ffffff, #ffffff) padding-box,
-                linear-gradient(45deg, var(--accent), var(--accent-2)) border-box;
+        linear-gradient(45deg, var(--accent), var(--accent-2)) border-box;
     border: 2px solid transparent;
     background-clip: padding-box, border-box;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
-.card-content { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 10px; 
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
-.card-content h2 { 
-    margin: 0; 
-    font-size: 20px; 
-    color: #0f172a; 
+
+.card-content h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #0f172a;
 }
-.muted { 
-    color: var(--muted); 
-    font-size: 13px; 
-    margin-top: 6px; 
+
+.muted {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 6px;
 }
-.role-card ul { 
+
+.role-card ul {
     margin: 4px 0 0 18px;
-    color: var(--muted);  
+    color: var(--muted);
 }
-.role-card li { 
-    margin: 4px 0; 
+
+.role-card li {
+    margin: 4px 0;
 }
+
 /* Role button base style */
-.role-btn{
+.role-btn {
     margin-top: 20px;
     align-self: flex-start;
     padding: 12px 20px;
@@ -135,50 +157,53 @@ h1 {
     color: white;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
 .customer-btn {
-  background: linear-gradient(90deg,var(--accent),var(--accent-2));
-  color: white;
-  box-shadow: 0 6px 18px rgba(255,122,74,0.18);
-}
-.owner-btn {
-  background: transparent;
-  color: var(--accent);
-  border: 2px solid rgba(255,122,74,0.4);
-  box-shadow: none;
-}
-/* Hover effect for buttons: light purple + lift */
-.role-btn:hover{
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(108,99,255,0.3);
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    color: white;
+    box-shadow: 0 6px 18px rgba(255, 122, 74, 0.18);
 }
 
-.highlight{
+.owner-btn {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid rgba(255, 122, 74, 0.4);
+    box-shadow: none;
+}
+
+/* Hover effect for buttons: light purple + lift */
+.role-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(108, 99, 255, 0.3);
+}
+
+.highlight {
     position: relative;
     text-align: center;
     padding: 100px 20px;
-    background: #fff; 
+    background: #fff;
 }
 
-.highlight-content{
+.highlight-content {
     max-width: 600px;
     margin: 0 auto;
 }
 
 .highlight h1 {
-  font-size: 35px;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 14px;
+    font-size: 35px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 14px;
 }
 
 .highlight p {
-  font-size: 20px;
-  color: var(--muted);
-  max-width: 650px;
-  margin: 0 auto;
+    font-size: 20px;
+    color: var(--muted);
+    max-width: 650px;
+    margin: 0 auto;
 }
 
-.side-img{
+.side-img {
     position: absolute;
     width: 140px;
     opacity: 0;
@@ -186,32 +211,32 @@ h1 {
     animation: fadeSlideUp 1s ease-out forwards;
 }
 
-.img-left{
+.img-left {
     left: 5%;
 }
 
-.img-right{
+.img-right {
     right: 5%;
 }
 
-.top{
+.top {
     top: 8%;
 }
 
-.bottom{
+.bottom {
     bottom: 6%;
 }
 
 /* food items animation */
-@keyframes fadeSlideUp{
-    to{
+@keyframes fadeSlideUp {
+    to {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
 }
 
 /* seperation line */
-.seperation{
+.seperation {
     position: relative;
     height: 30px;
     background: linear-gradient(to bottom, #eb6f6f, #fbe4e4);
@@ -226,41 +251,48 @@ h1 {
 .feature-section-bg {
     width: 100%;
     background: linear-gradient(135deg, #ffffff, #ffedef);
-    padding: 60px 0; /* vertical space above & below */
+    padding: 60px 0;
+    /* vertical space above & below */
 }
-.features{
+
+.features {
     padding: 0px 20px;
     text-align: center;
     max-width: 1200px;
     margin: 0 auto;
 
 }
-.features h1{
+
+.features h1 {
     font-weight: 700;
     font-size: 2.5rem;
     color: rgb(239 79 95);
     margin-bottom: 10px;
 }
-.features p{
+
+.features p {
     max-width: 450px;
     margin: 0 auto 40px;
     font-size: 1.2rem;
     color: var(--muted);
 }
-.features-wrapper{
+
+.features-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px;
     flex-wrap: wrap;
 }
-.features-left, 
-.features-right{
+
+.features-left,
+.features-right {
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
-.feature{
+
+.feature {
     background: white;
     padding: 10px;
     border-radius: 35px;
@@ -272,20 +304,22 @@ h1 {
     align-items: center;
     cursor: default;
 }
-.feature img{
+
+.feature img {
     width: 600px;
     height: 60px;
     object-fit: contain;
     margin-bottom: 10px;
 }
-.feature p{
+
+.feature p {
     font-size: 0.8rem;
     font-weight: 500;
     color: #3e3c3c;
 }
 
 /* mobile image and centre feature */
-.mobile-image{
+.mobile-image {
     position: relative;
     max-width: 250px;
     width: 100%;
@@ -294,19 +328,25 @@ h1 {
     opacity: 0;
     transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
+
 .mobile-image.hidden {
     opacity: 0;
-    transform: translateY(80px); /* Start position: moved down */
+    transform: translateY(80px);
+    /* Start position: moved down */
 }
+
 .mobile-image.visible {
     opacity: 1;
-    transform: translateY(0); /* Final position */
+    transform: translateY(0);
+    /* Final position */
 }
-.mobile-image img{
+
+.mobile-image img {
     width: 100%;
     border-radius: 30px;
     box-shadow: 0 15px 40px rgb(0 0 0 / 0.15);
 }
+
 .mobile-image::after {
     content: "";
     position: absolute;
@@ -317,9 +357,11 @@ h1 {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    pointer-events: none; /* Optional: so it doesn't block clicks */
+    pointer-events: none;
+    /* Optional: so it doesn't block clicks */
 }
-.feature-center{
+
+.feature-center {
     position: absolute;
     bottom: 30px;
     left: 50%;
@@ -335,11 +377,13 @@ h1 {
     align-items: center;
     cursor: default;
 }
+
 .feature-center img {
     width: 105px;
     height: 80px;
     margin-bottom: 30px;
 }
+
 .feature-center p {
     font-size: 0.9rem;
     font-weight: 500;
@@ -347,14 +391,14 @@ h1 {
 
 
 /* footer styling */
-footer{
+footer {
     background: #000000;
     color: white;
     padding: 30px 0;
     font-size: 14px;
 }
 
-.footer-container{
+.footer-container {
     max-width: 1200px;
     margin: auto;
     display: flex;
@@ -362,45 +406,46 @@ footer{
     justify-content: space-between;
 }
 
-.footer-section{
+.footer-section {
     flex: 1 1 200px;
     margin: 10px;
 }
 
-.footer-section h4{
+.footer-section h4 {
     margin-bottom: 10px;
 }
 
-.footer-section ul{
+.footer-section ul {
     list-style: none;
     padding: 0;
 }
 
-.footer-section ul li{
+.footer-section ul li {
     margin: 6px 0;
 }
 
-.footer-section a{
+.footer-section a {
     text-decoration: none;
     color: #888b92;
     transition: color 0.3s ease;
 }
-.footer-section a:hover{
+
+.footer-section a:hover {
     color: #ff6b35;
 }
 
-.logo{
+.logo {
     font-size: 28px;
     margin: 0;
 }
 
-.tagline{
+.tagline {
     margin-top: 5px;
     font-size: 13px;
     color: #c1c0c0;
 }
 
-.footer-bottom{
+.footer-bottom {
     text-align: center;
     margin-top: 20px;
     padding-top: 10px;
@@ -409,13 +454,13 @@ footer{
     color: #777;
 }
 
-.disclaimer{
+.disclaimer {
     font-size: 11px;
     margin-top: 5px;
     color: #999;
 }
 
-.credit{
+.credit {
     text-align: center;
     margin-top: 30px;
     font-size: 14px;
@@ -424,51 +469,63 @@ footer{
 
 /* now, trying the login form in this page only with blurrish background */
 /* Overlay Background */
-.overlay{
-    position: fixed;        /*stays in place if you scroll page*/
+.overlay {
+    position: fixed;
+    /*stays in place if you scroll page*/
     top: 0;
     left: 0;
-    width: 100vw;           /*overlay*/
+    width: 100vw;
+    /*overlay*/
     height: 100vh;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(2px);
-    z-index: 99;            /*Brings this overlay above almost everything else on the page*/
-    display: none;          /*initially hides the overlay until login clicked*/
+    z-index: 99;
+    /*Brings this overlay above almost everything else on the page*/
+    display: none;
+    /*initially hides the overlay until login clicked*/
 }
 
 /* Modal Container */
-.loginModal{
+.loginModal {
     position: fixed;
-    top: 50%;       /*viewport k center me fixed*/
-    left: 50%;      /*viewport k center me fixed*/
-    transform: translate(-50%, -50%);  /*(-50,-50)modal ko apne center se position krta h*/
-    background: rgba(255,255,255,0.25);
+    top: 50%;
+    /*viewport k center me fixed*/
+    left: 50%;
+    /*viewport k center me fixed*/
+    transform: translate(-50%, -50%);
+    /*(-50,-50)modal ko apne center se position krta h*/
+    background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(12px);
     padding: 30px 25px;
     border-radius: 20px;
     width: 360px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-    z-index: 100;  /*Is modal ko overlay ke upar laata hai (overlay ka z-index 99 tha, modal 100, matlab modal overlay se aage dikhai dega).*/
-    display: none;  /*modal ko initially chhupa diya*/
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    z-index: 100;
+    /*Is modal ko overlay ke upar laata hai (overlay ka z-index 99 tha, modal 100, matlab modal overlay se aage dikhai dega).*/
+    display: none;
+    /*modal ko initially chhupa diya*/
     animation: slideIn 0.4s ease-out;
 }
+
 /* animation */
-@keyframes slideIn{
-    from{
+@keyframes slideIn {
+    from {
         opacity: 0;
         transform: translate(-50%, -60%) scale(0.8);
         /* Modal thoda upar (-60% top) se start hota hai, chhota (scale(0.8)) aur fully transparent (opacity: 0). */
     }
-    to{
+
+    to {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
         /* Modal apne center mein aata hai (-50%, -50%), original size pe (scale(1)) aur fully visible hota hai (opacity: 1). */
     }
+
     /* Ye animation modal ke smoothly slide karke fade in hone ka effect deta hai. */
 }
 
 /* Close Button */
-.close-btn{
+.close-btn {
     position: absolute;
     top: 14px;
     right: 18px;
@@ -480,40 +537,47 @@ footer{
     cursor: pointer;
     transition: color 0.3s ease;
 }
+
 .close-btn:hover {
     color: #fe5959;
 }
+
 /* Modal Title */
-.loginModal h2{
+.loginModal h2 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
 }
+
 /* Modal subtitle */
-.login-title{
+.login-title {
     text-align: center;
     font-size: 13px;
     color: #333;
 }
-.remember{
+
+.remember {
     font-size: 14.6px;
     color: #333;
     padding: 35px 30px;
     font-size: 13px;
 }
-.forgot{
+
+.forgot {
     font-size: 14px;
     color: #007bff;
     text-decoration: none;
     font-size: 13px;
 }
+
 /* input group */
-.input-group{
+.input-group {
     position: relative;
     margin-bottom: 15px;
 }
-.input-group .icon{
+
+.input-group .icon {
     position: absolute;
     left: 14px;
     top: 50%;
@@ -542,59 +606,82 @@ footer{
     color: #888;
     cursor: pointer;
 }
+
 .toggle-password:hover {
     color: #333;
 }
-.input-group input{
+
+.input-group input {
     width: calc(100% - 51px);
     padding: 10px 10px 10px 40px;
     border: none;
     border-radius: 12px;
     font-size: 15px;
-    background: rgba(255,255,255,0.95);
+    background: rgba(255, 255, 255, 0.95);
     outline: none;
     transition: box-shadow 0.2s ease;
-    box-shadow: inset 0 0 3px rgba(0,0,0,0.05);
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.05);
 }
-.input-group input:focus{
+
+.input-group input:focus {
     box-shadow: 0 0 5px var(--accent);
 }
 
 /* Login button */
-.login-btn{
+.login-btn {
+    margin-top: 25px;
     width: 100%;
     padding: 12px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    color: white;
-    font-weight: bold;
     border: none;
     border-radius: 12px;
+    background: linear-gradient(45deg, #ff6b3d, #ff914d);
+    color: #fff;
+    font-weight: 600;
     font-size: 16px;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    /* Button content ke liye */
 }
-.login-btn:hover{
-    background: linear-gradient(90deg, var(--accent-2), var(--accent));
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+.login-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff914d, #ff6b3d);
+    transition: all 0.4s ease;
+    z-index: -1;
+}
+
+.login-btn:hover::after {
+    left: 0;
 }
 
 /* alternate options to sign in */
-.altr-signin-label{
+.altr-signin-label {
     text-align: center;
     margin-top: 30px;
 }
-.altr-signin-label p{
+
+.altr-signin-label p {
     font-size: 15px;
     color: #555;
 }
-.altr-signin{
+
+.altr-signin {
     display: flex;
     margin-top: 20px;
     justify-content: center;
     gap: 20px;
 }
-.google, .phn-num{
+
+.google,
+.phn-num {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -609,43 +696,59 @@ footer{
     font-weight: 500;
     color: #272727;
 }
-.google{
+
+.google {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
+
 .google:hover {
-  background: linear-gradient(to right, #f98880, #c94141);
-  transform: scale(1.02);
-  transition: all 0.4s ease;
+    background: linear-gradient(to right, #f98880, #c94141);
+    transform: scale(1.02);
+    transition: all 0.4s ease;
 }
+
 .phn-num:hover {
-  background: linear-gradient(to right, #929191, #474444);
-  transform: scale(1.02);
-  transition: all 0.4s ease;
+    background: linear-gradient(to right, #929191, #474444);
+    transform: scale(1.02);
+    transition: all 0.4s ease;
 }
 
 /* manual sign up */
-.signup{
+.signup {
     margin-top: 20px;
     font-size: 14px;
 }
-.signup a{
+
+.signup a {
     text-decoration: none;
     color: #007bff;
 }
 
 /* Responsive */
 @media (max-width: 900px) {
-  .card-wrapper { grid-template-columns: 1fr; }
-  h1 { font-size: 26px; }
-  .container { padding: 18px; margin: 20px; }
-  .features-wrapper {
+    .card-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .container {
+        padding: 18px;
+        margin: 20px;
+    }
+
+    .features-wrapper {
         flex-direction: column;
         align-items: center;
     }
-    .features-left, .features-right {
+
+    .features-left,
+    .features-right {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
