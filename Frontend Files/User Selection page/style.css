@@ -690,30 +690,68 @@ footer {
     padding: 10px 16px;
     margin: 5px;
     border: none;
-    border-radius: 9px;
+    border-radius: 11px;
     cursor: pointer;
     font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     color: #272727;
 }
 
 .google {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    width: 180px;
+    border: none;
+    background: linear-gradient(45deg, #ff3f3f, #fd7171);
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
-.google:hover {
-    background: linear-gradient(to right, #f98880, #c94141);
-    transform: scale(1.02);
+.google::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #fd7171, #ff3f3f);
     transition: all 0.4s ease;
+    z-index: -1;
 }
 
-.phn-num:hover {
-    background: linear-gradient(to right, #929191, #474444);
-    transform: scale(1.02);
+.google:hover::after {
+    left: 0;
+}
+
+.phn-num{
+    width: 180px;
+    border: none;
+    background: linear-gradient(45deg, #474747, #7b7b7b);
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
     transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.phn-num::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #7b7b7b, #474747);
+    transition: all 0.4s ease;
+    z-index: -1;
+}
+
+.phn-num:hover::after {
+    left: 0;
 }
 
 /* manual sign up */
