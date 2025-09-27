@@ -40,29 +40,45 @@ function closeModal(modalId, overlayId) {
     document.getElementById(overlayId).style.display = "none";
 }
 
-//Login form submission (UPDATED)
-const loginForm = document.getElementById("loginForm");
-if (loginForm) {        //agar page pe form hai tabhi ye code chale
-    loginForm.addEventListener("submit", function (e) {            //Jab user submit id wala (login button click) karega, ye function run hoga
+//Login customer form submission (UPDATED)
+const customerForm = document.getElementById("customerLoginForm");
+if (customerForm) {
+    customerForm.addEventListener("submit", function (e) {
+        const email = document.getElementById("customerUsername").value.trim();
+        const password = document.getElementById("customerPassword").value.trim();
+        const errorMsg = document.getElementById("customerLoginError");
 
-        const email = document.getElementById("username").value.trim();     //.trim() lagaya taaki extra spaces hat jaye.
-        const password = document.getElementById("password").value.trim();  //.trim() lagaya taaki extra spaces hat jaye.
-        const errorMsg = document.getElementById("loginError");
-
-        // Hide previous error
-        errorMsg.style.display = "none";    //Pehle ke error ko clear kar diya (agar koi pehle dikh raha tha to).
-        errorMsg.textContent = "";          //error ka text hata dena.
+        // Clear old error
+        errorMsg.style.display = "none";
+        errorMsg.textContent = "";
 
         if (!email || !password) {
-            e.preventDefault();       //STOP form submission
+            e.preventDefault();
             errorMsg.textContent = "Please enter both email and password.";
-            errorMsg.style.display = "block";       //Error box visible kar diya.
-            return;         //form submit na ho
+            errorMsg.style.display = "block";
         }
     });
 }
 
+//Login staff form submission (UPDATED)
+const staffForm = document.getElementById("staffLoginForm");
+if (staffForm) {
+    staffForm.addEventListener("submit", function (e) {
+        const staffId = document.getElementById("staffUsername").value.trim();
+        const password = document.getElementById("staffPassword").value.trim();
+        const errorMsg = document.getElementById("staffLoginError");
 
+        // Clear old error
+        errorMsg.style.display = "none";
+        errorMsg.textContent = "";
+
+        if (!staffId || !password) {
+            e.preventDefault();
+            errorMsg.textContent = "Please enter both Staff ID and Password.";
+            errorMsg.style.display = "block";
+        }
+    });
+}
 //for eye toggle for password
 function togglePassword() {
     const passwordInput = document.getElementById("password");  //password wala input field
