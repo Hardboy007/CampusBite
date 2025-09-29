@@ -430,6 +430,7 @@ body::before {
     background: #9CA3AF;
 }
 
+
 /* Responsive design */
 @media (max-width: 640px) {
     .navbar {
@@ -470,6 +471,13 @@ body::before {
 
     .main-logo i {
         font-size: 40px;
+    }
+    .toggle-btn {
+        padding: 12px 20px; /* Increase padding on small screens */
+        font-size: 18px; /* Increase font size */
+        position: absolute;
+        top: 10px; /* Position it closer to the top */
+        right: 20px; /* Align it to the right */
     }
 }
 
