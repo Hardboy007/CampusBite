@@ -126,8 +126,8 @@ body::before {
 
 .dark-mode .form-input,
 .dark-mode .form-select {
-    background: #222;
-    border: 1px solid #555;
+    background: rgba(30, 30, 30, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     color: #7a7a7a;
 }
 
@@ -136,13 +136,21 @@ body::before {
     color: #7a7a7a;
 }
 
+.dark-mode .form-select {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23FF7A4A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 20px;
+}
+
 /* Fix for input focus */
 .dark-mode .form-input:focus,
 .dark-mode .form-select:focus {
-    background: #333;
+    background: rgba(40, 40, 40, 0.9);
     color: #eee;
     border: 1px solid #FF7A4A;
     outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 122, 74, 0.2);
 }
 
 .dark-mode .next-btn {
@@ -363,6 +371,11 @@ body::before {
     font-weight: 400;
 }
 
+.form-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.25) inset !important;
+    -webkit-text-fill-color: #374151 !important;
+}
+
 /* Form row for side by side inputs */
 .form-row {
     display: flex;
@@ -472,12 +485,17 @@ body::before {
     .main-logo i {
         font-size: 40px;
     }
+
     .toggle-btn {
-        padding: 12px 20px; /* Increase padding on small screens */
-        font-size: 18px; /* Increase font size */
+        padding: 12px 20px;
+        /* Increase padding on small screens */
+        font-size: 18px;
+        /* Increase font size */
         position: absolute;
-        top: 10px; /* Position it closer to the top */
-        right: 20px; /* Align it to the right */
+        top: 10px;
+        /* Position it closer to the top */
+        right: 20px;
+        /* Align it to the right */
     }
 }
 
