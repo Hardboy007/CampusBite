@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {   //jab pura html co
         sideImgs.forEach((img, index) => {
             setTimeout(() => {
                 img.classList.add('loaded');
-            }, index * 100); // stagger 100ms per image
+            }, index * 150); // stagger 100ms per image
         });
 
-    }, 50);
+    }, 100);
 
 
     //mobile image element ko select kiya

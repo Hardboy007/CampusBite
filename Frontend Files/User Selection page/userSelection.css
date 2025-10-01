@@ -216,13 +216,13 @@ h1 {
     width: 140px;
     opacity: 0;
     transform: translateY(50px) scale(0.8) rotate(-13deg);
-    animation: fadeSlideUp 1s ease-out forwards;
 }
 
 /* Page-load extra fade/slide */
 .side-img.loaded {
     opacity: 1;
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    animation: fadeSlideUp 1s ease-out forwards;
 }
 
 .img-left {
