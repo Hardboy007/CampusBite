@@ -6,6 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {   //jab pura html co
             card.classList.add('loaded');
         });
 
+        const sideImgs = document.querySelectorAll('.side-img');
+        sideImgs.forEach((img, index) => {
+            setTimeout(() => {
+                img.classList.add('loaded');
+            }, index * 100); // stagger 100ms per image
+        });
+
     }, 50);
 
 

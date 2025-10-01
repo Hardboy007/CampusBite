@@ -98,11 +98,11 @@ h1 {
 
 /* Each card will appear with different delay on loading */
 .role-card:nth-child(1) {
-    transition-delay: 0.2s; 
+    transition-delay: 0.2s;
 }
 
 .role-card:nth-child(2) {
-    transition-delay: 0.3s; 
+    transition-delay: 0.3s;
 }
 
 /* page load hone pr cards slide hoke appear honge */
@@ -215,8 +215,14 @@ h1 {
     position: absolute;
     width: 140px;
     opacity: 0;
-    transform: translateY(50px) rotate(-13deg);
+    transform: translateY(50px) scale(0.8) rotate(-13deg);
     animation: fadeSlideUp 1s ease-out forwards;
+}
+
+/* Page-load extra fade/slide */
+.side-img.loaded {
+    opacity: 1;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .img-left {
@@ -239,7 +245,7 @@ h1 {
 @keyframes fadeSlideUp {
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0) scale(1) rotate(-13deg);
     }
 }
 
