@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {   //jab pura html content load ho jaye tab ye chale
+    setTimeout(function () {        //added this to fix the LATE ANIMATION BUG after linking backend on page
+        // Role cards animation trigger ← YE ADD KARO
+        const roleCards = document.querySelectorAll('.role-card');
+        roleCards.forEach((card) => {
+            card.classList.add('loaded');
+        });
+
+    }, 50);
+
+
     //mobile image element ko select kiya
     const mobileImage = document.querySelector('.mobile-image');
 

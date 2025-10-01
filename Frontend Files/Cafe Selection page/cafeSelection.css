@@ -57,7 +57,6 @@ body::before {
     padding: 0 40px;
     z-index: 1000;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-
 }
 
 .dark-mode .navbar {
@@ -152,16 +151,7 @@ body::before {
     width: 100%;
     max-width: 480px;
     margin-top: 70px;
-    opacity: 0;
-    /* ← YE ADD KIYA */
-    transform: translateY(30px);
-    /* ← YE ADD KIYA */
-    transition: all 0.6s ease-out;
-}
-
-.container.loaded {
-    opacity: 1;
-    transform: translateY(0);
+    animation: slideUp 0.4s ease-out;
 }
 
 @keyframes slideUp {

@@ -77,24 +77,32 @@ h1 {
     position: relative;
     opacity: 0;
     transform: translateY(30px);
-    animation: slideUp 0.6s ease-out forwards;
-    animation-delay: 0.3s;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    /* ← YE ADD KARA */
     border-radius: 16px;
     background-color: #ffffff;
     border: 2px solid transparent;
     box-shadow: 0 8px 24px rgba(16, 24, 40, 0.1);
     padding: 30px;
     width: 300px;
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s,
+        opacity 0.6s ease-out, transform 0.6s ease-out;
+    /* ← YE UPDATE KARA sab transitions ek saath */
 }
 
-/* each card will appear with different delay on loading  */
+/* Loaded state - Animation trigger hoga JavaScript se */
+.role-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Each card will appear with different delay on loading */
 .role-card:nth-child(1) {
-    animation-delay: 0.3s;
+    transition-delay: 0.2s; 
 }
 
 .role-card:nth-child(2) {
-    animation-delay: 0.5s;
+    transition-delay: 0.3s; 
 }
 
 /* page load hone pr cards slide hoke appear honge */
