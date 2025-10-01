@@ -10,3 +10,10 @@ function toggleDarkMode() {
         toggleBtn.textContent = 'Dark Mode';
     }
 }
+// Page load animation trigger for backend page load bug
+window.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+        const container = document.querySelector('.container');
+        if (container) container.classList.add('loaded');
+    }, 50);
+});
