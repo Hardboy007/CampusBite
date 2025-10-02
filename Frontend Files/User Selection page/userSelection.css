@@ -773,66 +773,130 @@ footer {
 }
 
 /* manual sign up */
-.signup {
+.customerSignup {
     margin-top: 20px;
     font-size: 14px;
 }
 
-.signup a {
+.customerSignup a {
     text-decoration: none;
     color: #007bff;
 }
 
+.staffSignup {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.staffSignup a {
+    text-decoration: none;
+    color: #ff5200;
+    font-weight: 600;
+    letter-spacing: -.3px;
+    transition: color 0.2s ease;
+}
+
+.staffSignup a:hover {
+    color: #292828;
+}
+
 /* Responsive */
-@media (max-width: 900px) {
-    .card-wrapper {
-        grid-template-columns: 1fr;
-    }
-
+/* Extra small devices - phones in portrait */
+@media (max-width: 480px) {
     h1 {
-        font-size: 26px;
+        font-size: 24px;
     }
 
-    .container {
-        padding: 18px;
-        margin: 20px;
+    .subtitle {
+        font-size: 0.9rem;
     }
 
-    .features-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .features-left,
-    .features-right {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
+    .role-card {
         width: 100%;
+        padding: 20px;
+    }
+
+    .role-card h2 {
+        font-size: 18px;
+    }
+
+    .role-btn {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .highlight h1 {
+        font-size: 24px;
+    }
+
+    .highlight p {
+        font-size: 15px;
+    }
+
+    .features h1 {
+        font-size: 1.8rem;
     }
 
     .loginModal {
-        width: 90%;
-        /* screen ke 90% tak stretch */
+        width: 95%;
         padding: 20px 15px;
-        /* thoda kam padding */
     }
 
     .loginModal h2 {
         font-size: 20px;
-        /* heading chhoti */
     }
 
     .input-group input {
         font-size: 14px;
-        /* input text thoda chhota */
-        padding: 10px 35px;
-        /* left-right fit kare */
+        padding: 11px 11px 11px 42px;
     }
 
     .login-btn {
-        font-size: 15px;
-        padding: 10px;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .side-img {
+        width: 80px;
+        /* chhoti width */
+        transform: translateY(30px) scale(0.6) rotate(-13deg);
+        /* scale thoda chhota */
+    }
+
+    .img-left {
+        left: 2%;
+        /* thoda adjust left */
+    }
+
+    .img-right {
+        right: 2%;
+        /* thoda adjust right */
+    }
+
+    .top {
+        top: 5%;
+    }
+
+    .bottom {
+        bottom: 3%;
+    }
+}
+
+/* Landscape mode fix for small screens */
+@media (max-width: 768px) and (orientation: landscape) {
+    .highlight {
+        padding: 40px 20px;
+    }
+
+    .features-wrapper {
+        gap: 20px;
+    }
+
+    .mobile-image {
+        max-width: 180px;
+    }
+     .side-img {
+        width: 100px;
+        transform: translateY(40px) scale(0.7) rotate(-13deg);
     }
 }

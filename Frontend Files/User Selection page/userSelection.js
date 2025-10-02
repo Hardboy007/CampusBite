@@ -97,17 +97,18 @@ if (staffForm) {
     });
 }
 //for eye toggle for password
-function togglePassword() {
-    const passwordInput = document.getElementById("password");  //password wala input field
-    const toggleIcon = document.querySelector(".toggle-password");  //eye icon ko pakdo
+function togglePassword(passwordId, iconElement) {
+    const passwordInput = document.getElementById(passwordId); // exact input field
 
-    if (passwordInput.type === "password") {  //agar password type yaani hidden dots me hai
-        passwordInput.type = "text";    //input ka type text kr do
-        toggleIcon.classList.remove("fa-eye-slash");  //eye 
-        toggleIcon.classList.add("fa-eye");
-    } else {                                  //agar already show ho rha h to hide kr do
-        passwordInput.type = "password";
-        toggleIcon.classList.remove("fa-eye");
-        toggleIcon.classList.add("fa-eye-slash");
+    if (!passwordInput || !iconElement) return; // safety check
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";                // show password
+        iconElement.classList.remove("fa-eye-slash");
+        iconElement.classList.add("fa-eye");
+    } else {
+        passwordInput.type = "password";            // hide password
+        iconElement.classList.remove("fa-eye");
+        iconElement.classList.add("fa-eye-slash");
     }
 }
