@@ -3,9 +3,9 @@
 
 /* root me variables define krte h jisse bar bar same color na likhna pade */
 :root {
-    --bg1: #FFF4EA;
+    --bg1: #fff5f5;
     /* light warm */
-    --bg2: #FFEDD5;
+    --bg2: hsl(0, 100%, 91%);
     /* slightly deeper */
     --accent: #FF7A4A;
     /* coral/orange */
@@ -406,7 +406,7 @@ h1 {
 
 /* footer styling */
 footer {
-    background: #000000;
+    background: #151515;
     color: white;
     padding: 30px 0;
     font-size: 14px;
