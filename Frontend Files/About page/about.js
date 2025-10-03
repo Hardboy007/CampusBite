@@ -1,3 +1,13 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll(".nav-links a");
+    links.forEach(link => {
+        if(link.href === window.location.href){     //"Ye link jo point kar raha hai" === "Ye current page ka URL"
+            link.classList.add("active");
+        }
+    });
+});
+
+//for Dark mode
 function toggleDarkMode() {
     const body = document.body;
     const toggleBtn = document.querySelector('.toggle-btn');

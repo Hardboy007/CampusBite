@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Martel+Sans&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap');
+
+body {
+    font-family: "Inter", sans-serif;
+    background: linear-gradient(135deg, rgba(255, 122, 74, 0.1) 0%, rgba(255, 181, 107, 0.1) 100%);
+    background-size: cover;
+    font-family: "Montserrat Alternates", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.dark-mode {
+    background-color: #121212;
+    /* color: #ddd; */
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    flex-wrap: nowrap;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(3px);
+    border-bottom: 1px solid rgba(255, 122, 74, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 1000;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.navbar .logo {
+    flex-shrink: 1;
+    min-width: 80px;
+    /* Prevent too small */
+    display: flex;
+    white-space: nowrap;
+    /* No line break */
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #FF7A4A, #FFB56B);
+    -webkit-background-clip: text;
+    /*Ye background ko sirf text ke andar clip kar deta hai*/
+    background-clip: text;
+    color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navbar .logo:hover {
+    transform: translateY(-2px);
+}
+
+.navbar .logo i {
+    background: linear-gradient(135deg, #FF7A4A, #FFB56B);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 26px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    flex-shrink: 1;
+    min-width: 120px;
+    white-space: nowrap;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4B5563;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 8px;
+    flex-shrink: 1;
+    min-width: 50px;
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    color: #FF7A4A;
+    background: rgba(255, 122, 74, 0.1);
+}
+
+.nav-links a.active {
+    /*jab about page khule to navbar me about button active dikhe*/
+    color: #FF7A4A;
+    background: rgba(255, 122, 74, 0.1);
+}
+
+.toggle-btn {
+    background: #f57c00;
+    border: none;
+    flex-shrink: 0;
+    /* Don't shrink too much */
+    min-width: 100px;
+    /* Minimum width */
+    white-space: nowrap;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Montserrat Alternates", sans-serif;
+}
+
+.dark-mode .toggle-btn {
+    background: #FF7A4A;
+    color: #222;
+    font-family: "Montserrat Alternates", sans-serif;
+}
+
+.dark-mode .navbar {
+    background: rgba(18, 18, 18, 0.9);
+    border-bottom: 1px solid rgba(255, 122, 74, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+    /* color: #ddd; */
+}
