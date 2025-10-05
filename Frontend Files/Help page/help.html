@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusBite - Help & Support</title>
+  <link rel="stylesheet" href="help.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-utensils"></i>
+            CampusBite
+        </div>
+        <div class="nav-links">
+            <a href="#">About</a> <!--link about url here -->
+            <a href="#">Help</a> <!--link help url here -->
+        </div>
+        <button class="toggle-btn" onclick="toggleDarkMode()">Dark Mode</button>
+    </div>
+
+  <!-- Header -->
+  <header class="help-header">
+    <h1>Help & Support</h1>
+    <p>We’re here to answer your questions and resolve your issues.</p>
+  </header>
+
+  <!-- Main Container -->
+  <main class="help-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul>
+        <li class="active" data-category="orders">Orders & Delivery</li>
+        <li data-category="payments">Payments & Refunds</li>
+        <li data-category="account">Account & Login</li>
+        <li data-category="cafes">Cafes & Restaurants</li>
+        <li data-category="legal">Legal & Policies</li>
+        <li data-category="other">Other Queries</li>
+      </ul>
+    </aside>
+
+    <!-- Content Area -->
+    <section class="content">
+      <h2 id="category-title">Orders & Delivery</h2>
+      <div id="faq-list" class="faq-list"></div>
+    </section>
+  </main>
+
+  <!--footer-->
+    <footer>
+        <div class="footer-container">
+
+            <!-- Logo & Tagline -->
+            <div class="footer-section">
+                <h2 class="logo">CampusBite</h2>
+                <p class="tagline">College life ka apna cafeteria app</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Cafeterias / Menu</a></li>
+                    <li><a href="#">Help & Support</a></li>
+                </ul>
+            </div>
+
+            <!-- For Partners -->
+            <div class="footer-section">
+                <h4>For Cafes/Partners</h4>
+                <ul>
+                    <li><a href="#">Partner with us</a></li>
+                    <li><a href="#">Add your cafeteria</a></li>
+                    <li><a href="#">Manage your menu</a></li>
+                </ul>
+            </div>
+
+            <!-- Policies -->
+            <div class="footer-section">
+                <h4>Policies</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Refund / Cancellation</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media -->
+            <div class="footer-section">
+                <h4>Connect with us</h4>
+                <div class="social-icons">
+                    <a href="#">Instagram</a> |
+                    <a href="#">Facebook</a> |
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 CampusBite. All rights reserved.</p>
+            <p class="disclaimer">All logos & names belong to their respective owners. Project made for academic
+                purpose.</p>
+        </div>
+        <div class="credit">
+            <p><i>a Hardik Srivastava production</i></p>
+        </div>
+    </footer>
+
+<script src="help.js"></script>
+</body>
+</html>
