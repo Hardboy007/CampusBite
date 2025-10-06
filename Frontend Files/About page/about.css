@@ -121,24 +121,46 @@ body {
 }
 
 .toggle-btn {
-    background: #f57c00;
+    background: linear-gradient(135deg, #FFB56B, #FF7A4A);
     border: none;
-    flex-shrink: 0;
-    /* Don't shrink too much */
-    min-width: 100px;
-    /* Minimum width */
-    white-space: nowrap;
     color: white;
-    padding: 10px 15px;
+    padding: 12px 16px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 50%;
+    /* Circular button */
     font-family: "Montserrat Alternates", sans-serif;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 122, 74, 0.3);
+    flex-shrink: 0;
 }
 
+/* Dark mode mein sun icon */
 .dark-mode .toggle-btn {
-    background: #FF7A4A;
-    color: #222;
-    font-family: "Montserrat Alternates", sans-serif;
+    background: linear-gradient(135deg, #FFB56B, #FF7A4A);
+    box-shadow: 0 4px 12px rgba(255, 145, 61, 0.4);
+}
+
+.dark-mode .toggle-btn:hover {
+    box-shadow: 0 6px 16px rgba(255, 132, 61, 0.384);
+}
+
+.toggle-btn i {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.toggle-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(255, 122, 74, 0.4);
+}
+
+.toggle-btn:hover i {
+    transform: rotate(25deg);
 }
 
 .dark-mode .navbar {

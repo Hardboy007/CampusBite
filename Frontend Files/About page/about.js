@@ -10,27 +10,29 @@ document.addEventListener("DOMContentLoaded", () => {
 //for Dark mode
 function toggleDarkMode() {
     const body = document.body;
-    const toggleBtn = document.querySelector('.toggle-btn');
+    const toggleBtn = document.querySelector('.toggle-btn i');
 
     body.classList.toggle('dark-mode');
 
-    // Update button text
+    // Icon change karo
     if (body.classList.contains('dark-mode')) {
-        toggleBtn.textContent = 'Light Mode';
-        localStorage.setItem('darkMode', 'on');  // save state
+        toggleBtn.classList.remove('fa-moon');
+        toggleBtn.classList.add('fa-sun');
+        localStorage.setItem('darkMode', 'true');
     } else {
-        toggleBtn.textContent = 'Dark Mode';
-        localStorage.setItem('darkMode', 'off'); // save state
+        toggleBtn.classList.remove('fa-sun');
+        toggleBtn.classList.add('fa-moon');
+        localStorage.setItem('darkMode', 'false');
     }
 }
 
-// On page load, check localStorage
-document.addEventListener('DOMContentLoaded', () => {
-    const body = document.body;
-    const toggleBtn = document.querySelector('.toggle-btn');
-
-    if(localStorage.getItem('darkMode') === 'on'){
-        body.classList.add('dark-mode');
-        if(toggleBtn) toggleBtn.textContent = 'Light Mode';     //update button text
+// Page load pe check karo saved preference
+window.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.querySelector('.toggle-btn i');
+    
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        toggleBtn.classList.remove('fa-moon');
+        toggleBtn.classList.add('fa-sun');
     }
-})
+});

@@ -113,24 +113,46 @@ body {
 }
 
 .toggle-btn {
-    background: #f57c00;
+    background: linear-gradient(135deg, #FFB56B, #FF7A4A);
     border: none;
-    flex-shrink: 0;
-    /* Don't shrink too much */
-    min-width: 100px;
-    /* Minimum width */
-    white-space: nowrap;
     color: white;
-    padding: 10px 15px;
+    padding: 12px 16px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 50%;
+    /* Circular button */
     font-family: "Montserrat Alternates", sans-serif;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 122, 74, 0.3);
+    flex-shrink: 0;
 }
 
+/* Dark mode mein sun icon */
 .dark-mode .toggle-btn {
-    background: #FF7A4A;
-    color: #222;
-    font-family: "Montserrat Alternates", sans-serif;
+    background: linear-gradient(135deg, #FFB56B, #FF7A4A);
+    box-shadow: 0 4px 12px rgba(255, 145, 61, 0.4);
+}
+
+.dark-mode .toggle-btn:hover {
+    box-shadow: 0 6px 16px rgba(255, 132, 61, 0.384);
+}
+
+.toggle-btn i {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.toggle-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(255, 122, 74, 0.4);
+}
+
+.toggle-btn:hover i {
+    transform: rotate(25deg);
 }
 
 .dark-mode .navbar {
@@ -190,6 +212,11 @@ body {
     border-right: 1px solid #e5e7eb;
 }
 
+.dark-mode .sidebar {
+    width: 250px;
+    background: rgb(61, 61, 61);
+}
+
 .sidebar ul {
     list-style: none;
 }
@@ -203,12 +230,31 @@ body {
     transition: all 0.2s;
 }
 
+.dark-mode .sidebar li {
+    padding: 16px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--card);
+    border-left: 4px solid transparent;
+    transition: all 0.2s;
+}
+
 .sidebar li:hover {
     background: #e9edf5;
 }
 
+.dark-mode .sidebar li:hover {
+    background: rgb(76, 76, 76);
+}
+
 .sidebar li.active {
     background: #fff;
+    border-left: 4px solid var(--accent);
+    color: var(--accent);
+}
+
+.dark-mode .sidebar li.active {
+    background: #463c39;
     border-left: 4px solid var(--accent);
     color: var(--accent);
 }
@@ -219,9 +265,21 @@ body {
     padding: 30px;
 }
 
+.dark-mode .content {
+    flex: 1;
+    padding: 30px;
+    background: #424242;
+}
+
 .content h2 {
     margin-bottom: 20px;
     font-size: 1.6rem;
+}
+
+.dark-mode .content h2 {
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    color: var(--card);
 }
 
 /* FAQ */
@@ -242,7 +300,24 @@ body {
     transition: color 0.2s;
 }
 
+.dark-mode .faq-question {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 15px 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s;
+    color: var(--card);
+}
+
 .faq-question:hover {
+    color: var(--accent);
+}
+
+.dark-mode .faq-question:hover {
     color: var(--accent);
 }
 
@@ -253,6 +328,16 @@ body {
     padding: 0 10px;
     font-size: 1 rem;
     color: var(--muted);
+    margin-bottom: 10px;
+}
+
+.dark-mode .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 10px;
+    font-size: 1 rem;
+    color: rgb(200, 200, 200);
     margin-bottom: 10px;
 }
 
@@ -365,15 +450,314 @@ footer {
     margin-bottom: -30px;
 }
 
-/* Responsive */
+/* Responsive Design for Mobile Screens */
+
+/* Tablets and smaller desktops */
 @media (max-width: 768px) {
-    .help-container {
-        flex-direction: column;
+
+    /* Navbar adjustments */
+    .navbar {
+        padding: 0 20px;
+        height: auto;
+        min-height: 60px;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
+    .navbar .logo {
+        font-size: 20px;
+        gap: 8px;
+    }
+
+    .navbar .logo i {
+        font-size: 22px;
+    }
+
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    .toggle-btn {
+        width: 45px;
+        height: 45px;
+        padding: 10px 12px;
+    }
+
+    .toggle-btn i {
+        font-size: 18px;
+    }
+
+    /* Header */
+    .help-header {
+        padding: 80px 20px 30px;
+    }
+
+    .help-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .help-header p {
+        font-size: 1rem;
+    }
+
+    /* Help container - Stack sidebar and content */
+    .help-container {
+        flex-direction: column;
+        margin: 20px 10px;
+    }
+
+    /* Sidebar full width on mobile */
     .sidebar {
         width: 100%;
         border-right: none;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .dark-mode .sidebar {
+        width: 100%;
+        border-bottom: 1px solid #444;
+    }
+
+    .sidebar ul {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sidebar li {
+        padding: 12px 16px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        display: inline-block;
+        min-width: max-content;
+    }
+
+    .dark-mode .sidebar li {
+        border-bottom: 3px solid transparent;
+    }
+
+    .sidebar li.active {
+        border-left: none;
+        border-bottom: 3px solid var(--accent);
+    }
+
+    .dark-mode .sidebar li.active {
+        border-left: none;
+        border-bottom: 3px solid var(--accent);
+    }
+
+    /* Content */
+    .content {
+        padding: 20px;
+    }
+
+    .dark-mode .content {
+        padding: 20px;
+    }
+
+    .content h2 {
+        font-size: 1.4rem;
+    }
+
+    .dark-mode .content h2 {
+        font-size: 1.4rem;
+    }
+
+    /* FAQ */
+    .faq-question {
+        font-size: 0.95rem;
+        padding: 12px 8px;
+    }
+
+    .dark-mode .faq-question {
+        font-size: 0.95rem;
+        padding: 12px 8px;
+    }
+
+    .faq-answer {
+        font-size: 0.9rem;
+        padding: 0 8px;
+    }
+
+    .dark-mode .faq-answer {
+        font-size: 0.9rem;
+        padding: 0 8px;
+    }
+
+    /* Footer */
+    footer {
+        padding: 40px 15px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin: 15px 0;
+    }
+
+    .contact {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+
+    /* Navbar - more compact */
+    .navbar {
+        padding: 0 15px;
+    }
+
+    .navbar .logo {
+        font-size: 18px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+        padding: 5px 10px;
+    }
+
+    .toggle-btn {
+        width: 40px;
+        height: 40px;
+        padding: 8px 10px;
+    }
+
+    .toggle-btn i {
+        font-size: 16px;
+    }
+
+    /* Header */
+    .help-header {
+        padding: 70px 15px 25px;
+    }
+
+    .help-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .help-header p {
+        font-size: 0.9rem;
+    }
+
+    .dark-mode .help-header p {
+        font-size: 0.9rem;
+    }
+
+    /* Help container */
+    .help-container {
+        margin: 15px 5px;
+        border-radius: 8px;
+    }
+
+    /* Sidebar horizontal scroll */
+    .sidebar li {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .dark-mode .sidebar li {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    /* Content */
+    .content {
+        padding: 15px;
+    }
+
+    .dark-mode .content {
+        padding: 15px;
+    }
+
+    .content h2 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .dark-mode .content h2 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    /* FAQ */
+    .faq-question {
+        font-size: 0.9rem;
+        padding: 10px 5px;
+    }
+
+    .dark-mode .faq-question {
+        font-size: 0.9rem;
+        padding: 10px 5px;
+    }
+
+    .faq-answer {
+        font-size: 0.85rem;
+        padding: 0 5px;
+    }
+
+    .dark-mode .faq-answer {
+        font-size: 0.85rem;
+        padding: 0 5px;
+    }
+
+    /* Footer */
+    footer {
+        padding: 30px 10px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .tagline {
+        font-size: 12px;
+    }
+
+    .credit {
+        font-size: 12px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .navbar .logo {
+        font-size: 16px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .help-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .content h2 {
+        font-size: 1.1rem;
+    }
+
+    .dark-mode .content h2 {
+        font-size: 1.1rem;
     }
 }
