@@ -99,3 +99,13 @@ window.addEventListener('DOMContentLoaded', function() {
         toggleBtn.classList.add('fa-sun');
     }
 });
+
+// help button page load hote hi active ho jaye
+document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll(".nav-links a");
+    links.forEach(link => {
+        if(link.href === window.location.href){     //"Ye link jo point kar raha hai" === "Ye current page ka URL"
+            link.classList.add("active");
+        }
+    });
+});
