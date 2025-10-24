@@ -20,11 +20,17 @@
     --glass: rgba(255, 255, 255, 0.8);
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
     height: 100%;
     margin: 0;
     font-family: "Montserrat Alternates", sans-serif;
+    overflow-x: hidden;
+    /* horizontal scroll band kiya */
     background: linear-gradient(180deg, var(--bg1), var(--bg2));
     color: #111;
 }
@@ -66,6 +72,8 @@ h1 {
     overflow: visible;
     justify-content: center;
     gap: 40px;
+    align-items: stretch;
+    /* Equal height cards */
     align-items: start;
     margin-top: 20px;
     flex-wrap: wrap;
@@ -77,6 +85,7 @@ h1 {
     cursor: pointer;
     overflow: hidden;
     position: relative;
+    height: 100%;
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -87,9 +96,15 @@ h1 {
     box-shadow: 0 8px 24px rgba(16, 24, 40, 0.1);
     padding: 30px;
     width: 300px;
+    min-width: 280px;
+    /* mobile ke liye limit */
+    max-width: 370px;
+    /* zyada failne na de */
     transition: transform .18s ease, box-shadow .18s ease, border-color .18s,
         opacity 0.6s ease-out, transform 0.6s ease-out;
     /* ← YE UPDATE KARA sab transitions ek saath */
+    flex: 1;
+    /* Fixed width, no grow/shrink */
 }
 
 /* Loaded state - Animation trigger hoga JavaScript se */
@@ -145,12 +160,14 @@ h1 {
 }
 
 .role-card ul {
-    margin: 4px 0 0 18px;
+    list-style-position: outside; /* dot content ke andar aa jaye */
+    margin: 10px 0 0 0;
+    padding-left: 20px;
     color: var(--muted);
 }
 
 .role-card li {
-    margin: 4px 0;
+    margin: 7px 30px;
 }
 
 /* Role button base style */
@@ -216,8 +233,10 @@ h1 {
 .side-img {
     position: absolute;
     width: 140px;
+    height: auto;
     opacity: 0;
     transform: translateY(50px) scale(0.8) rotate(-13deg);
+    pointer-events: none;
 }
 
 /* Page-load extra fade/slide */
@@ -803,12 +822,38 @@ footer {
 }
 
 /* Responsive - Optimized Version */
+@media (max-width: 1024px) {
+    .container {
+        padding: 25px 20px;
+        margin: 30px auto;
+    }
+
+    .card-wrapper {
+        gap: 30px;
+    }
+
+    /* Side images smaller on tablet */
+    .side-img {
+        width: 100px;
+    }
+
+    .img-left {
+        left: 3%;
+    }
+
+    .img-right {
+        right: 3%;
+    }
+}
 
 /* Tablets (768px and below) */
 @media (max-width: 768px) {
+    body {
+        overflow-x: hidden !important;
+    }
+
     .container {
         padding: 20px 15px;
-        margin: 20px auto;
     }
 
     h1 {
@@ -817,17 +862,20 @@ footer {
 
     .subtitle {
         font-size: 1rem;
+        margin-bottom: 20px;
     }
 
     /* Cards stack vertically */
     .card-wrapper {
         flex-direction: column;
+        align-items: center;
         gap: 25px;
     }
 
     .role-card {
         width: 100%;
-        max-width: 400px;
+        max-width: 500px;
+        flex: none;
     }
 
     .role-btn {
@@ -843,8 +891,20 @@ footer {
         font-size: 28px;
     }
 
+    .highlight p {
+        font-size: 18px;
+    }
+
     .side-img {
-        width: 100px;
+        width: 80px;
+    }
+
+    .img-left {
+        left: 2%;
+    }
+
+    .img-right {
+        right: 2%;
     }
 
     /* Features */
@@ -852,11 +912,16 @@ footer {
         font-size: 2rem;
     }
 
+    .features-wrapper {
+        gap: 35px;
+    }
+
     .features-left,
     .features-right {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 20px;
     }
 
     /* Footer */
@@ -877,10 +942,11 @@ footer {
     }
 }
 
-/* Mobile (480px and below) */
+/* Mobile phones (480px and below) */
 @media (max-width: 480px) {
     .container {
         padding: 15px 10px;
+        margin: 20px auto;
     }
 
     h1 {
@@ -891,17 +957,29 @@ footer {
         font-size: 0.9rem;
     }
 
-    /* Cards */
+    /* Cards full width */
     .role-card {
         width: 100%;
-        padding: 20px;
+        max-width: 100%;
+        padding: 20px 18px;
     }
 
     .card-content h2 {
         font-size: 18px;
     }
 
-    /* Hide clutter */
+    .role-card ul {
+        font-size: 13px;
+        padding-left: 18px;
+    }
+
+    .role-btn {
+        width: 100%;
+        padding: 13px 18px;
+        font-size: 0.95rem;
+    }
+
+    /* Hide side images on mobile for clean look */
     .side-img {
         display: none;
     }
@@ -924,14 +1002,26 @@ footer {
         font-size: 1.8rem;
     }
 
+    .features p {
+        font-size: 0.95rem;
+    }
+
     .features-wrapper {
         flex-direction: column;
         gap: 25px;
     }
 
+    .features-left,
+    .features-right {
+        width: 100%;
+        justify-content: center;
+        gap: 15px;
+    }
+
     .feature {
         width: 90px;
         height: 85px;
+        padding: 8px;
     }
 
     .mobile-image {
@@ -941,6 +1031,7 @@ footer {
     .feature-center {
         width: 85px;
         height: 120px;
+        padding: 12px 15px;
     }
 
     /* Footer */
@@ -952,20 +1043,45 @@ footer {
         font-size: 24px;
     }
 
-    /* Modal */
+    /* Login Modal */
     .loginModal {
         width: 95%;
+        max-width: 340px;
         padding: 25px 18px;
+    }
+
+    .loginModal h2 {
+        font-size: 22px;
     }
 
     .input-group input {
         width: 100%;
         padding: 11px 11px 11px 42px;
-        box-sizing: border-box;
+        font-size: 14px;
     }
 
     .google,
     .phn-num {
         width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    h1 {
+        font-size: 22px;
+    }
+
+    .role-card {
+        padding: 18px 15px;
+    }
+
+    .highlight h1 {
+        font-size: 22px;
+    }
+
+    .features h1 {
+        font-size: 1.6rem;
     }
 }
