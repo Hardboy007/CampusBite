@@ -3,9 +3,11 @@
 
 /* root me variables define krte h jisse bar bar same color na likhna pade */
 :root {
-    --bg1: #fff5f5;     /*changed color*/
+    --bg1: #fff5f5;
+    /*changed color*/
     /* light warm */
-    --bg2: hsl(0, 100%, 91%);   /*changed color*/
+    --bg2: hsl(0, 100%, 91%);
+    /*changed color*/
     /* slightly deeper */
     --accent: #FF7A4A;
     /* coral/orange */
@@ -800,9 +802,87 @@ footer {
     color: #292828;
 }
 
-/* Responsive */
-/* Extra small devices - phones in portrait */
+/* Responsive - Optimized Version */
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 15px;
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    /* Cards stack vertically */
+    .card-wrapper {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .role-card {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .role-btn {
+        width: 100%;
+    }
+
+    /* Highlight */
+    .highlight {
+        padding: 70px 20px;
+    }
+
+    .highlight h1 {
+        font-size: 28px;
+    }
+
+    .side-img {
+        width: 100px;
+    }
+
+    /* Features */
+    .features h1 {
+        font-size: 2rem;
+    }
+
+    .features-left,
+    .features-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Modal */
+    .altr-signin {
+        flex-direction: column;
+    }
+
+    .google,
+    .phn-num {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* Mobile (480px and below) */
 @media (max-width: 480px) {
+    .container {
+        padding: 15px 10px;
+    }
+
     h1 {
         font-size: 24px;
     }
@@ -811,18 +891,24 @@ footer {
         font-size: 0.9rem;
     }
 
+    /* Cards */
     .role-card {
         width: 100%;
         padding: 20px;
     }
 
-    .role-card h2 {
+    .card-content h2 {
         font-size: 18px;
     }
 
-    .role-btn {
-        width: 100%;
-        padding: 14px;
+    /* Hide clutter */
+    .side-img {
+        display: none;
+    }
+
+    /* Highlight */
+    .highlight {
+        padding: 60px 15px;
     }
 
     .highlight h1 {
@@ -830,73 +916,56 @@ footer {
     }
 
     .highlight p {
-        font-size: 15px;
+        font-size: 16px;
     }
 
+    /* Features */
     .features h1 {
         font-size: 1.8rem;
     }
 
-    .loginModal {
-        width: 95%;
-        padding: 20px 15px;
-    }
-
-    .loginModal h2 {
-        font-size: 20px;
-    }
-
-    .input-group input {
-        font-size: 14px;
-        padding: 11px 11px 11px 42px;
-    }
-
-    .login-btn {
-        font-size: 14px;
-        padding: 12px;
-    }
-
-    .side-img {
-        width: 80px;
-        /* chhoti width */
-        transform: translateY(30px) scale(0.6) rotate(-13deg);
-        /* scale thoda chhota */
-    }
-
-    .img-left {
-        left: 2%;
-        /* thoda adjust left */
-    }
-
-    .img-right {
-        right: 2%;
-        /* thoda adjust right */
-    }
-
-    .top {
-        top: 5%;
-    }
-
-    .bottom {
-        bottom: 3%;
-    }
-}
-
-/* Landscape mode fix for small screens */
-@media (max-width: 768px) and (orientation: landscape) {
-    .highlight {
-        padding: 40px 20px;
-    }
-
     .features-wrapper {
-        gap: 20px;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .feature {
+        width: 90px;
+        height: 85px;
     }
 
     .mobile-image {
-        max-width: 180px;
+        max-width: 200px;
     }
-     .side-img {
-        width: 100px;
-        transform: translateY(40px) scale(0.7) rotate(-13deg);
+
+    .feature-center {
+        width: 85px;
+        height: 120px;
+    }
+
+    /* Footer */
+    footer {
+        padding: 30px 15px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    /* Modal */
+    .loginModal {
+        width: 95%;
+        padding: 25px 18px;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 11px 11px 11px 42px;
+        box-sizing: border-box;
+    }
+
+    .google,
+    .phn-num {
+        width: 100%;
     }
 }
