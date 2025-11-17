@@ -7,7 +7,7 @@
     <title>Menu</title>
     <!-- CRITICAL: Apply dark mode BEFORE page renders to prevent flash -->
     <script>
-        (function() {
+        (function () {
             if (localStorage.getItem('darkMode') === 'on') {
                 document.documentElement.classList.add('dark');
             }
@@ -39,7 +39,8 @@
             </div>
             <!--Desktop Navigation-->
             <nav class="hidden md:flex items-center gap-6">
-                <button class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-orange-200 dark:hover:bg-gray-700 transition-colors">
+                <button
+                    class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-orange-200 dark:hover:bg-gray-700 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2">
                         <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -56,7 +57,8 @@
                     </svg>
                     Menu
                 </button>
-                <button class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-orange-200 dark:hover:bg-gray-700 transition-colors">
+                <button
+                    class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-orange-200 dark:hover:bg-gray-700 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2">
                         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
@@ -67,7 +69,8 @@
             </nav>
 
             <!-- Mobile Menu Button -->
-            <button id="mobileMenuBtn" class="md:hidden p-2 hover:bg-orange-200 dark:hover:bg-gray-700 rounded-lg transition-colors">
+            <button id="mobileMenuBtn"
+                class="md:hidden p-2 hover:bg-orange-200 dark:hover:bg-gray-700 rounded-lg transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2">
                     <line x1="4" x2="20" y1="12" y2="12"></line>
@@ -91,11 +94,14 @@
             </div>
 
             <!-- Dark Mode Toggle -->
-            <button onclick="toggleDarkMode()" class="hidden md:block relative p-2 hover:bg-orange-200 dark:hover:bg-gray-700 rounded-lg transition-colors">
+            <button onclick="toggleDarkMode()"
+                class="hidden md:block relative p-2 hover:bg-orange-200 dark:hover:bg-gray-700 rounded-lg transition-colors">
                 <div class="dark-toggle">
                     <div class="dark-toggle-slider">
                         <svg class="w-4 h-4 text-yellow-500 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                            <path fill-rule="evenodd"
+                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                clip-rule="evenodd"></path>
                         </svg>
                         <svg class="w-4 h-4 text-blue-300 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -107,7 +113,8 @@
             <!-- Cart Icon -->
             <button onclick="event.preventDefault(); toggleCart()"
                 class="relative p-2 hover:bg-orange-200 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -120,11 +127,11 @@
         <!-- Mobile Navigation Dropdown -->
         <div id="mobileMenu" class="hidden md:hidden border-t border-orange-200/40 bg-white">
             <nav class="flex flex-col p-4 space-y-2">
-                <button
+                <a href="/user-selection"
                     class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-orange-100 dark:hover:bg-gray-700 transition-colors text-left">
                     <i class="fa-solid fa-home w-5 h-5"></i>
                     <span>Home</span>
-                </button>
+                </a>
                 <button
                     class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-orange-100 dark:hover:bg-gray-700 text-orange-500 font-medium text-left">
                     <i class="fa-solid fa-utensils w-5 h-5"></i>
@@ -147,9 +154,12 @@
                     <div class="dark-toggle scale-75">
                         <div class="dark-toggle-slider">
                             <svg class="w-3 h-3 text-yellow-500 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                                <path fill-rule="evenodd"
+                                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                    clip-rule="evenodd"></path>
                             </svg>
-                            <svg class="w-3 h-3 text-blue-300 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-3 h-3 text-blue-300 hidden dark:block" fill="currentColor"
+                                viewBox="0 0 20 20">
                                 <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                             </svg>
                         </div>
@@ -281,7 +291,8 @@
                             class="absolute inset-0 bg-gradient-to-r from-red-400 to-red-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
                         <span class="relative z-10 group-hover:text-white font-semibold">Clear</span>
                     </button>
-                    <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                    <button onclick="toggleCart()"
+                        class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
                         <svg class="w-6 h-6 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12" />
