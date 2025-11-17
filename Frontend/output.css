@@ -1559,6 +1559,10 @@ body {
   transition: background-color 0.3s ease;
 }
 
+.dark .dark-toggle {
+  background: #374151;
+}
+
 .dark-toggle-slider {
   position: absolute;
   top: 2px;
