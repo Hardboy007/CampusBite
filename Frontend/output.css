@@ -680,6 +680,18 @@ video {
   z-index: 60;
 }
 
+.m-auto {
+  margin: auto;
+}
+
+.m-0 {
+  margin: 0px;
+}
+
+.m-\[10px\] {
+  margin: 10px;
+}
+
 .mx-6 {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
@@ -688,6 +700,16 @@ video {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.mx-0 {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.my-\[6px\] {
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 
 .mb-2 {
@@ -720,6 +742,14 @@ video {
 
 .mt-6 {
   margin-top: 1.5rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mt-\[5px\] {
+  margin-top: 5px;
 }
 
 .line-clamp-1 {
@@ -881,12 +911,20 @@ video {
   max-width: 28rem;
 }
 
+.max-w-7xl {
+  max-width: 80rem;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
 
 .grow {
   flex-grow: 1;
+}
+
+.basis-\[200px\] {
+  flex-basis: 200px;
 }
 
 .-translate-x-full {
@@ -918,12 +956,20 @@ video {
   cursor: pointer;
 }
 
+.list-none {
+  list-style-type: none;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .items-start {
@@ -1051,8 +1097,18 @@ video {
   border-color: rgb(254 215 170 / 0.5);
 }
 
+.border-\[\#ddd\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(221 221 221 / var(--tw-border-opacity, 1));
+}
+
 .bg-black\/50 {
   background-color: rgb(0 0 0 / 0.5);
+}
+
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
 
 .bg-green-500 {
@@ -1069,6 +1125,11 @@ video {
   background-color: rgb(255 247 237 / 0.5);
 }
 
+.bg-orange-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 115 22 / var(--tw-bg-opacity, 1));
+}
+
 .bg-red-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
@@ -1083,14 +1144,9 @@ video {
   background-color: rgb(255 255 255 / 0.95);
 }
 
-.bg-gray-100 {
+.bg-\[\#151515\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
-}
-
-.bg-orange-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 115 22 / var(--tw-bg-opacity, 1));
+  background-color: rgb(21 21 21 / var(--tw-bg-opacity, 1));
 }
 
 .bg-gradient-to-r {
@@ -1153,6 +1209,10 @@ video {
   padding: 1.5rem;
 }
 
+.p-0 {
+  padding: 0px;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -1208,6 +1268,11 @@ video {
   padding-bottom: 2rem;
 }
 
+.py-\[30px\] {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
 .pb-3 {
   padding-bottom: 0.75rem;
 }
@@ -1226,6 +1291,10 @@ video {
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pt-\[10px\] {
+  padding-top: 10px;
 }
 
 .text-left {
@@ -1273,6 +1342,14 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-\[12px\] {
+  font-size: 12px;
+}
+
+.text-\[11px\] {
+  font-size: 11px;
 }
 
 .font-bold {
@@ -1339,6 +1416,30 @@ video {
 .text-yellow-500 {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#c1c0c0\] {
+  --tw-text-opacity: 1;
+  color: rgb(193 192 192 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#888b92\] {
+  --tw-text-opacity: 1;
+  color: rgb(136 139 146 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#777\] {
+  --tw-text-opacity: 1;
+  color: rgb(119 119 119 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#999\] {
+  --tw-text-opacity: 1;
+  color: rgb(153 153 153 / var(--tw-text-opacity, 1));
+}
+
+.no-underline {
+  text-decoration-line: none;
 }
 
 .opacity-50 {
@@ -1431,6 +1532,10 @@ video {
 
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -2069,6 +2174,11 @@ body {
   background-color: rgb(255 247 237 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:text-\[\#ff6b35\]:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 107 53 / var(--tw-text-opacity, 1));
+}
+
 .hover\:opacity-90:hover {
   opacity: 0.9;
 }
@@ -2153,13 +2263,13 @@ body {
   border-color: rgb(55 65 81 / var(--tw-border-opacity, 1));
 }
 
+.dark\:border-gray-700\/40:is(.dark *) {
+  border-color: rgb(55 65 81 / 0.4);
+}
+
 .dark\:border-orange-700:is(.dark *) {
   --tw-border-opacity: 1;
   border-color: rgb(194 65 12 / var(--tw-border-opacity, 1));
-}
-
-.dark\:border-gray-700\/40:is(.dark *) {
-  border-color: rgb(55 65 81 / 0.4);
 }
 
 .dark\:bg-gray-800:is(.dark *) {
