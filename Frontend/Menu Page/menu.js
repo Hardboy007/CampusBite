@@ -20,6 +20,7 @@ let cart = {};
 let currentCategory = 'All';
 let searchQuery = '';
 let recentlyAdded = [];   // Recently added items track karne ke liye
+let isLoading = true;  // ← NEW: Loading state track karne ke liye
 
 // ============ DARK MODE INITIALIZATION ============
 function initDarkMode() {
@@ -58,9 +59,44 @@ function toggleDarkMode() {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function () {
     initDarkMode();
+    showSkeletonLoading();
+
+    // Simulate loading delay (remove in production if data loads instantly)
+    setTimeout(() => {
+        hideSkeletonLoading();
+        renderMenuItems();
+        updateCartUI();
+    }, 800);
 });
+
+// Show skeleton loading
+function showSkeletonLoading() {
+    const grid = document.getElementById('menuGrid');
+    const skeletonHTML = Array(8).fill(0).map(() => `
+        <div class="skeleton-card">
+            <div class="skeleton-image"></div>
+            <div class="p-4 space-y-3">
+                <div class="skeleton h-5 w-3/4"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-5/6"></div>
+                <div class="flex justify-between items-center mt-4">
+                    <div class="skeleton h-6 w-16"></div>
+                    <div class="skeleton h-9 w-24 rounded-lg"></div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    grid.innerHTML = skeletonHTML;
+}
+
+// Hide skeleton loading
+function hideSkeletonLoading() {
+    const grid = document.getElementById('menuGrid');
+    grid.classList.add('animate-fade-in');
+}
 renderMenuItems();
 updateCartUI();
+
 
 //Render Menu items
 function renderMenuItems() {
@@ -162,13 +198,13 @@ function createMenuItemCard(item) {
                     <span class="text-xl font-bold text-orange-500">₹${item.price}</span>
                     ${quantity > 0 ? `
                         <div class="flex items-center gap-2 glass-card px-2 py-1 rounded-full">
-                            <button onclick="removeFromCart('${item.id}')" class="h-7 w-7 rounded-full hover:bg-orange-100 dark:hover:bg-gray-700 flex items-center justify-center transition-colors">
+                            <button onclick="removeFromCart('${item.id}')" class="ripple h-7 w-7 rounded-full hover:bg-orange-100 dark:hover:bg-gray-700 flex items-center justify-center transition-colors">
                                 <svg class="w-4 h-4 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
                                 </svg>
                             </button>
                             <span class="font-semibold min-w-[20px] text-center dark:text-white">${quantity}</span>
-                            <button onclick="addToCart('${item.id}')" class="h-7 w-7 rounded-full hover:bg-orange-100 dark:hover:bg-gray-700 flex items-center justify-center transition-colors">
+                            <button onclick="addToCart('${item.id}')" class="ripple h-7 w-7 rounded-full hover:bg-orange-100 dark:hover:bg-gray-700 flex items-center justify-center transition-colors">
                                 <svg class="w-4 h-4 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                 </svg>
@@ -178,7 +214,7 @@ function createMenuItemCard(item) {
                         <button 
                             onclick="addToCart('${item.id}')" 
                             ${!item.isAvailable ? 'disabled' : ''}
-                                class="px-4 py-2 rounded-lg gradient-secondary text-white font-medium text-sm hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1">
+                                class="ripple px-4 py-2 rounded-lg gradient-secondary text-white font-medium text-sm hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
@@ -216,6 +252,13 @@ function addToCart(itemId) {
 
     console.log('Cart after add:', cart);
     console.log('Item quantity:', cart[itemId].quantity);
+
+    // Animate cart badge
+    const cartBadge = document.getElementById('cartBadge');
+    if (cartBadge) {
+        cartBadge.classList.add('badge-pulse');
+        setTimeout(() => cartBadge.classList.remove('badge-pulse'), 400);
+    }
 
     updateCartUI();
     renderMenuItems();
@@ -263,10 +306,12 @@ function updateCartUI() {
     const floatingCart = document.getElementById('floatingCart');
     if (itemCount > 0) {
         floatingCart.classList.remove('hidden');
+        floatingCart.classList.add('has-items');
         document.getElementById('floatingCartCount').textContent = `${itemCount} items`;        //┌─────────────┐
         document.getElementById('floatingCartTotal').textContent = `₹${Math.round(subtotal)}`;  //│  🛒 3 items │  ← Floating button
     } else {                                                                                    //│     ₹88     │
-        floatingCart.classList.add('hidden');                                                   //└─────────────┘
+        floatingCart.classList.add('hidden');    
+        floatingCart.classList.remove('has-items');                                               //└─────────────┘
     }
 
     // Update Cart Sidebar
@@ -314,7 +359,7 @@ function updateCartUI() {
                                 <div class="flex items-center justify-between mt-2">
                                     <span class="text-orange-500 font-bold">₹${item.price}</span>
                                     <button onclick="addToCart('${item.id}')" 
-                                        class="px-4 py-1.5 text-xs font-semibold bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full hover:shadow-lg transition-all">
+                                        class="ripple px-4 py-1.5 text-xs font-semibold bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full hover:shadow-lg transition-all">
                                         + Add
                                     </button>
                                 </div>
@@ -324,7 +369,7 @@ function updateCartUI() {
                 `).join('')}
             </div>
             
-            <button onclick="toggleCart()" 
+            <button onclick="browseFullMenu()" 
                 class="w-full mt-4 py-3 text-sm font-medium text-orange-500 border-2 border-orange-200 dark:border-orange-700 rounded-lg hover:bg-orange-50 dark:hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
                 <span>Browse Full Menu</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -378,13 +423,25 @@ function toggleCart() {
     overlay.classList.toggle('show');
 }
 
+function browseFullMenu() {
+    //first close the cart
+    toggleCart();
+    //then switch to 'All' category
+    const allBtn = document.querySelector('.category-tab');
+    if (allBtn) {
+        filterCategory('All', allBtn);
+    }
+    //scroll to top smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function showToast(message) {
     const toast = document.createElement('div');
     toast.className = 'fixed bottom-24 right-6 glass-card text-gray-800 dark:text-white px-6 py-3 rounded-lg shadow-2xl font-medium';
     toast.style.cssText = 'z-index: 9999; opacity: 0; transform: translateY(20px); transition: all 0.2s ease-in-out;';
     toast.textContent = message;
     document.body.appendChild(toast);
-    
+
     setTimeout(() => {
         toast.style.opacity = '1';
         toast.style.transform = 'translateY(0)';
