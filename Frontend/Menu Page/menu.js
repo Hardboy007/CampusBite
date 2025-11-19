@@ -20,7 +20,8 @@ let cart = {};
 let currentCategory = 'All';
 let searchQuery = '';
 let recentlyAdded = [];   // Recently added items track karne ke liye
-let isLoading = true;  // ← NEW: Loading state track karne ke liye
+let isLoading = true;  // Loading state track karne ke liye
+let priceRange = 'all';
 
 // ============ DARK MODE INITIALIZATION ============
 function initDarkMode() {
@@ -98,14 +99,24 @@ renderMenuItems();
 updateCartUI();
 
 
-//Render Menu items
+//=========== RENDER MENU ITEMS =============
 function renderMenuItems() {
     const grid = document.getElementById('menuGrid');
     const noResults = document.getElementById('noResults');
     let filtered = menuItems.filter(item => {
         const matchesCategory = currentCategory === 'All' || item.category === currentCategory;
         const matchesSearch = item.name.toLowerCase().includes(searchQuery) || item.description.toLowerCase().includes(searchQuery);
-        return matchesCategory && matchesSearch;
+
+        //Price Range Filter
+        let matchesPrice = true;
+        if(priceRange === 'budget'){
+            matchesPrice = item.price <= 30;
+        }else if(priceRange === 'medium'){
+            matchesPrice = item.price >=30 && item.price <= 60;
+        }else if(priceRange === 'premium'){
+            matchesPrice = item.price > 60;
+        }
+        return matchesCategory && matchesSearch && matchesPrice;
     });
     if (filtered.length === 0) {
         grid.innerHTML = '';
@@ -116,6 +127,18 @@ function renderMenuItems() {
     }
 }
 
+//============== FILTER BY PRICE RANGE =================
+function filterByPrice(range, btn){
+    priceRange = range;
+    //update button styles
+    document.querySelectorAll('.price-filter-btn').forEach(button => {
+        button.classList.remove('active', 'bg-orange-500', 'text-white');
+        button.classList.add('bg-gray-100', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
+    });
+    btn.classList.remove('bg-gray-100', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
+    btn.classList.add('active', 'bg-orange-500', 'text-white');
+    renderMenuItems();
+}
 //Search functionality
 document.getElementById('searchDesktop').addEventListener('input', (e) => {
     searchQuery = e.target.value.toLowerCase();
