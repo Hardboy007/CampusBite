@@ -119,12 +119,94 @@ function renderMenuItems() {
 //Search functionality
 document.getElementById('searchDesktop').addEventListener('input', (e) => {
     searchQuery = e.target.value.toLowerCase();
+    showSearchSuggestions(searchQuery, 'Desktop');
     renderMenuItems();
 });
 document.getElementById('searchMobile').addEventListener('input', (e) => {
     searchQuery = e.target.value.toLowerCase();
+    showSearchSuggestions(searchQuery, 'Mobile');
     renderMenuItems();
 });
+
+//========== SHOW SEARCH SUGGESTIONS ==============
+function showSearchSuggestions(query, device){
+    const suggestionsContainer = document.getElementById(`searchSuggestions${device}`);
+
+    if(!query || query.length < 2){
+        suggestionsContainer.classList.add('hidden');
+        return;
+    }
+    //Filters item matching query
+    const matches = menuItems.filter(item => 
+        item.name.toLowerCase().includes(query) || 
+        item.description.toLowerCase().includes(query) ||
+        item.category.toLowerCase().includes(query)
+    ).slice(0, 5);  //show max 5 suggestions
+
+    if(matches.length == 0){
+        suggestionsContainer.classList.add('hidden');
+        return;
+    }
+    //Highlighting matching text
+    function highlightMatch(text, query) {
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.replace(regex, '<span class="suggestion-highlight">$1</span>');
+    }
+    // Generate suggestions HTML
+    suggestionsContainer.innerHTML = matches.map(item => `
+        <div class="suggestion-item" onclick="selectSuggestion('${item.id}', '${device}')">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="flex-1">
+                <h4 class="font-semibold text-sm dark:text-white">${highlightMatch(item.name, query)}</h4>
+                <p class="text-xs text-gray-500 dark:text-gray-400">${item.category} • ₹${item.price}</p>
+            </div>
+            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </div>
+    `).join('');
+    
+    suggestionsContainer.classList.remove('hidden');
+}
+
+//============== SELECT SUGGESTION ================
+function selectSuggestion(itemId, device) {
+    const item = menuItems.find(i => i.id === itemId);
+    if (!item) return;
+    
+    // Set search value
+    document.getElementById(`search${device}`).value = '';
+    searchQuery = '';
+    
+    // Hide suggestions
+    document.getElementById(`searchSuggestions${device}`).classList.add('hidden');
+    
+    // Filter to item's category
+    const categoryBtn = Array.from(document.querySelectorAll('.category-tab'))
+        .find(btn => btn.textContent.trim() === item.category);
+    if (categoryBtn) {
+        filterCategory(item.category, categoryBtn);
+    }
+    
+    // Scroll to item
+    setTimeout(() => {
+        const itemCard = document.querySelector(`[data-item-id="${itemId}"]`);
+        if (itemCard) {
+            itemCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            itemCard.classList.add('highlight-pulse');
+            setTimeout(() => itemCard.classList.remove('highlight-pulse'), 2000);
+        }
+    }, 300);
+}
+
+// ==============HIDE SUGGESTIONS ON OUTSIDE CLICK==================
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.relative')) {
+        document.getElementById('searchSuggestionsDesktop')?.classList.add('hidden');
+        document.getElementById('searchSuggestionsMobile')?.classList.add('hidden');
+    }
+});
+
 
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function () {
@@ -310,7 +392,7 @@ function updateCartUI() {
         document.getElementById('floatingCartCount').textContent = `${itemCount} items`;        //┌─────────────┐
         document.getElementById('floatingCartTotal').textContent = `₹${Math.round(subtotal)}`;  //│  🛒 3 items │  ← Floating button
     } else {                                                                                    //│     ₹88     │
-        floatingCart.classList.add('hidden');    
+        floatingCart.classList.add('hidden');
         floatingCart.classList.remove('has-items');                                               //└─────────────┘
     }
 

@@ -39,7 +39,7 @@
             </div>
             <!--Desktop Navigation-->
             <nav class="hidden md:flex items-center gap-6">
-                <a href="/user-selection" 
+                <a href="/user-selection"
                     class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-orange-200 dark:hover:bg-gray-700 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2">
@@ -90,6 +90,11 @@
                     </svg>
                     <input type="search" id="searchDesktop" placeholder="Search for dishes..."
                         class="w-full pl-10 pr-4 py-2 rounded-lg border border-orange-200/50 bg-orange-50/50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+
+                    <div id="searchSuggestionsDesktop"
+                        class="search-suggestions hidden absolute top-full mt-2 w-full bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-orange-200 dark:border-gray-700 max-h-80 overflow-y-auto z-50">
+                        <!-- suggestions dynamically add honge via js -->
+                    </div>
                 </div>
             </div>
 
@@ -177,6 +182,10 @@
                 </svg>
                 <input type="search" id="searchMobile" placeholder="Search for dishes..."
                     class="w-full pl-10 pr-4 py-2 rounded-lg border border-orange-200/50 bg-orange-50/50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                <div id="searchSuggestionsMobile"
+                    class="search-suggestions hidden absolute top-full mt-2 w-full bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-orange-200 dark:border-gray-700 max-h-80 overflow-y-auto z-50">
+                    <!-- Suggestions yahan dynamically add honge via js -->
+                </div>
             </div>
         </div>
     </header>

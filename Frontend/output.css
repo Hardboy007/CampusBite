@@ -660,6 +660,10 @@ video {
   top: 0.5rem;
 }
 
+.top-full {
+  top: 100%;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -798,6 +802,10 @@ video {
 
 .h-full {
   height: 100%;
+}
+
+.max-h-80 {
+  max-height: 20rem;
 }
 
 .min-h-screen {
@@ -1352,6 +1360,12 @@ video {
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-xl {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -1932,6 +1946,77 @@ body {
   color: #9ca3af;
 }
 
+/* ============ SEARCH SUGGESTIONS ============= */
+
+.search-suggestions{
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown{
+  from{
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.suggestion-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid rgba(255, 183, 107, 0.1);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: rgba(255, 183, 107, 0.1);
+}
+
+.dark .suggestion-item:hover {
+  background: rgba(255, 183, 107, 0.15);
+}
+
+.suggestion-item img {
+  width: 48px;
+  height: 48px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px;
+}
+
+.suggestion-highlight {
+  background: rgba(255, 122, 74, 0.2);
+  font-weight: 600;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* Highlight pulse animation */
+
+@keyframes highlightPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 122, 74, 0.7);
+  }
+
+  50% {
+    box-shadow: 0 0 0 15px rgba(255, 122, 74, 0);
+  }
+}
+
+.highlight-pulse {
+  animation: highlightPulse 1s ease-out 2;
+}
+
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -2061,6 +2146,11 @@ body {
 .dark\:border-orange-700:is(.dark *) {
   --tw-border-opacity: 1;
   border-color: rgb(194 65 12 / var(--tw-border-opacity, 1));
+}
+
+.dark\:bg-gray-800:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }
 
 .dark\:text-gray-300:is(.dark *) {
