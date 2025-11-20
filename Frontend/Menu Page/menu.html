@@ -243,19 +243,19 @@
         <div class="container mx-auto px-4 md:px-6 py-3">
             <div class="flex items-center gap-3 overflow-x-auto scrollbar-hide">
                 <span class="text-sm font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap">Price:</span>
-                <button onclick="filterByPrice('all', this)"
+                <button onclick="event.stopPropagation(); filterByPrice('all', this)"
                     class="price-filter-btn active px-4 py-1.5 text-sm rounded-full bg-orange-500 text-white font-medium whitespace-nowrap transition-all">
                     All Prices
                 </button>
-                <button onclick="filterByPrice('budget', this)"
+                <button onclick="event.stopPropagation(); filterByPrice('budget', this)"
                     class="price-filter-btn px-4 py-1.5 text-sm rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium whitespace-nowrap hover:bg-orange-100 dark:hover:bg-gray-700 transition-all">
                     Budget (₹0-30)
                 </button>
-                <button onclick="filterByPrice('medium', this)"
+                <button onclick="event.stopPropagation(); filterByPrice('medium', this)"
                     class="price-filter-btn px-4 py-1.5 text-sm rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium whitespace-nowrap hover:bg-orange-100 dark:hover:bg-gray-700 transition-all">
                     Medium (₹31-60)
                 </button>
-                <button onclick="filterByPrice('premium', this)"
+                <button onclick="event.stopPropagation(); filterByPrice('premium', this)"
                     class="price-filter-btn px-4 py-1.5 text-sm rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium whitespace-nowrap hover:bg-orange-100 dark:hover:bg-gray-700 transition-all">
                     Premium (₹61+)
                 </button>

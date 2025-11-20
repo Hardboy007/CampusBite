@@ -128,16 +128,27 @@ function renderMenuItems() {
 }
 
 //============== FILTER BY PRICE RANGE =================
-function filterByPrice(range, btn){
-    priceRange = range;
-    //update button styles
-    document.querySelectorAll('.price-filter-btn').forEach(button => {
-        button.classList.remove('active', 'bg-orange-500', 'text-white');
-        button.classList.add('bg-gray-100', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
+function filterByPrice(range, btn) {
+    // Pehle button update karo (DOM directly)
+    const allButtons = document.querySelectorAll('.price-filter-btn');
+    allButtons.forEach(button => {
+        if (button === btn) {
+            // Active button
+            button.className = 'price-filter-btn active px-4 py-1.5 text-sm rounded-full bg-orange-500 text-white font-medium whitespace-nowrap transition-all';
+        } else {
+            // Inactive buttons
+            button.className = 'price-filter-btn px-4 py-1.5 text-sm rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium whitespace-nowrap hover:bg-orange-100 dark:hover:bg-gray-700 transition-all';
+        }
     });
-    btn.classList.remove('bg-gray-100', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
-    btn.classList.add('active', 'bg-orange-500', 'text-white');
-    renderMenuItems();
+    
+    // Ab filter apply karo
+    priceRange = range;
+    
+    // Debounced render (300ms delay)
+    clearTimeout(window.priceFilterTimeout);
+    window.priceFilterTimeout = setTimeout(() => {
+        renderMenuItems();
+    }, 300);
 }
 //Search functionality
 document.getElementById('searchDesktop').addEventListener('input', (e) => {
