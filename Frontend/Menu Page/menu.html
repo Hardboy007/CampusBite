@@ -400,8 +400,31 @@
                     </div>
                 </div>
                 <button
-                    class="w-full gradient-primary text-white h-12 text-base font-semibold rounded-lg hover:opacity-90 transition-opacity">
-                    Proceed to Checkout
+                    class="checkout-btn w-full h-14 text-base font-bold rounded-xl relative overflow-hidden group shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <!-- Background gradient (moves left to right) -->
+                    <span class="absolute inset-0 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600"></span>
+
+                    <!-- Hover shine effect (left to right) -->
+                    <span
+                        class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></span>
+
+                    <!-- Button content -->
+                    <span class="relative z-10 flex items-center justify-center gap-2 text-white">
+                        <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span class="font-bold text-lg">Proceed to Checkout</span>
+                        <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+
+                    <!-- Pulse effect on edges -->
+                    <span
+                        class="absolute inset-0 rounded-xl border-2 border-orange-400 opacity-0 group-hover:opacity-100 group-hover:animate-ping"></span>
                 </button>
             </div>
         </div>
