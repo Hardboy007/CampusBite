@@ -12,8 +12,9 @@ const menuItems = [
     { id: "10", name: "Chai", description: "Hot Indian tea brewed with spices and milk", price: 10, image: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=500&q=80", category: "Beverages", isVeg: true, isAvailable: true },
     { id: "11", name: "Coffee", description: "Fresh brewed coffee with milk and sugar", price: 20, image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=80", category: "Beverages", isVeg: true, isAvailable: true },
     { id: "12", name: "Cold Drink", description: "Chilled carbonated soft drink", price: 20, image: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=500&q=80", category: "Beverages", isVeg: true, isAvailable: true },
-    { id: "13", name: "Gulab Jamun (2 pcs)", description: "Soft milk dumplings soaked in rose-flavored sugar syrup", price: 30, image: "https://images.unsplash.com/photo-1597328117006-6d1566b80f59?w=500&q=80", category: "Desserts", isVeg: true, isAvailable: true },
-    { id: "14", name: "Ice Cream", description: "Creamy vanilla ice cream served in a cup", price: 40, image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&q=80", category: "Desserts", isVeg: true, isAvailable: true }
+    { id: "13", name: "Masala Dosa", description: "crispy South Indian crepe made from batter, traditionally stuffed with a spiced potato filling.", price: 70, image: "https://images.unsplash.com/photo-1708146464361-5c5ce4f9abb6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFzYWxhJTIwZG9zYXxlbnwwfHwwfHx8MA%3D%3D", category: "Lunch", isVeg: true, isAvailable: true },
+    { id: "14", name: "Ice Cream", description: "Creamy vanilla ice cream served in a cup", price: 40, image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&q=80", category: "Desserts", isVeg: true, isAvailable: true },
+    { id: "15", name: "Omelete", description: "beaten eggs or an egg mixture cooked until just set may be folded around", price: 50, image: "https://media.istockphoto.com/id/1048121658/photo/scrambled-eggs-or-omelette-made-from-eggs-and-cheese-with-herbs.webp?a=1&b=1&s=612x612&w=0&k=20&c=xhnGisEErH4pOLsX_tUhflZhHqIYYtl9bovhrdklkWs=", category: "Breakfast", isVeg: false, isAvailable: true }
 ]
 
 let cart = {};
