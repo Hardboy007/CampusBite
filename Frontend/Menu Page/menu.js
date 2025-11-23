@@ -1,4 +1,4 @@
-// Menu Data
+// Menu Data For DEMO
 const menuItems = [
     { id: "1", name: "Aloo Paratha", description: "Crispy whole wheat flatbread stuffed with spiced potato filling", price: 40, image: "https://media.istockphoto.com/id/1951940755/photo/close-up-image-of-indian-breakfast-dish-buffet-triangular-slices-of-aloo-parathas-on-white.webp?a=1&b=1&s=612x612&w=0&k=20&c=potsL3cD35yKkfndnt4aelUWlOTczCvNCBCRrReyru4=", category: "Breakfast", isVeg: true, isAvailable: true },
     { id: "2", name: "Idli (2 pcs)", description: "a soft, spongy, steamed cake made, traditionally served as a breakfast or snack in South India", price: 50, image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=500&q=80", category: "Breakfast", isVeg: true, isAvailable: true },
@@ -61,6 +61,7 @@ function toggleDarkMode() {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function () {
     initDarkMode();
+    initUserProfile();
     showSkeletonLoading();
 
     // Simulate loading delay (remove in production if data loads instantly)
@@ -427,8 +428,8 @@ function updateCartUI() {
         document.getElementById('floatingCartCount').textContent = `${itemCount} items`;        //┌─────────────┐
         document.getElementById('floatingCartTotal').textContent = `₹${Math.round(subtotal)}`;  //│  🛒 3 items │  ← Floating button
     } else {                                                                                    //│     ₹88     │
-        floatingCart.classList.add('hidden');
-        floatingCart.classList.remove('has-items');                                               //└─────────────┘
+        floatingCart.classList.add('hidden');                                                   //└─────────────┘
+        floatingCart.classList.remove('has-items');                                               
     }
 
     // Update Cart Sidebar
@@ -570,3 +571,36 @@ function showToast(message) {
         setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
+
+// // ============ USER PROFILE MANAGEMENT ============
+
+// // Initialize user profile on page load
+// function initUserProfile(){
+//     //DEMO user data
+//     const dummyUser = {
+//         userName: 'Hardik',
+//         phone: '+91 95484 15772',
+//         name: 'Hardik Srivastava',
+//         email: 'hardik77.aman@gmail.com'
+//     };
+//     updateUserProfile(dummyUser);   // ← Ye function SAME rahega BACKEND ke time
+// }
+// // // Update profile UI with user data
+// // function updateUserProfile(userData){   // ← NO CHANGE for BACKEND
+// //     const initial = userData.name.charAt(0).toUpperCase();
+
+// //     //Desktop Profile
+// //     document.getElementById('userInitial').textContent = initial;
+// //     document.getElementById('userName').textContent = userData.userName;
+// //     document.getElementById('dropdownUserName').textContent = userData.name;
+// //     document.getElementById('dropdownUserPhone').textContent = userData.phone;
+
+// //     //Mobile Profile
+// //     const mobileInitial = document.getElementById('userInitialMobile');
+// //     const mobileName = document.getElementById('userNameMobile');
+// //     const mobilePhone = document.getElementById('userPhoneMobile');
+// //     if (mobileInitial) mobileInitial.textContent = initial;
+// //     if (mobileName) mobileName.textContent = userData.name;
+// //     if (mobilePhone) mobilePhone.textContent = userData.phone;
+// // }
+// // // Handle logout    (when BACKEND small update - API call add)

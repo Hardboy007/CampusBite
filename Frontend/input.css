@@ -68,9 +68,9 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 183, 107, 0.4);
-  box-shadow: 
+  box-shadow:
     0 4px 20px rgba(255, 122, 74, 0.1),
-    0 0 20px rgba(255, 183, 107, 0.3),       
+    0 0 20px rgba(255, 183, 107, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   transition: all 0.3s ease;
 }
@@ -80,7 +80,7 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 183, 107, 0.25);
-  box-shadow: 
+  box-shadow:
     0 4px 20px rgba(0, 0, 0, 0.3),
     0 0 25px rgba(255, 122, 74, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -91,8 +91,10 @@ body {
 }
 
 .hover-lift:hover {
-  transform: translateY(-8px) scale(1.02);  /* Upar uthao + thoda zoom */
-  box-shadow: 0 20px 40px rgba(255, 122, 74, 0.4);  /* Badi shadow */
+  transform: translateY(-8px) scale(1.02);
+  /* Upar uthao + thoda zoom */
+  box-shadow: 0 20px 40px rgba(255, 122, 74, 0.4);
+  /* Badi shadow */
 }
 
 .dark .hover-lift:hover {
@@ -396,10 +398,13 @@ body {
 
 /* ============ FLOATING CART PULSE ============ */
 @keyframes floatingPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     box-shadow: 0 8px 24px rgba(255, 122, 74, 0.3);
   }
+
   50% {
     transform: scale(1.05);
     box-shadow: 0 12px 32px rgba(255, 122, 74, 0.5);
@@ -494,21 +499,23 @@ body {
 }
 
 /* ============ SEARCH SUGGESTIONS ============= */
-.search-suggestions{
+.search-suggestions {
   animation: slideDown 0.2s ease-out;
 }
 
-@keyframes slideDown{
-  from{
+@keyframes slideDown {
+  from {
     opacity: 0;
     transform: translateY(-10px);
   }
-  to{
+
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-.suggestion-item{
+
+.suggestion-item {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -517,21 +524,26 @@ body {
   transition: background-color 0.2s;
   border-bottom: 1px solid rgba(255, 183, 107, 0.1);
 }
+
 .suggestion-item:last-child {
   border-bottom: none;
 }
+
 .suggestion-item:hover {
   background: rgba(255, 183, 107, 0.1);
 }
+
 .dark .suggestion-item:hover {
   background: rgba(255, 183, 107, 0.15);
 }
+
 .suggestion-item img {
   width: 48px;
   height: 48px;
   object-fit: cover;
   border-radius: 8px;
 }
+
 .suggestion-highlight {
   background: rgba(255, 122, 74, 0.2);
   font-weight: 600;
@@ -541,9 +553,12 @@ body {
 
 /* Highlight pulse animation */
 @keyframes highlightPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(255, 122, 74, 0.7);
   }
+
   50% {
     box-shadow: 0 0 0 15px rgba(255, 122, 74, 0);
   }
@@ -551,4 +566,41 @@ body {
 
 .highlight-pulse {
   animation: highlightPulse 1s ease-out 2;
+}
+
+/* ============ PROFILE DROPDOWN ============ */
+.profile-dropdown {
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.group:hover .profile-dropdown {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Dropdown arrow (tooltip style) */
+.group:hover .profile-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  background: white;
+  transform: rotate(45deg);
+  border-top: 1px solid rgba(255, 183, 107, 0.3);
+  border-left: 1px solid rgba(255, 183, 107, 0.3);
+}
+
+.dark .group:hover .profile-dropdown::before {
+  background: #1f2937;
+  border-top-color: rgba(255, 183, 107, 0.2);
+  border-left-color: rgba(255, 183, 107, 0.2);
+}
+
+/* Smooth transitions */
+.profile-dropdown a,
+.profile-dropdown button {
+  transition: all 0.2s ease;
 }
