@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <!-- Dark mode BEFORE CSS loads -->
+    <script>
+        if (localStorage.getItem('darkMode') === 'on') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat+Alternates:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="order.css">
+</head>
+
+<body>
+    <header>
+        <button class="back" onclick="history.back()">←</button>
+        <div>
+            <h1>Order</h1>
+            <div class="small">Review & checkout</div>
+        </div>
+        <div class="header-right">
+            <button id="darkModeBtn" class="dark-mode-toggle">
+                <div class="dark-toggle-slider">
+                    <svg class="sun-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </div>
+            </button>
+
+
+            <button onclick="goEditCart()" class="cart-btn">
+                <svg class="cart-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span id="cartBadge" class="cart-badge-svg">3</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- ORDER REVIEW -->
+        <section id="sec1" class="section">
+            <div class="order-card">
+                <div class="summary">
+                    <div class="thumb">🍜</div>
+                    <div>
+                        <div style="font-weight:700">Order Review</div>
+                        <div class="small" id="itemSummary">3 items — ₹120</div>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center">
+                    <div class="count-pill" id="itemCount">3 items</div>
+                    <button class="expand-btn ripple" id="toggleItems">Expand</button>
+                </div>
+            </div>
+
+            <div class="items-list" id="itemsList"></div>
+            <div style="display:flex;margin-top:10px">
+                <button class="edit-cart ripple" onclick="goEditCart()">Edit Cart</button>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="sec2" class="section">
+            <h2>Contact Details</h2>
+            <div class="field">
+                <label for="phone">Phone number <span class="required-star">*</span></label>
+                <input id="phone" type="tel" inputmode="numeric" pattern="[0-9]{10}" placeholder="98*****10" />
+
+                <!-- Saved Number Option (if exists) -->
+                <div id="savedPhoneOption" style="display: none; margin-top: 8px;">
+                    <button type="button" onclick="useSavedPhone()"
+                        style="background: rgba(255, 183, 107, 0.2); border: 1px solid rgba(255, 183, 107, 0.4); padding: 6px 12px; border-radius: 8px; font-size: 13px; cursor: pointer;">
+                        Use saved: <strong id="savedPhoneDisplay"></strong>
+                    </button>
+                </div>
+
+                <div class="small">We will send an order token to this number.</div>
+            </div>
+
+            <div style="margin-top:8px">
+                <label><input type="checkbox" id="saveInfo" /> Save info for next time</label>
+            </div>
+        </section>
+
+        <!-- PAYMENT -->
+        <section id="sec3" class="section">
+            <h2>Payment Method</h2>
+            <div class="pay-grid">
+                <div class="pay-card" data-method="counter">
+                    <div class="icon">🏪</div>
+                    <div>
+                        <div style="font-weight:700">Pay at Counter</div>
+                        <div class="small">Recommended — fast & free</div>
+                    </div>
+                </div>
+
+                <div class="pay-card" data-method="upi">
+                    <div class="icon">🔗</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight:700; font-size:700">UPI</div>
+                        <div class="small upi-icons">
+                            <img src="https://static.cdnlogo.com/logos/p/79/phonepe.svg" alt="PhonePe" class="upi-logo">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Google_Pay_Logo_%282020%29.svg"
+                                alt="GPay" class="upi-logo">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/512px-Paytm_Logo_%28standalone%29.svg.png"
+                                alt="Paytm" class="upi-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICE -->
+        <section id="sec4" class="section">
+            <h2>Price Breakdown</h2>
+            <div class="price-row">
+                <div>Subtotal</div>
+                <div id="subtotal">₹100</div>
+            </div>
+            <div class="divider"></div>
+            <div class="price-row">
+                <div>GST (10%)</div>
+                <div id="tax">₹10</div>
+            </div>
+            <div class="total-row">
+                <div style="font-weight:700">Grand Total</div>
+                <div class="total-amount" id="grandTotal">₹110</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- BOTTOM BAR -->
+    <div class="bottom-bar">
+        <div class="bottom-inner">
+            <div style="display:flex;flex-direction:column">
+                <div class="small" style="font-size: large;">Total</div>
+                <div style="font-weight:800;font: size 20px;" id="bottomTotal"></div>
+            </div>
+            <button id="placeOrder" class="place-btn-effect ripple" disabled>
+                <span>Place Order</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- CONFIRMATION -->
+    <aside id="confirmation" class="confirmation">
+        <div class="conf-success">
+            <svg width="64" height="64" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="12" fill="#10b981" />
+                <path d="M7 12.5l2.5 2 5-6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+            </svg>
+            <div style="font-weight:700">Order Placed</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+            <div class="token" id="orderToken">BBC042</div>
+            <div class="qr" id="qrBox">QR</div>
+            <div class="small">Ready in <strong id="eta">~15 mins</strong> • Pickup at <strong>Counter 2</strong></div>
+            <div style="display:flex;gap:8px;width:100%">
+                <button class="btn-ghost ripple" id="screenshotBtn">Screenshot</button>
+                <button class="btn-primary ripple" id="shareBtn">Share</button>
+            </div>
+        </div>
+
+        <details style="margin-top:8px">
+            <summary style="font-weight:700">Order Summary</summary>
+            <div class="mini-list" id="confirmList"></div>
+        </details>
+
+        <div style="margin-top:auto;display:flex;gap:8px">
+            <button class="btn-ghost ripple" onclick="closeConfirm()">Close</button>
+            <button class="btn-primary ripple" onclick="openTracking()">Track My Order</button>
+        </div>
+    </aside>
+
+    <!-- TRACKING OVERLAY (Option C) -->
+    <div id="trackingUI" class="tracking-overlay">
+        <div class="tracking-box">
+            <h3>Order Tracking</h3>
+
+            <div class="tracking-line"></div>
+            <div class="tracking-progress" id="trackingProgress"></div>
+
+            <ul class="tracking-horizontal" id="trackingSteps">
+                <!-- markers are emojis (Option C) -->
+                <li id="st1">
+                    <div class="marker">🟢</div>
+                    <div class="label">Order<br>Submitted</div>
+                </li>
+                <li id="st2">
+                    <div class="marker">🟡</div>
+                    <div class="label">Preparing</div>
+                </li>
+                <li id="st3">
+                    <div class="marker">🔵</div>
+                    <div class="label">Ready to<br>Pick</div>
+                </li>
+                <li id="st4">
+                    <div class="marker">⚪</div>
+                    <div class="label"> order collected</div>
+                </li>
+            </ul>
+
+            <button class="close-track ripple" onclick="closeTracking()">Close</button>
+        </div>
+    </div>
+    <script src="order.js" defer></script>
+</body>
+
+</html>

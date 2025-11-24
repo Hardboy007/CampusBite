@@ -584,3 +584,12 @@ function handleLogout() {
         }, 300);
     }
 }
+
+// clicks "Proceed to Checkout"     (DEMO FOR BACKEND)
+// function proceedToCheckout() {
+//     // Save cart to localStorage
+//     localStorage.setItem('campusbite_cart', JSON.stringify(cart));
+    
+//     // Redirect to order page
+//     window.location.href = '/order.html';
+// }
