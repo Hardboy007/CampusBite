@@ -1,20 +1,20 @@
 // Menu Data For DEMO
 const menuItems = [
-    { id: "1", name: "Aloo Paratha", description: "Crispy whole wheat flatbread stuffed with spiced potato filling", price: 40, image: "https://media.istockphoto.com/id/1951940755/photo/close-up-image-of-indian-breakfast-dish-buffet-triangular-slices-of-aloo-parathas-on-white.webp?a=1&b=1&s=612x612&w=0&k=20&c=potsL3cD35yKkfndnt4aelUWlOTczCvNCBCRrReyru4=", category: "Breakfast", isVeg: true, isAvailable: true },
-    { id: "2", name: "Idli (2 pcs)", description: "a soft, spongy, steamed cake made, traditionally served as a breakfast or snack in South India", price: 50, image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=500&q=80", category: "Breakfast", isVeg: true, isAvailable: true },
-    { id: "3", name: "Samosa (2 pcs)", description: "Crispy golden pastry filled with spiced potatoes and peas", price: 20, image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&q=80", category: "Breakfast", isVeg: true, isAvailable: true },
-    { id: "4", name: "Chole Bhature", description: "Spicy chickpea curry served with fluffy fried bread", price: 60, image: "https://cdn.pixabay.com/photo/2022/12/28/17/44/bowl-7683485_1280.jpg", category: "Lunch", isVeg: true, isAvailable: true },
-    { id: "5", name: "Rajma Rice", description: "Red kidney beans curry served with steamed basmati rice", price: 70, image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=80", category: "Lunch", isVeg: true, isAvailable: true },
-    { id: "6", name: "Paneer Butter Masala + 2 Roti", description: "Cottage cheese in creamy tomato gravy with 2 wheat flatbreads", price: 80, image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=500&q=80", category: "Lunch", isVeg: true, isAvailable: true },
-    { id: "7", name: "White Sauce Pasta", description: " a creamy, rich dish made by combining cooked pasta with a smooth béchamel sauce, typically prepared using butter, flour, and milk.", price: 40, image: "https://media.istockphoto.com/id/664878332/photo/fettuchini-alfredo-with-garlic-bread-dinner.jpg?s=612x612&w=0&k=20&c=aYOwsF-UcMtlxS4rt0mefug80Xbz1VjwpjQnnubZiOQ=", category: "Snacks", isVeg: true, isAvailable: true },
-    { id: "8", name: "Sandwich", description: "Grilled sandwich with vegetables, cheese and chutney", price: 35, image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500&q=80", category: "Snacks", isVeg: true, isAvailable: true },
-    { id: "9", name: "Vada Pav", description: "Mumbai's iconic potato fritter in a soft bun with chutneys", price: 25, image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&q=80", category: "Snacks", isVeg: true, isAvailable: true },
-    { id: "10", name: "Chai", description: "Hot Indian tea brewed with spices and milk", price: 10, image: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=500&q=80", category: "Beverages", isVeg: true, isAvailable: true },
-    { id: "11", name: "Coffee", description: "Fresh brewed coffee with milk and sugar", price: 20, image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=80", category: "Beverages", isVeg: true, isAvailable: true },
-    { id: "12", name: "Cold Drink", description: "Chilled carbonated soft drink", price: 20, image: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=500&q=80", category: "Beverages", isVeg: true, isAvailable: true },
-    { id: "13", name: "Masala Dosa", description: "crispy South Indian crepe made from batter, traditionally stuffed with a spiced potato filling.", price: 70, image: "https://images.unsplash.com/photo-1708146464361-5c5ce4f9abb6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFzYWxhJTIwZG9zYXxlbnwwfHwwfHx8MA%3D%3D", category: "Lunch", isVeg: true, isAvailable: true },
-    { id: "14", name: "Ice Cream", description: "Creamy vanilla ice cream served in a cup", price: 40, image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&q=80", category: "Desserts", isVeg: true, isAvailable: true },
-    { id: "15", name: "Omelete", description: "beaten eggs or an egg mixture cooked until just set may be folded around", price: 50, image: "https://media.istockphoto.com/id/1048121658/photo/scrambled-eggs-or-omelette-made-from-eggs-and-cheese-with-herbs.webp?a=1&b=1&s=612x612&w=0&k=20&c=xhnGisEErH4pOLsX_tUhflZhHqIYYtl9bovhrdklkWs=", category: "Breakfast", isVeg: false, isAvailable: true }
+    { id: "1", name: "Aloo Paratha", description: "Crispy whole wheat flatbread stuffed with spiced potato filling", price: 40, image: "./images/paratha.webp", category: "Breakfast", isVeg: true, isAvailable: true },
+    { id: "2", name: "Idli (2 pcs)", description: "a soft, spongy, steamed cake made, traditionally served as a breakfast or snack in South India", price: 50, image: "./images/idli.jpeg", category: "Breakfast", isVeg: true, isAvailable: true },
+    { id: "3", name: "Samosa (2 pcs)", description: "Crispy golden pastry filled with spiced potatoes and peas", price: 20, image: "./images/samosa.jpeg", category: "Breakfast", isVeg: true, isAvailable: true },
+    { id: "4", name: "Chole Bhature", description: "Spicy chickpea curry served with fluffy fried bread", price: 60, image: "./images/bhatura.jpg", category: "Lunch", isVeg: true, isAvailable: true },
+    { id: "5", name: "Rajma Rice", description: "Red kidney beans curry served with steamed basmati rice", price: 70, image: "./images/rajma.jpeg", category: "Lunch", isVeg: true, isAvailable: true },
+    { id: "6", name: "Paneer Butter Masala + 2 Roti", description: "Cottage cheese in creamy tomato gravy with 2 wheat flatbreads", price: 80, image: "./images/paneer.jpeg", category: "Lunch", isVeg: true, isAvailable: true },
+    { id: "7", name: "White Sauce Pasta", description: " a creamy, rich dish made by combining cooked pasta with a smooth béchamel sauce, typically prepared using butter, flour, and milk.", price: 40, image: "./images/whitepasta.jpg", category: "Snacks", isVeg: true, isAvailable: true },
+    { id: "8", name: "Sandwich", description: "Grilled sandwich with vegetables, cheese and chutney", price: 35, image: "./images/sandwich.jpeg", category: "Snacks", isVeg: true, isAvailable: true },
+    { id: "9", name: "Red Sauce Pasta", description: "classic dish featuring pasta tossed in a rich, flavorful tomato-based sauce.", price: 70, image: "./images/redpasta.avif", category: "Snacks", isVeg: true, isAvailable: true },
+    { id: "10", name: "Chai", description: "Hot Indian tea brewed with spices and milk", price: 15, image: "./images/chai.avif", category: "Beverages", isVeg: true, isAvailable: true },
+    { id: "11", name: "Coffee", description: "Fresh brewed coffee with milk and sugar", price: 30, image: "./images/coffee.avif", category: "Beverages", isVeg: true, isAvailable: true },
+    { id: "12", name: "Chowmein", description: "A Chinese-American dish consisting of a combination of stewed vegetables served over fried noodles.", price: 50, image: "./images/chowmein.avif", category: "Snacks", isVeg: true, isAvailable: true },
+    { id: "13", name: "Masala Dosa", description: "crispy South Indian crepe made from batter, traditionally stuffed with a spiced potato filling.", price: 70, image: "./images/dosa.avif", category: "Lunch", isVeg: true, isAvailable: true },
+    { id: "14", name: "Spring Roll", description: "crispy, appetizers filled with mixture of vegetables, wrapped in a thin wrapper and deep-fried until shatteringly crisps.", price: 40, image: "./images/springroll.webp", category: "Snacks", isVeg: true, isAvailable: true },
+    { id: "15", name: "Omelete", description: "beaten eggs or an egg mixture cooked until just set may be folded around", price: 50, image: "./images/omelete.webp", category: "Breakfast", isVeg: false, isAvailable: true }
 ]
 
 let cart = {};
@@ -47,8 +47,10 @@ function toggleDarkMode() {
         localStorage.setItem('darkMode', 'off');
     }
 
-    // Force reflow to apply changes immediately
-    void html.offsetHeight;
+    // Re-enable transitions after switch
+    setTimeout(() => {
+        html.style.transition = '';
+    }, 50);
 }
 // IMPORTANT: Initialize dark mode IMMEDIATELY before page loads
 (function () {
@@ -63,13 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initDarkMode();
     initUserProfile();
     showSkeletonLoading();
-
-    // Simulate loading delay (remove in production if data loads instantly)
-    setTimeout(() => {
-        hideSkeletonLoading();
-        renderMenuItems();
-        updateCartUI();
-    }, 800);
 });
 
 // Show skeleton loading
@@ -306,7 +301,7 @@ function createMenuItemCard(item) {
     return `
         <div class="glass-card rounded-lg overflow-hidden group hover-lift">
             <div class="relative h-48 overflow-hidden">
-                <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 <div class="absolute top-2 left-2">${vegBadge}</div>
             </div>
             <div class="p-4">
@@ -416,7 +411,7 @@ function updateCartUI() {
     if (itemCount > 0) {
         cartBadge.textContent = itemCount;
         cartBadge.classList.remove('hidden');               //┌──────────────────────────────┐
-    } else {                                                  //│  CampusBite          🛒(3)   │  ← Ye badge                        
+    } else {                                                //│  CampusBite          🛒(3)   │  ← Ye badge                        
         cartBadge.classList.add('hidden');                  //└──────────────────────────────┘
     }
 
@@ -573,34 +568,19 @@ function showToast(message) {
 }
 
 // // ============ USER PROFILE MANAGEMENT ============
-
-// // Initialize user profile on page load
-// function initUserProfile(){
-//     //DEMO user data
-//     const dummyUser = {
-//         userName: 'Hardik',
-//         phone: '+91 95484 15772',
-//         name: 'Hardik Srivastava',
-//         email: 'hardik77.aman@gmail.com'
-//     };
-//     updateUserProfile(dummyUser);   // ← Ye function SAME rahega BACKEND ke time
-// }
-// // // Update profile UI with user data
-// // function updateUserProfile(userData){   // ← NO CHANGE for BACKEND
-// //     const initial = userData.name.charAt(0).toUpperCase();
-
-// //     //Desktop Profile
-// //     document.getElementById('userInitial').textContent = initial;
-// //     document.getElementById('userName').textContent = userData.userName;
-// //     document.getElementById('dropdownUserName').textContent = userData.name;
-// //     document.getElementById('dropdownUserPhone').textContent = userData.phone;
-
-// //     //Mobile Profile
-// //     const mobileInitial = document.getElementById('userInitialMobile');
-// //     const mobileName = document.getElementById('userNameMobile');
-// //     const mobilePhone = document.getElementById('userPhoneMobile');
-// //     if (mobileInitial) mobileInitial.textContent = initial;
-// //     if (mobileName) mobileName.textContent = userData.name;
-// //     if (mobilePhone) mobilePhone.textContent = userData.phone;
-// // }
-// // // Handle logout    (when BACKEND small update - API call add)
+function handleLogout() {
+    const confirmed = confirm('Are you sure you want to logout?');
+    
+    if (confirmed) {
+        // Disable button to prevent multiple clicks
+        const logoutBtns = document.querySelectorAll('[onclick="handleLogout()"]');
+        logoutBtns.forEach(btn => btn.disabled = true);
+        
+        showToast('Logging out...');
+        
+        // Fast redirect (300ms instead of 1000ms)
+        setTimeout(() => {
+            window.location.href = '/user-selection';
+        }, 300);
+    }
+}
