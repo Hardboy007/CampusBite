@@ -626,3 +626,26 @@ body {
 .profile-dropdown button {
   transition: all 0.2s ease;
 }
+
+/* Price Filter Buttons - Dark Mode */
+.dark .price-filter-btn:not(.active) {
+    @apply bg-gray-800 text-gray-300 border-gray-700;
+}
+
+.dark .price-filter-btn:not(.active):hover {
+    @apply bg-gray-700 text-white;
+}
+
+.dark .price-filter-btn.active {
+    background: linear-gradient(to right, #ff5d22, #ffac58) !important;
+    @apply text-white;
+}
+
+/* Mobile Menu Dark */
+.dark #mobileMenu {
+    @apply bg-gray-900;
+}
+
+.dark #mobileMenu .bg-orange-50 {
+    @apply bg-gray-800;
+}
