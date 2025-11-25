@@ -90,19 +90,45 @@ function renderCart() {
     const grandTotalEl = document.getElementById('grandTotal');
     const bottomTotal = document.getElementById('bottomTotal');
 
+    //clear previous items
     itemsList.innerHTML = '';
+
     let count = 0, sub = 0;
+
+    // Handle empty cart
+    if (!cart || cart.length === 0) {
+        itemsList.innerHTML = '<div style="text-align:center; padding:20px; color:#999;">No items in cart</div>';
+        itemSummary.textContent = '0 items — ₹0';
+        itemCountBadge.textContent = '0 items';
+        cartBadge.textContent = '0';
+        subtotalEl.textContent = '₹0';
+        taxEl.textContent = '₹0';
+        grandTotalEl.textContent = '₹0';
+        bottomTotal.textContent = '₹0';
+        return;
+    }
+
+    //render cart items
     cart.forEach(it => {
         count += it.qty;
         sub += it.price * it.qty;
         const row = document.createElement('div');
         row.className = 'item';
-        row.innerHTML = `<div class="thumb">${it.emoji}</div>
-      <div><div style="font-weight:700">${it.name}</div><div class="small">₹${it.price} each</div></div>
-      <div style="margin-left:auto;display:flex;gap:8px;align-items:center"><div class="qty">x${it.qty}</div></div>`;
+        row.innerHTML = `
+            <div class="thumb">${it.emoji || '🍽️'}</div>
+            <div>
+                <div style="font-weight:700">${it.name}</div>
+                <div class="small">₹${it.price} each</div>
+            </div>
+            <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+                <div class="qty">x${it.qty}</div>
+            </div>
+        `;
         itemsList.appendChild(row);
     });
     const tax = Math.round(sub * 0.10);
+    const total = sub + tax;
+    //update ui
     itemSummary.textContent = `${count} items — ₹${sub}`;
     itemCountBadge.textContent = `${count} items`;
     cartBadge.textContent = count;
@@ -110,8 +136,20 @@ function renderCart() {
     taxEl.textContent = `₹${tax}`;
     grandTotalEl.textContent = `₹${sub + tax}`;
     bottomTotal.textContent = `₹${sub + tax}`;
+    updateCartBadge();
 }
 renderCart();
+
+// Update cart badge in header
+function updateCartBadge() {
+    const cartBadge = document.getElementById('cartBadge');
+    const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+    
+    if (cartBadge) {
+        cartBadge.textContent = totalItems;
+        cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+    }
+}
 
 /* ---------------- UI small helpers ---------------- */
 const toggleItems = document.getElementById('toggleItems');

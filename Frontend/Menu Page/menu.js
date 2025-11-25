@@ -586,10 +586,41 @@ function handleLogout() {
 }
 
 // clicks "Proceed to Checkout"     (DEMO FOR BACKEND)
-// function proceedToCheckout() {
-//     // Save cart to localStorage
-//     localStorage.setItem('campusbite_cart', JSON.stringify(cart));
+function proceedToCheckout() {
+    // Check if cart is empty
+    if (Object.keys(cart).length === 0) {
+        showToast('Your cart is empty!');
+        return;
+    }
     
-//     // Redirect to order page
-//     window.location.href = '/order.html';
-// }
+    // Convert cart object to order page format
+    const orderCart = Object.values(cart).map(item => ({
+        name: item.name,
+        price: item.price,
+        qty: item.quantity,
+        emoji: getItemEmoji(item.category),
+        id: item.id
+    }));
+    
+    // Save to localStorage
+    localStorage.setItem('campusbite_cart', JSON.stringify(orderCart));
+    
+    // Show loading toast
+    showToast('Proceeding to checkout...');
+    
+    // Redirect after short delay
+    setTimeout(() => {
+        window.location.href = '/order.html';
+    }, 300);
+}
+
+// Helper function to get emoji based on category
+function getItemEmoji(category) {
+    const emojiMap = {
+        'Breakfast': '🍳',
+        'Lunch': '🍛',
+        'Snacks': '🍟',
+        'Beverages': '☕'
+    };
+    return emojiMap[category] || '🍽️';
+}
