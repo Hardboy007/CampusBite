@@ -69,8 +69,6 @@ darkBtn.addEventListener("click", () => {
     }
 });
 
-
-
 /* ---------------- payment selection ---------------- */
 function selectPay(card) {
     payCards.forEach(c => c.classList.remove('selected'));
