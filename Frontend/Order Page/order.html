@@ -171,7 +171,7 @@
         <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
             <div class="token" id="orderToken">BBC042</div>
             <div class="qr" id="qrBox">QR</div>
-            <div class="small">Ready in <strong id="eta">~15 mins</strong> • Pickup at <strong>Counter 2</strong></div>
+            <div class="small">Ready in <strong id="eta">~15 mins</strong> • Pickup at <strong>Counter</strong></div>
             <div style="display:flex;gap:8px;width:100%">
                 <button class="btn-ghost ripple" id="screenshotBtn">Screenshot</button>
                 <button class="btn-primary ripple" id="shareBtn">Share</button>
@@ -192,32 +192,75 @@
     <!-- TRACKING OVERLAY (Option C) -->
     <div id="trackingUI" class="tracking-overlay">
         <div class="tracking-box">
-            <h3>Order Tracking</h3>
+            <div class="tracking-header">
+                <h3>Order Status</h3>
+            </div>
 
-            <div class="tracking-line"></div>
-            <div class="tracking-progress" id="trackingProgress"></div>
+            <div class="tracking-progress-container">
+                <div class="progress-line"></div>
+                <div class="progress-fill" id="progressFill"></div>
 
-            <ul class="tracking-horizontal" id="trackingSteps">
-                <!-- markers are emojis (Option C) -->
-                <li id="st1">
-                    <div class="marker">🟢</div>
-                    <div class="label">Order<br>Submitted</div>
-                </li>
-                <li id="st2">
-                    <div class="marker">🟡</div>
-                    <div class="label">Preparing</div>
-                </li>
-                <li id="st3">
-                    <div class="marker">🔵</div>
-                    <div class="label">Ready to<br>Pick</div>
-                </li>
-                <li id="st4">
-                    <div class="marker">⚪</div>
-                    <div class="label"> order collected</div>
-                </li>
-            </ul>
+                <div class="steps-list">
+                    <!-- step 1 -->
+                    <div class="step" id="step1">
+                        <div class="step-circle">
+                            <div class="step-dot"></div>
+                            <div class="step-checkmark">✓</div>
+                        </div>
+                        <div class="step-info">
+                            <div class="step-title">Order Placed</div>
+                            <div class="step-time" id="time1">--:--</div>
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="step" id="step2">
+                        <div class="step-circle">
+                            <div class="step-dot"></div>
+                            <div class="step-checkmark">✓</div>
+                        </div>
+                        <div class="step-info">
+                            <div class="step-title">Preparing</div>
+                            <div class="step-time" id="time2">--:--</div>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="step" id="step3">
+                        <div class="step-circle">
+                            <div class="step-dot"></div>
+                            <div class="step-checkmark">✓</div>
+                        </div>
+                        <div class="step-info">
+                            <div class="step-title">Ready</div>
+                            <div class="step-time" id="time3">--:--</div>
+                        </div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="step" id="step4">
+                        <div class="step-circle">
+                            <div class="step-dot"></div>
+                            <div class="step-checkmark">✓</div>
+                        </div>
+                        <div class="step-info">
+                            <div class="step-title">Completed</div>
+                            <div class="step-time" id="time4">--:--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <button class="close-track ripple" onclick="closeTracking()">Close</button>
+            <!-- ETA Info -->
+            <div class="eta-card">
+                <div class="eta-icon">⏱️</div>
+                <div class="eta-text">
+                    <div class="eta-label">Estimated Time</div>
+                    <div class="eta-value">~15 mins</div>
+                </div>
+            </div>
+            <!-- Actions -->
+            <div class="tracking-footer">
+                <button class="btn-outline" onclick="closeTracking()">Close</button>
+                <button class="btn-filled" onclick="refreshTracking()">Refresh</button>
+            </div>
         </div>
     </div>
     <script src="order.js" defer></script>

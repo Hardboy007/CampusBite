@@ -144,7 +144,7 @@ renderCart();
 function updateCartBadge() {
     const cartBadge = document.getElementById('cartBadge');
     const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-    
+
     if (cartBadge) {
         cartBadge.textContent = totalItems;
         cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
@@ -254,60 +254,111 @@ function closeConfirm() {
 }
 
 
-/* ---------------- Tracking (Option C) ---------------- */
+/* ---------------- Tracking ---------------- */
 const trackingUI = document.getElementById('trackingUI');
-const progressEl = document.getElementById('trackingProgress') || document.getElementById('trackingProgress'); // fallback
-const steps = ['st1', 'st2', 'st3', 'st4'];
-let stepIndex = 0;
-let trackingTimer = null;
+const progressEl = document.getElementById('progressFill');
+const steps = ['step1', 'step2', 'step3', 'step4'];
+let currentStep = 0;
+let trackingInterval = null;
+
 
 function resetTracking() {
     // remove active class from items
-    steps.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.remove('active');
+    steps.forEach((id, index) => {
+        const step = document.getElementById(id);
+        if (step) {
+            step.classList.remove('active', 'completed');
+        }
+        // Clear time
+        const timeEl = document.getElementById('time' + (index + 1));
+        if (timeEl) timeEl.textContent = '--:--';
     });
-    stepIndex = 0;
-    // reset progress width
-    const prog = document.getElementById('trackingProgress');
-    if (prog) prog.style.width = '0%';
-    if (trackingTimer) clearTimeout(trackingTimer);
+    // Reset progress
+    if (progressFill) progressFill.style.height = '0%';
+
+    currentStep = 0;
+
+    if (trackingInterval) {
+        clearInterval(trackingInterval);
+        trackingInterval = null;
+    }
+}
+function getCurrentTime() {
+    const now = new Date();
+    return now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    });
 }
 
-function animateTracking() {
+function animateStep() {
     // compute percent per step: when first step active -> progress covers 0% (or a little), after each step increase
-    if (stepIndex >= steps.length) return;
-    const el = document.getElementById(steps[stepIndex]);
-    if (el) el.classList.add('active');
-
-    // set progress: percent = ((stepIndex + 1) / (steps.length)) * 100 - small adjustment so final reaches 100%
-    const prog = document.getElementById('trackingProgress');
-    const percent = Math.round(((stepIndex + 1) / steps.length) * 100);
-    if (prog) prog.style.width = percent + '%';
-
-    stepIndex++;
-    if (stepIndex < steps.length) {
-        // Change timing based on step (faster initially, slower at end)
-        const delays = [800, 2000, 3000];  // milliseconds for each step
-        trackingTimer = setTimeout(animateTracking, delays[stepIndex - 1] || 1700);
+    if (currentStep >= steps.length) {
+        clearInterval(trackingInterval);
+        return;
     }
+    const stepId = steps[currentStep];
+    const stepEl = document.getElementById(stepId);
+
+    if (stepEl) {
+        //Mark previous steps as completed
+        if (currentStep > 0) {
+            const prevStep = document.getElementById(steps[currentStep - 1]);
+            if (prevStep) {
+                prevStep.classList.remove('active');
+                prevStep.classList.add('completed');
+            }
+        }
+        //Activate current step
+        stepEl.classList.add('active');
+
+        //set time
+        const timeEl = document.getElementById('time' + (currentStep + 1));
+        if (timeEl) {
+            timeEl.textContent = getCurrentTime();
+        }
+
+        //update progress bar
+        const progress = ((currentStep + 1) / steps.length) * 100;
+        if (progressFill) {
+            progressFill.style.height = progress + '%';
+        }
+    }
+    currentStep++;
 }
 
 function openTracking() {
+    // Set order ID
+    const orderToken = document.getElementById('orderToken');
+    const trackOrderId = document.getElementById('trackOrderId');
+    if (orderToken && trackOrderId) {
+        trackOrderId.textContent = orderToken.textContent;
+    }
+
     resetTracking();
     trackingUI.style.display = 'flex';
-    // slight delay so overlay shows then animate
-    setTimeout(() => {
-        animateTracking();
-    }, 180);
+
+    // Start animation with delays
+    setTimeout(() => animateStep(), 300);      // Step 1
+    setTimeout(() => animateStep(), 2000);     // Step 2
+    setTimeout(() => animateStep(), 5000);     // Step 3
+    setTimeout(() => animateStep(), 8000);     // Step 4
 }
 
 function closeTracking() {
     trackingUI.style.display = 'none';
-    // Do NOT reset UI back to place order page
-    // Confirmation overlay remains visible
 }
 
+function refreshTracking() {
+    resetTracking();
+
+    // Restart animation
+    setTimeout(() => animateStep(), 300);
+    setTimeout(() => animateStep(), 2000);
+    setTimeout(() => animateStep(), 5000);
+    setTimeout(() => animateStep(), 8000);
+}
 
 /* hook tracking-close button is inline on markup */
 
