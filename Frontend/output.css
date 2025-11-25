@@ -596,6 +596,10 @@ video {
   visibility: hidden;
 }
 
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
@@ -777,6 +781,10 @@ video {
 
 .block {
   display: block;
+}
+
+.inline {
+  display: inline;
 }
 
 .flex {
@@ -2235,9 +2243,38 @@ body {
   pointer-events: none;
 }
 
+.dark .profile-dropdown {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1));
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+}
+
+.dark .profile-dropdown .text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.dark .profile-dropdown .text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+}
+
+.dark .profile-dropdown a:hover,
+.dark .profile-dropdown button:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
+}
+
 .group:hover .profile-dropdown {
   transform: translateY(0);
   pointer-events: auto;
+}
+
+.dark .profile-dropdown::before {
+  background: #1f2937;
+  border-top-color: rgba(255, 183, 107, 0.2);
+  border-left-color: rgba(255, 183, 107, 0.2);
 }
 
 /* Dropdown arrow */
@@ -2266,6 +2303,53 @@ body {
 .profile-dropdown a,
 .profile-dropdown button {
   transition: all 0.2s ease;
+}
+
+/* Price Filter Buttons - Dark Mode */
+
+.dark .price-filter-btn:not(.active) {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1));
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+}
+
+.dark .price-filter-btn:not(.active):hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.dark .price-filter-btn.active {
+  background: linear-gradient(to right, #ff5d22, #ffac58) !important;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+/* Category tabs sticky bar */
+
+.dark .sticky.top-16 {
+  background: rgba(22, 22, 22, 0.95) !important;
+  border-bottom-color: rgba(255, 183, 107, 0.2);
+}
+
+.dark .bg-white\/95 {
+  background: rgba(22, 22, 22, 0.95) !important;
+}
+
+/* Mobile Menu Dark */
+
+.dark #mobileMenu {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
+}
+
+.dark #mobileMenu .bg-orange-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:scale-105:hover {
