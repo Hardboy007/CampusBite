@@ -573,9 +573,32 @@ body {
   pointer-events: none;
 }
 
+.dark .profile-dropdown {
+  @apply bg-gray-800 border-gray-700;
+}
+
+.dark .profile-dropdown .text-gray-800 {
+  @apply text-white;
+}
+
+.dark .profile-dropdown .text-gray-700 {
+  @apply text-gray-300;
+}
+
+.dark .profile-dropdown a:hover,
+.dark .profile-dropdown button:hover {
+  @apply bg-gray-700;
+}
+
 .group:hover .profile-dropdown {
   transform: translateY(0);
   pointer-events: auto;
+}
+
+.dark .profile-dropdown::before {
+  background: #1f2937;
+  border-top-color: rgba(255, 183, 107, 0.2);
+  border-left-color: rgba(255, 183, 107, 0.2);
 }
 
 /* Dropdown arrow */
