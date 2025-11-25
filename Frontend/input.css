@@ -569,8 +569,26 @@ body {
 
 /* ============ PROFILE DROPDOWN ============ */
 .profile-dropdown {
+  opacity: 0;
+  visibility: hidden;
   transform: translateY(-10px);
   pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+/* Show on click (new behavior) */
+.profile-dropdown.show-dropdown {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+.profile-dropdown:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .dark .profile-dropdown {
