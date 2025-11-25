@@ -340,8 +340,8 @@ function openTracking() {
     // Start animation with delays
     setTimeout(() => animateStep(), 300);      // Step 1
     setTimeout(() => animateStep(), 2000);     // Step 2
-    setTimeout(() => animateStep(), 5000);     // Step 3
-    setTimeout(() => animateStep(), 8000);     // Step 4
+    setTimeout(() => animateStep(), 3000);     // Step 3
+    setTimeout(() => animateStep(), 5000);     // Step 4
 }
 
 function closeTracking() {
@@ -354,8 +354,8 @@ function refreshTracking() {
     // Restart animation
     setTimeout(() => animateStep(), 300);
     setTimeout(() => animateStep(), 2000);
+    setTimeout(() => animateStep(), 3000);
     setTimeout(() => animateStep(), 5000);
-    setTimeout(() => animateStep(), 8000);
 }
 
 /* hook tracking-close button is inline on markup */
