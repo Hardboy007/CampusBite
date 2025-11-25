@@ -629,23 +629,29 @@ body {
 
 /* Price Filter Buttons - Dark Mode */
 .dark .price-filter-btn:not(.active) {
-    @apply bg-gray-800 text-gray-300 border-gray-700;
+  @apply bg-gray-800 text-gray-300 border-gray-700;
 }
 
 .dark .price-filter-btn:not(.active):hover {
-    @apply bg-gray-700 text-white;
+  @apply bg-gray-700 text-white;
 }
 
 .dark .price-filter-btn.active {
-    background: linear-gradient(to right, #ff5d22, #ffac58) !important;
-    @apply text-white;
+  background: linear-gradient(to right, #ff5d22, #ffac58) !important;
+  @apply text-white;
+}
+
+/* Category tabs sticky bar */
+.dark .sticky.top-16 {
+  background: rgba(22, 22, 22, 0.95) !important;
+  border-bottom-color: rgba(255, 183, 107, 0.2);
 }
 
 /* Mobile Menu Dark */
 .dark #mobileMenu {
-    @apply bg-gray-900;
+  @apply bg-gray-900;
 }
 
 .dark #mobileMenu .bg-orange-50 {
-    @apply bg-gray-800;
+  @apply bg-gray-800;
 }
