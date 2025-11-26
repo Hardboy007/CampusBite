@@ -5,9 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Welcome — CampusBite</title>
-    <link rel="stylesheet" href="userSelection.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="stylesheet" href="userSelection.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
 <body>
@@ -15,7 +14,7 @@
         <!-- Hero / Header -->
         <h1>Welcome to <span class="brand">CampusBite</span></h1>
         <p class="subtitle">Choose your role and get started.</p>
-
+        
         <!-- Role Selection Cards -->
         <div class="card-wrapper">
             <!-- Customer Card -->
@@ -28,11 +27,13 @@
                         <li>Quick order placement</li>
                         <li>Track order status</li>
                     </ul>
-                    <form method="POST" action="/user-selection">
-                        <input type="hidden" name="role" value="customer">
+                    <div>
+                        <input type="hidden" name="role" value="customer" />
                         <!-- // student  qlikhe  -->
-                        <button type="submit" class="role-btn customer-btn">Continue as Customer</button>
-                    </form>
+                        <button type="submit" class="role-btn customer-btn">
+                            Continue as Customer
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -46,38 +47,48 @@
                         <li>Update availability</li>
                         <li>Update menu and pricing</li>
                     </ul>
-                    <form method="POST" action="/user-selection">
-                        <input type="hidden" name="role" value="staff">
-                        <button type="submit" class="role-btn staff-btn">Continue as Staff</button>
-                    </form>
+                    <div>
+                        <input type="hidden" name="role" value="staff" />
+                        <button type="submit" class="role-btn staff-btn">
+                            Continue as Staff
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Customer Glass Login Modal -->
-    <div id="customerOverlay" class="overlay"></div>    <!--changed id overlay to customerOverlay-->
+    <div id="customerOverlay" class="overlay"></div>
+    <!--changed id overlay to customerOverlay-->
 
-    <div id="customerModal" class="loginModal">         <!--changed modal to customerModal-->
+    <div id="customerModal" class="loginModal">
+        <!--changed modal to customerModal-->
         <div class="modal-box">
             <span class="close-btn" onclick="closeModal('customerModal','customerOverlay')">x</span>
             <h2>Login as Customer</h2>
             <p class="login-title">Enter your credentials to access your account</p>
 
-            <!-- Error Message -->      <!--changed id loginError to customerLoginError-->
-            <p id="customerLoginError" class="error-msg"></p>  <!--yaha pe pura isliye nhi likha kyuki ye err msg tab ayega jab condition lage aur wo js me hoga-->
+            <!-- Error Message -->
+            <!--changed id loginError to customerLoginError-->
+            <p id="customerLoginError" class="error-msg"></p>
+            <!--yaha pe pura isliye nhi likha kyuki ye err msg tab ayega jab condition lage aur wo js me hoga-->
 
             <!-- ✅ Customer Form start -->
-            <form id="customerLoginForm" method="POST" action="/user-selection">    <!--changed id loginForm to customerLoginForm-->
+            <form id="customerLoginForm" method="POST" action="/user-selection">
+                <!--changed id loginForm to customerLoginForm-->
                 <div class="input-group">
                     <b class="fas fa-envelope icon"></b>
-                    <input type="text" id="customerUsername" placeholder="Email Id" name="email">   <!--changed id username to customerUsername-->
+                    <input type="text" id="customerUsername" placeholder="Email Id" name="email" />
+                    <!--changed id username to customerUsername-->
                 </div>
 
                 <div class="input-group">
                     <b class="fas fa-lock icon"></b>
-                    <input type="password" id="customerPassword" placeholder="Password" name="password">    <!--changed id password to customerPassword-->
-                    <span class="fas fa-eye-slash toggle-password" onclick="togglePassword('customerPassword', this)"></span>
+                    <input type="password" id="customerPassword" placeholder="Password" name="password" />
+                    <!--changed id password to customerPassword-->
+                    <span class="fas fa-eye-slash toggle-password"
+                        onclick="togglePassword('customerPassword', this)"></span>
                 </div>
 
                 <div class="options">
@@ -96,34 +107,44 @@
                 <button class="google">Google</button>
                 <button class="phn-num">Get OTP</button>
             </div>
-            <!--changed class from signup to customerSignup-->
-            <p class="customerSignup">Don't have an account? <a href="#">Sign up here</a></p>
+
+            <p class="signup">
+                Don't have an account? <a href="#">Sign up here</a>
+            </p>
         </div>
     </div>
 
     <!-- Staff Glass Login Modal -->
-    <div id="staffOverlay" class="overlay"></div>   <!--changed id overlay to staffOverlay-->
+    <div id="staffOverlay" class="overlay"></div>
+    <!--changed id overlay to staffOverlay-->
 
-    <div id="staffModal" class="loginModal">        <!--changed id loginModal to staffModal-->
+    <div id="staffModal" class="loginModal">
+        <!--changed id loginModal to staffModal-->
         <div class="modal-box">
             <span class="close-btn" onclick="closeModal('staffModal','staffOverlay')">x</span>
             <h2>Login as Staff</h2>
             <p class="login-title">Enter your credentials to access your account</p>
 
-            <!-- Error Message -->  <!--changed id loginError to staffLoginError-->
-            <p id="staffLoginError" class="error-msg"></p>  <!--yaha pe pura isliye nhi likha kyuki ye err msg tab ayega jab condition lage aur wo js me hoga-->
+            <!-- Error Message -->
+            <!--changed id loginError to staffLoginError-->
+            <p id="staffLoginError" class="error-msg"></p>
+            <!--yaha pe pura isliye nhi likha kyuki ye err msg tab ayega jab condition lage aur wo js me hoga-->
 
             <!-- ✅ Staff Form start -->
-            <form id="staffLoginForm" method="POST" action="/user-selection">   <!--changed id loginForm to staffLoginForm-->
+            <form id="staffLoginForm" method="#" action="#">
+                <!--changed id loginForm to staffLoginForm-->
                 <div class="input-group">
                     <b class="fas fa-envelope icon"></b>
-                    <input type="text" id="staffUsername" placeholder="Email Id" name="email">  <!--changed id username to staffUsername-->
+                    <input type="text" id="staffUsername" placeholder="Email Id" name="email" />
+                    <!--changed id username to staffUsername-->
                 </div>
 
                 <div class="input-group">
                     <b class="fas fa-lock icon"></b>
-                    <input type="password" id="staffPassword" placeholder="Password" name="password">   <!--changed id password to staffPassword-->
-                    <span class="fas fa-eye-slash toggle-password" onclick="togglePassword('staffPassword', this)"></span>
+                    <input type="password" id="staffPassword" placeholder="Password" name="password" />
+                    <!--changed id password to staffPassword-->
+                    <span class="fas fa-eye-slash toggle-password"
+                        onclick="togglePassword('staffPassword', this)"></span>
                 </div>
 
                 <div class="options">
@@ -131,7 +152,9 @@
                     <a href="#" class="forgot">Forgot Password?</a>
                 </div>
 
-                <button type="submit" class="login-btn">Login to Manage Orders</button>
+                <button type="submit" class="login-btn">
+                    Login to Manage Orders
+                </button>
             </form>
             <!-- ✅ Form end -->
 
@@ -142,28 +165,33 @@
                 <button class="google">Google</button>
                 <button class="phn-num">Get OTP</button>
             </div>
-            <!--changed class from signup to staffSignup-->
-            <p class="staffSignup">Don't have an account? <a href="#">Partner with us</a></p>
+
+            <p class="signup">
+                Don't have an account? <a href="#">Sign up here</a>
+            </p>
         </div>
     </div>
     <section class="highlight">
         <div class="highlight-content">
             <h1>Smart dining, made simple</h1>
-            <p>No long queues, no confusion — just quick bites and clear updates.</p>
+            <p>
+                No long queues, no confusion — just quick bites and clear updates.
+            </p>
         </div>
-        <img src="images/burger.avif" alt="Burger" class="side-img img-left top">
-        <img src="images/momos.avif" alt="Momos" class="side-img img-left bottom">
-        <img src="images/pizza.avif" alt="Pizza" class="side-img img-right top">
-        <img src="images/chhole bhature.png" alt="Chhole Bhature" class="side-img img-right bottom">
+        <img src="images/burger.avif" alt="Burger" class="side-img img-left top" />
+        <img src="images/momos.avif" alt="Momos" class="side-img img-left bottom" />
+        <img src="images/pizza.avif" alt="Pizza" class="side-img img-right top" />
+        <img src="images/chhole bhature.png" alt="Chhole Bhature" class="side-img img-right bottom" />
     </section>
 
     <div class="seperation"></div>
 
-
     <section class="feature-section-bg">
         <div class="features">
             <h1 class="features-title">What's waiting for you on our website?</h1>
-            <p class="features-subtitle">On Campus? Skip the waiting, explore your cravings, and order smarter with us.
+            <p class="features-subtitle">
+                On Campus? Skip the waiting, explore your cravings, and order smarter
+                with us.
             </p>
 
             <div class="features-wrapper">
@@ -208,10 +236,8 @@
         </div>
     </section>
 
-
     <footer>
         <div class="footer-container">
-
             <!-- Logo & Tagline -->
             <div class="footer-section">
                 <h2 class="logo">CampusBite</h2>
@@ -222,11 +248,11 @@
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
+                    <li><a href="/user-selection">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
                     <li><a href="#">Contact Us</a></li>
                     <li><a href="#">Cafeterias / Menu</a></li>
-                    <li><a href="#">Help & Support</a></li>
+                    <li><a href="/help">Help & Support</a></li>
                 </ul>
             </div>
 
@@ -254,8 +280,7 @@
             <div class="footer-section">
                 <h4>Connect with us</h4>
                 <div class="social-icons">
-                    <a href="#">Instagram</a> |
-                    <a href="#">Facebook</a> |
+                    <a href="#">Instagram</a> | <a href="#">Facebook</a> |
                     <a href="#">LinkedIn</a>
                 </div>
             </div>
@@ -263,8 +288,13 @@
 
         <div class="footer-bottom">
             <p>© 2025 CampusBite. All rights reserved.</p>
-            <p class="disclaimer">All logos & names belong to their respective owners. Project made for academic
-                purpose.</p>
+            <p class="disclaimer">
+                All logos & names belong to their respective owners. Project made for
+                academic purpose.
+            </p>
+        </div>
+        <div class="credit">
+            <p><i>a Hardik Srivastava production</i></p>
         </div>
     </footer>
     <script src="userSelection.js"></script>
