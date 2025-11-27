@@ -1,0 +1,383 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat Alternates', sans-serif;
+    background: #f5f5f5;
+    line-height: 1.6;
+}
+
+.dark body {
+    background: #1a1a1a;
+    color: #e0e0e0;
+}
+
+/* ================DARK MODE BUTTON==================s */
+.dark-mode-toggle {
+    position: relative;
+    width: 56px;
+    height: 28px;
+    border-radius: 28px;
+    border: none;
+    background: #e5e7eb;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+.dark-toggle-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.sun-icon,
+.moon-icon {
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    transition: opacity 0.3s ease;
+}
+
+.sun-icon {
+    color: #facc15;
+    opacity: 1;
+}
+
+.moon-icon {
+    color: #93c5fd;
+    opacity: 0;
+}
+
+.dark .dark-mode-toggle {
+    background: #374151;
+}
+
+.dark .dark-toggle-slider {
+    transform: translateX(28px);
+    background: #1f2937;
+}
+
+.dark .sun-icon {
+    opacity: 0;
+}
+
+.dark .moon-icon {
+    opacity: 1;
+}
+
+/* Header */
+.header {
+    background: white;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.dark .header {
+    background: #2a2a2a;
+    border-bottom-color: #3a3a3a;
+}
+
+.header h1 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.back-btn,
+.dark-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.back-btn:hover,
+.dark-btn:hover {
+    background: #f0f0f0;
+}
+
+.dark .back-btn:hover,
+.dark .dark-btn:hover {
+    background: #3a3a3a;
+}
+
+.dark .back-btn {
+    color: #e5e7eb;
+    font-weight: bold;
+}
+
+/* Container */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Section */
+.section {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.dark .section {
+    background: #2a2a2a;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.label {
+    font-size: 13px;
+    color: #666;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.dark .label {
+    color: #999;
+}
+
+.phone-display,
+.email-display {
+    font-size: 16px;
+    font-weight: 500;
+    color: #111;
+}
+
+.dark .phone-display,
+.dark .email-display {
+    color: #e0e0e0;
+}
+
+/* Edit Button */
+.edit-btn {
+    background: none;
+    border: 1px solid #ddd;
+    color: #ff6b35;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.dark .edit-btn {
+    border-color: #3a3a3a;
+}
+
+.edit-btn:hover {
+    background: #fff5f0;
+}
+
+.dark .edit-btn:hover {
+    background: #3a3a3a;
+}
+
+/* Edit Form */
+.edit-form {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.dark .edit-form {
+    border-top-color: #3a3a3a;
+}
+
+.edit-form.hidden {
+    display: none;
+}
+
+.edit-form input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.dark .edit-form input {
+    background: #1a1a1a;
+    border-color: #3a3a3a;
+    color: #e0e0e0;
+}
+
+.edit-form input:focus {
+    outline: none;
+    border-color: #ff6b35;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-cancel,
+.btn-save {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.dark .btn-cancel {
+    background: #3a3a3a;
+    color: #ccc;
+}
+
+.btn-save {
+    background: #ff6b35;
+    color: white;
+}
+
+.btn-save:hover {
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+}
+
+/* Verify Button */
+.verify-btn {
+    width: 100%;
+    padding: 12px;
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.3s ease;
+}
+
+.verify-btn:hover {
+    background: #059669;
+}
+
+.verify-btn:hover:not(.verified) {
+    background: #059669;
+}
+
+.verify-btn.verified {
+    background: #d1d5db !important;
+    color: #6b7280 !important;
+    cursor: not-allowed !important;
+}
+
+.dark .verify-btn.verified {
+    background: #374151 !important;
+    color: #9ca3af !important;
+}
+
+.verify-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Settings Button */
+.settings-btn {
+    width: 100%;
+    padding: 16px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #111;
+    text-decoration: none;
+}
+
+.dark .settings-btn {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+    color: #e0e0e0;
+}
+
+.settings-btn:hover {
+    background: #f9f9f9;
+}
+
+.dark .settings-btn:hover {
+    background: #3a3a3a;
+}
+
+.settings-btn svg {
+    color: #ff6b35;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .container {
+        padding: 12px;
+    }
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #10b981;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

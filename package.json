@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.18.1"
+  },
+  "name": "major",
+  "version": "1.0.0",
+  "description": "This is our group project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Campus Bite Production",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.18"
+  }
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - CampusBite</title>
+    <script>
+        if (localStorage.getItem('darkMode') === 'on') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat+Alternates:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/settings.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <button onclick="history.back()" class="back-btn">← Back</button>
+        <h1>Settings</h1>
+        <div style="width: 40px;"></div> <!-- Spacer for center alignment -->
+    </header>
+
+    <!-- Main -->
+    <main class="container">
+        <!-- SMS preference section -->
+        <div class="section">
+            <h2 class="section-title">SMS Preferences</h2>
+            <!-- Order SMS (Always ON) -->
+            <div class="setting-item">
+                <div class="setting-content">
+                    <div class="setting-label">Order related SMS</div>
+                    <div class="setting-desc">
+                        Cannot be disabled as they are critical to provide service
+                    </div>
+                </div>
+                <div class="toggle-switch disabled">
+                    <input type="checkbox" checked disabled>
+                    <span class="toggle-slider"></span>
+                </div>
+            </div>
+            <!-- Recommendations & Reminders -->
+            <div class="setting-item">
+                <div class="setting-content">
+                    <div class="setting-label">Recommendations & Reminders</div>
+                    <div class="setting-desc">
+                        Keep this on to receive offer recommendations & timely reminders based on your interests
+                    </div>
+                </div>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="smsRecommendations" onchange="toggleSMSRecommendations()">
+                    <span class="toggle-slider"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Preferences Section -->
+        <div class="section">
+            <h2 class="section-title">Notification Preferences</h2>
+
+            <!-- Email Notifications -->
+            <div class="setting-item">
+                <div class="setting-content">
+                    <div class="setting-label">Email Notifications</div>
+                    <div class="setting-desc">
+                        Receive order confirmations and updates via email
+                    </div>
+                </div>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="emailNotifications" onchange="toggleEmailNotifications()">
+                    <span class="toggle-slider"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appearance Section -->
+        <div class="section">
+            <h2 class="section-title">Appearance</h2>
+            <!-- Dark Mode -->
+            <div class="setting-item">
+                <div class="setting-content">
+                    <div class="setting-label">Dark Mode</div>
+                    <div class="setting-desc">
+                        Switch between light and dark theme
+                    </div>
+                </div>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="darkMode" onchange="toggleDarkMode()">
+                    <span class="toggle-slider"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account & Support Section -->
+        <div class="section">
+            <h2 class="section-title">Account & Support</h2>
+
+            <!-- Privacy Policy -->
+            <div class="setting-link" onclick="openLink('privacy')">
+                <div class="setting-content">
+                    <div class="setting-label">Privacy Policy</div>
+                </div>
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </div>
+            <!-- Terms & Conditions -->
+            <div class="setting-link" onclick="openLink('terms')">
+                <div class="setting-content">
+                    <div class="setting-label">Terms & Conditions</div>
+                </div>
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </div>
+            <!-- Help & Support -->
+            <div class="setting-link" onclick="openLink('support')">
+                <div class="setting-content">
+                    <div class="setting-label">Help & Support</div>
+                </div>
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Logout Button -->
+        <button class="logout-btn" onclick="handleLogout()">
+            Logout
+        </button>
+
+        <!-- App Version -->
+        <div class="app-version">
+            CampusBite v1.0.0
+        </div>
+    </main>
+    <script src="/js/settings.js"></script>
+</body>
+
+</html>

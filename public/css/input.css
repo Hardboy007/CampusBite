@@ -1,0 +1,679 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.gradient-primary {
+  background: linear-gradient(to right, #ff5f25, #ffa448);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-secondary {
+  background: linear-gradient(to right, #ff5d22, #ffac58);
+}
+
+body {
+  background: linear-gradient(180deg, hsl(30, 40%, 98%), hsl(30, 30%, 95%));
+  font-family: system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+/* ============ DARK MODE BODY ============ */
+.dark body {
+  background: linear-gradient(180deg, #1a1a1a, #0d0d0d);
+  color: #e5e5e5;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 183, 107, 0.4);
+  box-shadow:
+    0 4px 20px rgba(255, 122, 74, 0.1),
+    0 0 20px rgba(255, 183, 107, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.dark .glass-card {
+  background: rgba(48, 48, 48, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 183, 107, 0.25);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 0 25px rgba(255, 122, 74, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  /* Upar uthao + thoda zoom */
+  box-shadow: 0 20px 40px rgba(255, 122, 74, 0.4);
+  /* Badi shadow */
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 20px 40px rgba(255, 122, 74, 0.4);
+}
+
+/* ============ CART SIDEBAR ============ */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  max-width: 28rem;
+  background: linear-gradient(135deg, #ffffff 0%, #fff5ed 100%);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 60;
+  overflow-y: auto;
+}
+
+.dark .cart-sidebar {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.6);
+}
+
+#cartSidebar.open {
+  transform: translateX(0);
+}
+
+/* ============ OVERLAY ============ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 50;
+}
+
+#overlay.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.dark #overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* ============ MOBILE MENU ============ */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  background: white;
+  padding: 15px;
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+.dark .mobile-menu {
+  background: #161616;
+}
+
+/* ============ SKELETON LOADING ============ */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+      rgba(255, 183, 107, 0.1) 0%,
+      rgba(255, 183, 107, 0.2) 50%,
+      rgba(255, 183, 107, 0.1) 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 8px;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.05) 100%);
+  background-size: 1000px 100%;
+}
+
+.skeleton-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 183, 107, 0.4);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.dark .skeleton-card {
+  background: rgba(48, 48, 48, 0.9);
+  border: 1px solid rgba(255, 183, 107, 0.25);
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 192px;
+  background: linear-gradient(90deg,
+      rgba(255, 183, 107, 0.2) 0%,
+      rgba(255, 183, 107, 0.3) 50%,
+      rgba(255, 183, 107, 0.2) 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+.dark .skeleton-image {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.08) 100%);
+  background-size: 1000px 100%;
+}
+
+/* ============ RIPPLE EFFECT ============ */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.ripple:active::after {
+  width: 300px;
+  height: 300px;
+  transition: width 0s, height 0s;
+}
+
+/* Dark mode ripple */
+.dark .ripple::after {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============ CART ITEM SLIDE-IN ANIMATION ============ */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.cart-item-enter {
+  animation: slideInRight 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============ BUTTON CLICK ANIMATION ============ */
+@keyframes buttonPop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.button-click {
+  animation: buttonPop 0.3s ease;
+}
+
+/* ============ CART BADGE PULSE ============ */
+@keyframes badgePulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.badge-pulse {
+  animation: badgePulse 0.4s ease;
+}
+
+/* ============ DARK MODE TOGGLE ============ */
+.dark-toggle {
+  position: relative;
+  width: 56px;
+  height: 28px;
+  background: #e5e7eb;
+  border-radius: 28px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  pointer-events: none;
+  /* Let parent button handle clicks */
+}
+
+.dark .dark-toggle {
+  background: #374151;
+}
+
+.dark-toggle-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark .dark-toggle-slider {
+  transform: translateX(28px);
+  background: #1f2937;
+}
+
+/* ============ HEADER ============ */
+.dark header {
+  background: rgba(22, 22, 22, 0.95);
+  border-bottom-color: rgba(255, 122, 74, 0.2);
+}
+
+/* ============ MOBILE MENU ============ */
+.dark #mobileMenu {
+  background: #161616;
+  border-top-color: rgba(255, 122, 74, 0.2);
+}
+
+.dark #mobileMenu button:hover {
+  background: #303030;
+}
+
+/* ============ SEARCH BARS ============ */
+.dark input[type="search"] {
+  background: rgba(48, 48, 48, 0.8);
+  border-color: rgba(255, 183, 107, 0.3);
+  color: white;
+}
+
+.dark input[type="search"]::placeholder {
+  color: #9ca3af;
+}
+
+.dark input[type="search"]:focus {
+  background: rgba(48, 48, 48, 0.9);
+  border-color: #ff7a4a;
+}
+
+/* ============ CATEGORY TABS ============ */
+.dark .category-tab:not(.gradient-secondary) {
+  background: #303030 !important;
+}
+
+.dark .category-tab:not(.gradient-secondary) .relative.z-10 {
+  color: #d1d5db !important;
+}
+
+.dark .category-tab:not(.gradient-secondary):hover .relative.z-10 {
+  color: white !important;
+}
+
+/* ============ FLOATING CART ============ */
+.dark #floatingCart {
+  box-shadow: 0 8px 24px rgba(255, 122, 74, 0.4);
+}
+
+/* ============ FLOATING CART PULSE ============ */
+@keyframes floatingPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 8px 24px rgba(255, 122, 74, 0.3);
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(255, 122, 74, 0.5);
+  }
+}
+
+#floatingCart.has-items {
+  animation: floatingPulse 2s ease-in-out infinite;
+}
+
+.dark #floatingCart.has-items {
+  animation: floatingPulse 2s ease-in-out infinite;
+}
+
+/* ============ TEXT COLORS ============ */
+.dark .text-gray-800 {
+  color: #d1d5db;
+}
+
+.dark .text-gray-600 {
+  color: #9ca3af;
+}
+
+.dark .text-gray-700 {
+  color: #d1d5db;
+}
+
+.dark .text-gray-500 {
+  color: #9ca3af;
+}
+
+.dark .text-gray-400 {
+  color: #6b7280;
+}
+
+/* ============ CART SUMMARY ============ */
+.dark #cartSummary {
+  border-top-color: rgba(255, 183, 107, 0.2);
+}
+
+/* ============ BORDERS ============ */
+.dark .border-gray-100 {
+  border-color: #374151;
+}
+
+.dark .border-gray-300 {
+  border-color: #4b5563;
+}
+
+.dark .border-orange-200 {
+  border-color: rgba(255, 183, 107, 0.3);
+}
+
+/* ============ BACKGROUNDS ============ */
+.dark .bg-orange-50 {
+  background: rgba(48, 48, 48, 0.5);
+}
+
+.dark .bg-orange-100 {
+  background: #303030;
+}
+
+.dark .bg-gray-50 {
+  background: #374151;
+}
+
+/* ============ HOVER EFFECTS ============ */
+.dark .hover\:bg-orange-200:hover {
+  background: rgba(255, 183, 107, 0.2);
+}
+
+.dark .hover\:bg-orange-100:hover {
+  background: rgba(255, 183, 107, 0.15);
+}
+
+.dark .hover\:bg-gray-50:hover {
+  background: #374151;
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background: #303030;
+}
+
+/* ============ CATEGORY STICKY BAR ============ */
+.dark .sticky {
+  background: rgba(22, 22, 22, 0.95);
+}
+
+/* ============ NO RESULTS MESSAGE ============ */
+.dark #noResults p {
+  color: #9ca3af;
+}
+
+/* ============ SEARCH SUGGESTIONS ============= */
+.search-suggestions {
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid rgba(255, 183, 107, 0.1);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: rgba(255, 183, 107, 0.1);
+}
+
+.dark .suggestion-item:hover {
+  background: rgba(255, 183, 107, 0.15);
+}
+
+.suggestion-item img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.suggestion-highlight {
+  background: rgba(255, 122, 74, 0.2);
+  font-weight: 600;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* Highlight pulse animation */
+@keyframes highlightPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 122, 74, 0.7);
+  }
+
+  50% {
+    box-shadow: 0 0 0 15px rgba(255, 122, 74, 0);
+  }
+}
+
+.highlight-pulse {
+  animation: highlightPulse 1s ease-out 2;
+}
+
+/* ============ PROFILE DROPDOWN ============ */
+.profile-dropdown {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+/* Show on click (new behavior) */
+.profile-dropdown.show-dropdown {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+.profile-dropdown:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dark .profile-dropdown {
+  @apply bg-gray-800 border-gray-700;
+}
+
+.dark .profile-dropdown .text-gray-800 {
+  @apply text-white;
+}
+
+.dark .profile-dropdown .text-gray-700 {
+  @apply text-gray-300;
+}
+
+.dark .profile-dropdown a:hover,
+.dark .profile-dropdown button:hover {
+  @apply bg-gray-700;
+}
+
+.group:hover .profile-dropdown {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dark .profile-dropdown::before {
+  background: #1f2937;
+  border-top-color: rgba(255, 183, 107, 0.2);
+  border-left-color: rgba(255, 183, 107, 0.2);
+}
+
+/* Dropdown arrow */
+.group:hover .profile-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  background: white;
+  transform: rotate(45deg);
+  border-top: 1px solid rgba(255, 183, 107, 0.3);
+  border-left: 1px solid rgba(255, 183, 107, 0.3);
+}
+
+.dark .group:hover .profile-dropdown::before {
+  background: #1f2937;
+  border-top-color: rgba(255, 183, 107, 0.2);
+  border-left-color: rgba(255, 183, 107, 0.2);
+}
+
+/* Smooth transitions */
+.profile-dropdown a,
+.profile-dropdown button {
+  transition: all 0.2s ease;
+}
+
+/* Price Filter Buttons - Dark Mode */
+.dark .price-filter-btn:not(.active) {
+  @apply bg-gray-800 text-gray-300 border-gray-700;
+}
+
+.dark .price-filter-btn:not(.active):hover {
+  @apply bg-gray-700 text-white;
+}
+
+.dark .price-filter-btn.active {
+  background: linear-gradient(to right, #ff5d22, #ffac58) !important;
+  @apply text-white;
+}
+
+/* Category tabs sticky bar */
+.dark .sticky.top-16 {
+  background: rgba(22, 22, 22, 0.95) !important;
+  border-bottom-color: rgba(255, 183, 107, 0.2);
+}
+
+.dark .bg-white\/95 {
+  background: rgba(22, 22, 22, 0.95) !important;
+}
+
+/* Mobile Menu Dark */
+.dark #mobileMenu {
+  @apply bg-gray-900;
+}
+
+.dark #mobileMenu .bg-orange-50 {
+  @apply bg-gray-800;
+}
