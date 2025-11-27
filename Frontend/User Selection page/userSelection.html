@@ -14,7 +14,7 @@
         <!-- Hero / Header -->
         <h1>Welcome to <span class="brand">CampusBite</span></h1>
         <p class="subtitle">Choose your role and get started.</p>
-        
+
         <!-- Role Selection Cards -->
         <div class="card-wrapper">
             <!-- Customer Card -->
@@ -62,58 +62,101 @@
     <div id="customerOverlay" class="overlay"></div>
     <!--changed id overlay to customerOverlay-->
 
+    <!-- Customer Modal (Login + Signup with Flip) -->
     <div id="customerModal" class="loginModal">
-        <!--changed modal to customerModal-->
-        <div class="modal-box">
-            <span class="close-btn" onclick="closeModal('customerModal','customerOverlay')">x</span>
-            <h2>Login as Customer</h2>
-            <p class="login-title">Enter your credentials to access your account</p>
+        <div class="modal-flip-container">
 
-            <!-- Error Message -->
-            <!--changed id loginError to customerLoginError-->
-            <p id="customerLoginError" class="error-msg"></p>
-            <!--yaha pe pura isliye nhi likha kyuki ye err msg tab ayega jab condition lage aur wo js me hoga-->
+            <!-- Front Side - Login -->
+            <div class="modal-box front">
+                <span class="close-btn" onclick="closeModal('customerModal','customerOverlay')">×</span>
+                <h2>Login as Customer</h2>
+                <p class="login-title">Enter your credentials to access your account</p>
 
-            <!-- ✅ Customer Form start -->
-            <form id="customerLoginForm" method="POST" action="/user-selection">
-                <!--changed id loginForm to customerLoginForm-->
-                <div class="input-group">
-                    <b class="fas fa-envelope icon"></b>
-                    <input type="text" id="customerUsername" placeholder="Email Id" name="email" />
-                    <!--changed id username to customerUsername-->
+                <p id="customerLoginError" class="error-msg"></p>
+
+                <form id="customerLoginForm" method="POST" action="/user-selection">
+                    <div class="input-group">
+                        <i class="fas fa-envelope icon"></i>
+                        <input type="text" id="customerUsername" placeholder="Email Id" name="email" />
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-lock icon"></i>
+                        <input type="password" id="customerPassword" placeholder="Password" name="password" />
+                        <span class="fas fa-eye-slash toggle-password"
+                            onclick="togglePassword('customerPassword', this)"></span>
+                    </div>
+
+                    <div class="options">
+                        <label class="remember"><input type="checkbox" />Remember me</label>
+                        <a href="#" class="forgot">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+
+                <div class="altr-signin-label">
+                    <p>Or Continue With</p>
+                </div>
+                <div class="altr-signin">
+                    <button class="google">Google</button>
+                    <button class="phn-num">Get OTP</button>
                 </div>
 
-                <div class="input-group">
-                    <b class="fas fa-lock icon"></b>
-                    <input type="password" id="customerPassword" placeholder="Password" name="password" />
-                    <!--changed id password to customerPassword-->
-                    <span class="fas fa-eye-slash toggle-password"
-                        onclick="togglePassword('customerPassword', this)"></span>
-                </div>
-
-                <div class="options">
-                    <label class="remember"><input type="checkbox" />Remember me</label>
-                    <a href="#" class="forgot">Forgot Password?</a>
-                </div>
-
-                <button type="submit" class="login-btn">Login</button>
-            </form>
-            <!-- ✅ Form end -->
-
-            <div class="altr-signin-label">
-                <p>Or Continue With</p>
+                <p class="signup">
+                    Don't have an account? <a href="#" onclick="flipToSignup('customer'); return false;">Sign up here</a>
+                </p>
             </div>
-            <div class="altr-signin">
-                <button class="google">Google</button>
-                <button class="phn-num">Get OTP</button>
+
+            <!-- Back Side - Signup -->
+            <div class="modal-box back">
+                <span class="close-btn" onclick="closeModal('customerModal','customerOverlay')">×</span>
+                <h2>Create Account</h2>
+                <p class="login-title">Sign up to start ordering</p>
+
+                <p id="customerSignupError" class="error-msg" style="color: #ef4444; font-size: 13px; margin-bottom: 10px;"></p>
+
+                <form id="customerSignupForm">
+                    <div class="input-group">
+                        <i class="fas fa-user icon"></i>
+                        <input type="text" id="signupName" placeholder="Full Name" name="name" required />
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-envelope icon"></i>
+                        <input type="email" id="signupEmail" placeholder="Email Id" name="email" required />
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-phone icon"></i>
+                        <input type="tel" id="signupPhone" placeholder="Phone Number" name="phone" maxlength="10"
+                            required />
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-lock icon"></i>
+                        <input type="password" id="signupPassword" placeholder="Password" name="password" required />
+                        <span class="fas fa-eye-slash toggle-password"
+                            onclick="togglePassword('signupPassword', this)"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-lock icon"></i>
+                        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required />
+                        <span class="fas fa-eye-slash toggle-password"
+                            onclick="togglePassword('signupConfirmPassword', this)"></span>
+                    </div>
+
+                    <button type="submit" class="login-btn">Create Account</button>
+                </form>
+
+                <p class="signup">
+                    Already have an account? <a href="#" onclick="flipToLogin('customer'); return false;">Login here</a>
+                </p>
             </div>
 
-            <p class="signup">
-                Don't have an account? <a href="#">Sign up here</a>
-            </p>
         </div>
     </div>
-
     <!-- Staff Glass Login Modal -->
     <div id="staffOverlay" class="overlay"></div>
     <!--changed id overlay to staffOverlay-->

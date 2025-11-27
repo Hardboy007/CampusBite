@@ -160,7 +160,8 @@ h1 {
 }
 
 .role-card ul {
-    list-style-position: outside; /* dot content ke andar aa jaye */
+    list-style-position: outside;
+    /* dot content ke andar aa jaye */
     margin: 10px 0 0 0;
     padding-left: 20px;
     color: var(--muted);
@@ -628,11 +629,25 @@ footer {
 }
 
 .error-msg {
-    color: #e74c3c;
-    font-size: 14px;
-    margin-bottom: 10px;
+    min-height: 20px;
+    font-size: 13px;
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 6px;
     text-align: center;
-    display: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.error-msg:not(:empty) {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid #ef4444;
+}
+
+/* Success message override */
+.error-msg[style*="color: rgb(16, 185, 129)"] {
+    background: rgba(16, 185, 129, 0.1) !important;
+    border-color: #10b981 !important;
 }
 
 .toggle-password {
@@ -941,6 +956,61 @@ footer {
         max-width: 280px;
     }
 }
+
+.loginModal .modal-flip-container {
+    position: relative;
+    width: 100%;
+    min-height: 550px;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Flipped state */
+.loginModal .modal-flip-container.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Override modal-box positioning for flip */
+.loginModal .modal-flip-container .modal-box {
+    position: absolute !important;
+    width: 100%;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+/* Front side (Login) */
+.loginModal .modal-flip-container .modal-box.front {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+/* Back side (Signup) */
+.loginModal .modal-flip-container .modal-box.back {
+    transform: rotateY(180deg);
+}
+
+/* Hide the back side when not flipped */
+.modal-flip-container:not(.flipped) .modal-box.back {
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Ensure signup form is longer */
+.loginModal .modal-flip-container .modal-box.back {
+    min-height: 600px;
+}
+
+/* Hide the front side when flipped */
+.modal-flip-container.flipped .modal-box.front {
+    pointer-events: none;
+    opacity: 0;
+}
+
+
 
 /* Mobile phones (480px and below) */
 @media (max-width: 480px) {

@@ -112,3 +112,138 @@ function togglePassword(passwordId, iconElement) {
         iconElement.classList.add("fa-eye-slash");
     }
 }
+
+
+// Flip to Signup
+function flipToSignup(role) {
+    if (window.event) window.event.preventDefault();
+
+    const modal = document.getElementById(role + 'Modal');
+    const flipContainer = modal.querySelector('.modal-flip-container');
+    // Add flip class
+    flipContainer.classList.add('flipped');
+
+    // Clear any error messages
+    const signupError = document.getElementById(role + 'SignupError');
+    const loginError = document.getElementById(role + 'LoginError');
+    if (signupError) signupError.textContent = '';
+    if (loginError) loginError.textContent = '';
+
+    return false;
+}
+
+// Flip back to Login
+function flipToLogin(role) {
+    if (window.event) window.event.preventDefault();
+
+    const modal = document.getElementById(role + 'Modal');
+    const flipContainer = modal.querySelector('.modal-flip-container');
+
+    // Remove flip class
+    flipContainer.classList.remove('flipped');
+
+    // Clear any error messages
+    const signupError = document.getElementById(role + 'SignupError');
+    const loginError = document.getElementById(role + 'LoginError');
+    if (signupError) signupError.textContent = '';
+    if (loginError) loginError.textContent = '';
+    
+    return false;
+}
+
+// Handle Signup Form Submission
+document.addEventListener('DOMContentLoaded', function() {
+    const customerSignupForm = document.getElementById('customerSignupForm');
+    
+    if (customerSignupForm) {
+        customerSignupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('📝 Signup form submitted');
+            handleCustomerSignup(e);
+        });
+        console.log('✅ Signup form handler attached');
+    } else {
+        console.error('❌ Signup form not found!');
+    }
+});
+
+function handleCustomerSignup(e){
+    if (e) e.preventDefault();
+
+    const name = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const phone = document.getElementById('signupPhone').value.trim();
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+    const errorMsg = document.getElementById('customerSignupError');
+
+    // Clear previous errors
+    errorMsg.textContent = '';
+    errorMsg.style.color = '#ef4444';
+
+    // Validation
+    if (!name || !email || !phone || !password || !confirmPassword) {
+        errorMsg.textContent = 'Please fill all fields';
+        errorMsg.style.color = '#ef4444';
+        return false;
+    }
+
+    // Phone validation (Indian numbers)
+    if (!/^[6-9][0-9]{9}$/.test(phone)) {
+        errorMsg.textContent = 'Please enter a valid 10-digit phone number';
+        errorMsg.style.color = '#ef4444';
+        return false;
+    }
+
+    // Email validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorMsg.textContent = 'Please enter a valid email address';
+        errorMsg.style.color = '#ef4444';
+        return false;
+    }
+
+    // Password match validation
+    if (password !== confirmPassword) {
+        errorMsg.textContent = 'Passwords do not match';
+        errorMsg.style.color = '#ef4444';
+        return false;
+    }
+
+    // Password strength validation (min 6 characters)
+    if (password.length < 6) {
+        errorMsg.textContent = 'Password must be at least 6 characters';
+        errorMsg.style.color = '#ef4444';
+        return false;
+    }
+
+    // Clear error
+    errorMsg.textContent = '';
+
+    // Save user data to localStorage (Demo - Baad me backend API call hogi)
+    const userData = {
+        fullName: name,
+        email: email,
+        phone: phone,
+        phoneVerified: false,
+        emailVerified: false,
+        joinDate: new Date().toISOString()
+    };
+
+    localStorage.setItem('userData', JSON.stringify(userData));
+
+    // Show success message
+    errorMsg.textContent = 'Account created successfully! Redirecting to login...';
+    errorMsg.style.color = '#10b981';
+
+    // Flip back to login after 1.5 seconds
+    setTimeout(() => {
+        flipToLogin('customer');
+        
+        // Clear form after flip animation completes
+        setTimeout(() => {
+            document.getElementById('customerSignupForm').reset();
+            errorMsg.textContent = '';
+        }, 800);
+    }, 1200);
+}
