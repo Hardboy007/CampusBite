@@ -1824,6 +1824,7 @@ video {
 
 body {
   font-family: 'Inter', sans-serif;
+  color: #1f2937;
 }
 
 h1,
@@ -1930,7 +1931,7 @@ body {
   height: 100vh;
   width: 100%;
   max-width: 28rem;
-  background: linear-gradient(135deg, #ffffff 0%, #fff5ed 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #fff5ed 100%) !important;
   box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
   transform: translateX(100%);
   transition: transform 0.3s ease;
@@ -1939,7 +1940,7 @@ body {
 }
 
 .dark .cart-sidebar {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%) !important;
   box-shadow: -4px 0 20px rgba(0, 0, 0, 0.6);
 }
 
@@ -2178,6 +2179,13 @@ body {
 }
 
 /* ============ HEADER ============ */
+
+/* Header - Light mode proper background */
+
+header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid rgba(255, 183, 107, 0.4);
+}
 
 .dark header {
   background: rgba(22, 22, 22, 0.95);
@@ -2425,6 +2433,8 @@ body {
   transform: translateY(-10px);
   pointer-events: none;
   transition: all 0.2s ease;
+  background: white !important;
+  border: 1px solid rgba(255, 183, 107, 0.4) !important;
 }
 
 /* Show on click (new behavior) */
@@ -2448,6 +2458,8 @@ body {
   border-color: rgb(55 65 81 / var(--tw-border-opacity, 1));
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+  background: #1f2937 !important;
+  border-color: rgba(255, 183, 107, 0.25) !important;
 }
 
 .dark .profile-dropdown .text-gray-800 {
@@ -2458,6 +2470,12 @@ body {
 .dark .profile-dropdown .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+}
+
+.dark .profile-dropdown p,
+.dark .profile-dropdown span,
+.dark .profile-dropdown a {
+  color: #d1d5db !important;
 }
 
 .dark .profile-dropdown a:hover,
@@ -2486,16 +2504,16 @@ body {
   right: 20px;
   width: 12px;
   height: 12px;
-  background: white;
   transform: rotate(45deg);
-  border-top: 1px solid rgba(255, 183, 107, 0.3);
-  border-left: 1px solid rgba(255, 183, 107, 0.3);
+  background: white !important;
+  border-top: 1px solid rgba(255, 183, 107, 0.3) !important;
+  border-left: 1px solid rgba(255, 183, 107, 0.3) !important;
 }
 
 .dark .group:hover .profile-dropdown::before {
-  background: #1f2937;
-  border-top-color: rgba(255, 183, 107, 0.2);
-  border-left-color: rgba(255, 183, 107, 0.2);
+  background: #1f2937 !important;
+  border-top-color: rgba(255, 183, 107, 0.2) !important;
+  border-left-color: rgba(255, 183, 107, 0.2) !important;
 }
 
 /* Smooth transitions */
@@ -2503,6 +2521,40 @@ body {
 .profile-dropdown a,
 .profile-dropdown button {
   transition: all 0.2s ease;
+}
+
+/* Profile dropdown text colors - Light mode */
+
+.profile-dropdown p,
+.profile-dropdown span:not(.font-semibold),
+.profile-dropdown a {
+  color: #374151 !important;
+}
+
+.dark .profile-dropdown p,
+.dark .profile-dropdown span:not(.font-semibold),
+.dark .profile-dropdown a {
+  color: white !important;
+}
+
+/* Profile dropdown hover - Light mode */
+
+.profile-dropdown a:hover,
+.profile-dropdown button:not(.text-red-600):hover {
+  background: rgba(255, 183, 107, 0.1) !important;
+}
+
+.dark .profile-dropdown a:hover,
+.dark .profile-dropdown button:not(.text-red-600):hover {
+  background: #374151 !important;
+}
+
+.profile-dropdown .font-semibold {
+  color: #111827 !important;
+}
+
+.dark .profile-dropdown .font-semibold {
+  color: white !important;
 }
 
 /* Price Filter Buttons - Dark Mode */
@@ -2516,11 +2568,36 @@ body {
   color: rgb(209 213 219 / var(--tw-text-opacity, 1));
 }
 
+.price-filter-btn:not(.active) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+}
+
+.dark .price-filter-btn:not(.active) {
+  color: #d1d5db;
+}
+
+.dark .profile-dropdown .price-filter-btn:not(.active) {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+}
+
 .dark .price-filter-btn:not(.active):hover {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.price-filter-btn:not(.active):hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 237 213 / var(--tw-bg-opacity, 1));
+}
+
+.dark .price-filter-btn:not(.active):hover {
+  background: #303030;
 }
 
 .dark .price-filter-btn.active {
@@ -2550,6 +2627,363 @@ body {
 .dark #mobileMenu .bg-orange-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+}
+
+/* ============ CRITICAL LIGHT MODE TEXT FIXES ============ */
+
+/* Menu card titles - MUST be visible in light mode */
+
+.glass-card h3 {
+  color: #1f2937 !important;
+}
+
+.dark .glass-card h3 {
+  color: #ffffff !important;
+}
+
+/* Menu card descriptions */
+
+.glass-card p {
+  color: #4b5563 !important;
+}
+
+.dark .glass-card p {
+  color: #d1d5db !important;
+}
+
+/* Price text remains orange (no change needed) */
+
+.glass-card .text-orange-500 {
+  color: #f97316 !important;
+}
+
+/* Price filter bar background - Light mode */
+
+.bg-white\/95.backdrop-blur {
+  background: rgba(249, 250, 251, 0.95) !important;
+}
+
+.dark .bg-white\/95.backdrop-blur {
+  background: rgba(22, 22, 22, 0.95) !important;
+}
+
+/* Category tab inactive buttons - Light mode */
+
+.category-tab:not(.gradient-secondary) {
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%) !important;
+}
+
+.dark .category-tab:not(.gradient-secondary) {
+  background: #303030 !important;
+}
+
+/* Glass card proper visibility */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid rgba(251, 146, 60, 0.3) !important;
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.1) !important;
+}
+
+.dark .glass-card {
+  background: rgba(48, 48, 48, 0.9) !important;
+  border: 1px solid rgba(255, 183, 107, 0.25) !important;
+}
+
+/* Search suggestions container - Light mode */
+
+.search-suggestions {
+  background: white !important;
+  border: 1px solid rgba(255, 183, 107, 0.4) !important;
+}
+
+/* Search suggestion items - Light mode */
+
+.suggestion-item h4 {
+  color: #111827 !important;
+}
+
+.suggestion-item p {
+  color: #6b7280 !important;
+}
+
+.suggestion-item svg {
+  color: #9ca3af !important;
+}
+
+/* Search suggestions - Dark mode overrides */
+
+.dark .search-suggestions {
+  background: #1f2937 !important;
+  border-color: rgba(255, 183, 107, 0.25) !important;
+}
+
+.dark .suggestion-item h4 {
+  color: white !important;
+}
+
+.dark .suggestion-item p {
+  color: #9ca3af !important;
+}
+
+.dark .suggestion-item svg {
+  color: #6b7280 !important;
+}
+
+/* ============ CART and PROFILE HOVER - LIGHT MODE ============ */
+
+/* Cart button hover - Light mode */
+
+button[onclick*="toggleCart"]:hover {
+  background: rgba(255, 183, 107, 0.1) !important;
+}
+
+.dark button[onclick*="toggleCart"]:hover {
+  background: rgba(255, 183, 107, 0.15) !important;
+}
+
+button[onclick*="browseFullMenu"]:hover {
+  background: rgba(255, 183, 107, 0.1) !important;
+}
+
+#profileBtn:hover {
+  background: rgba(255, 183, 107, 0.1) !important;
+}
+
+.ghar:hover {
+  background: rgba(255, 183, 107, 0.1) !important;
+}
+
+/* ============ PRICE LABEL - LIGHT MODE FIX ============ */
+
+.text-gray-800 {
+  color: #1f2937 !important;
+}
+
+.dark .text-gray-800 {
+  color: #d1d5db !important;
+}
+
+/* ============ QUANTITY BUTTONS - LIGHT MODE FIX ============ */
+
+/* Quantity control container background - Light mode */
+
+.glass-card .rounded-full {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(255, 183, 107, 0.3);
+}
+
+.dark .glass-card .rounded-full {
+  background: rgba(48, 48, 48, 0.9) !important;
+  border: 1px solid rgba(255, 183, 107, 0.25);
+}
+
+/* Quantity buttons (+/-) - Light mode */
+
+.glass-card button.h-7.w-7 {
+  background: transparent !important;
+  color: #374151 !important;
+}
+
+.glass-card button.h-7.w-7:hover {
+  background: rgba(255, 183, 107, 0.15) !important;
+}
+
+.glass-card button.h-7.w-7 svg {
+  color: #374151 !important;
+}
+
+/* Dark mode overrides */
+
+.dark .glass-card button.h-7.w-7 {
+  color: #d1d5db !important;
+}
+
+.dark .glass-card button.h-7.w-7:hover {
+  background: rgba(255, 183, 107, 0.2) !important;
+}
+
+.dark .glass-card button.h-7.w-7 svg {
+  color: #d1d5db !important;
+}
+
+/* Quantity NUMBER - Light mode CRITICAL FIX */
+
+.glass-card span.font-semibold.min-w-\[20px\] {
+  color: #111827 !important;
+  font-weight: 700 !important;
+}
+
+.dark .glass-card span.font-semibold.min-w-\[20px\] {
+  color: white !important;
+}
+
+/* ============ FLOATING CART - HOVER FIX ============ */
+
+/* Floating cart - prevent disappearing on hover */
+
+#floatingCart {
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#floatingCart:hover {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: scale(1.05) !important;
+}
+
+/* Floating cart should remain orange gradient */
+
+#floatingCart {
+  background: linear-gradient(to right, #ff5d22, #ffac58) !important;
+}
+
+/* ============ CART SIDEBAR TEXT - LIGHT MODE FIX ============ */
+
+/* Cart title */
+
+.cart-sidebar h2 {
+  color: #111827 !important;
+}
+
+.dark .cart-sidebar h2 {
+  color: white !important;
+}
+
+/* Cart item names */
+
+.cart-sidebar .glass-card h4 {
+  color: #111827 !important;
+}
+
+.dark .cart-sidebar .glass-card h4 {
+  color: white !important;
+}
+
+/* Cart item quantity number */
+
+.cart-sidebar span.font-semibold.min-w-\[30px\] {
+  color: #111827 !important;
+}
+
+.dark .cart-sidebar span.font-semibold.min-w-\[30px\] {
+  color: white !important;
+}
+
+/* Cart item price */
+
+.cart-sidebar p.font-bold {
+  color: #111827 !important;
+}
+
+.dark .cart-sidebar p.font-bold {
+  color: white !important;
+}
+
+/* Cart summary labels */
+
+.cart-sidebar .text-gray-600 {
+  color: #4b5563 !important;
+}
+
+.dark .cart-sidebar .text-gray-400 {
+  color: #9ca3af !important;
+}
+
+/* Cart quantity buttons in sidebar */
+
+.cart-sidebar button.h-7.w-7 {
+  background: white !important;
+  border: 1px solid #d1d5db;
+}
+
+.cart-sidebar button.h-7.w-7:hover {
+  background: #f9fafb !important;
+}
+
+.cart-sidebar button.h-7.w-7 svg {
+  color: #374151 !important;
+}
+
+.dark .cart-sidebar button.h-7.w-7 {
+  background: #374151 !important;
+  border-color: #4b5563;
+}
+
+.dark .cart-sidebar button.h-7.w-7:hover {
+  background: #4b5563 !important;
+}
+
+.dark .cart-sidebar button.h-7.w-7 svg {
+  color: #d1d5db !important;
+}
+
+/* Quick Add section in empty cart */
+
+.cart-sidebar h3 {
+  color: #374151 !important;
+}
+
+.dark .cart-sidebar h3 {
+  color: #d1d5db !important;
+}
+
+/* Quick Add item names */
+
+.cart-sidebar .rounded-xl h4 {
+  color: #111827 !important;
+}
+
+.dark .cart-sidebar .rounded-xl h4 {
+  color: white !important;
+}
+
+/* Quick Add item labels */
+
+.cart-sidebar .rounded-xl span.text-xs {
+  color: #6b7280 !important;
+}
+
+.dark .cart-sidebar .rounded-xl span.text-xs {
+  color: #9ca3af !important;
+}
+
+/* Empty cart message */
+
+#emptyCart p {
+  color: #9ca3af !important;
+}
+
+.dark #emptyCart p {
+  color: #6b7280 !important;
+}
+
+/* ============ ADD TO CART BUTTON TEXT - LIGHT MODE ============ */
+
+/* Add to Cart button should always have white text */
+
+button.gradient-secondary {
+  color: white !important;
+}
+
+/* Ensure button text is visible */
+
+button.gradient-secondary svg {
+  color: white !important;
+}
+
+/* ============ GLASS CARD BUTTONS - HOVER STATES ============ */
+
+/* Prevent dark hover on light mode */
+
+.glass-card button:not(.gradient-secondary):hover {
+  background: rgba(255, 183, 107, 0.15) !important;
+}
+
+.dark .glass-card button:not(.gradient-secondary):hover {
+  background: rgba(255, 183, 107, 0.2) !important;
 }
 
 .hover\:scale-105:hover {
