@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname,"/public")));
 
 
 app.get("/",(req,res)=>{
-    res.send("server is listinig on port 8080");
+    res.send("/user-selection");
 });  
 
    //User Selection Page
@@ -96,26 +96,6 @@ app.get("/profile", (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // staff routes
 // app.get("/staff-dashoard", (req, res) => {
 //   res.render("listings/student"); 
@@ -126,3 +106,6 @@ app.listen(8080,()=>{
     console.log("server running");
 
 });
+
+// Vercel export (ADD THIS AT THE VERY END)
+module.exports = app;
