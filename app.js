@@ -33,9 +33,9 @@ app.use(express.static(path.join(__dirname,"/public")));
 
 
 
-app.get("/",(req,res)=>{
-    res.send("/user-selection");
-});  
+app.get("/", (req, res) => {
+    return res.redirect("/user-selection");
+});
 
    //User Selection Page
 app.get("/user-selection", (req, res) => {
