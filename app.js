@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname,"/public")));
 
 
 app.get("/",(req,res)=>{
-    res.send("server is listinig on port 8080");
+    res.send("/user-selection");
 });  
 
    //User Selection Page
