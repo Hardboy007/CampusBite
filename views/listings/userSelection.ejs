@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FEG1XR60F3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-FEG1XR60F3');
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Welcome — CampusBite</title>
@@ -12,81 +21,188 @@
 <body>
     <!-- ✅ LOADING SCREEN - Bas ek line! -->
     <%- include('../partials/loadingScreen') %>
-    <div class="container">
-        <!-- Hero / Header -->
-        <h1>Welcome to <span class="brand">CampusBite</span></h1>
-        <p class="subtitle">Choose your role and get started.</p>
+        <div class="container">
+            <!-- Hero / Header -->
+            <h1>Welcome to <span class="brand">CampusBite</span></h1>
+            <p class="subtitle">Choose your role and get started.</p>
 
-        <!-- Role Selection Cards -->
-        <div class="card-wrapper">
-            <!-- Customer Card -->
-            <div class="role-card">
-                <div class="card-content">
-                    <h2>I'm a Customer</h2>
-                    <p class="muted">Quick orders • Track status • Pickup faster</p>
-                    <ul>
-                        <li>Browse campus cafes</li>
-                        <li>Quick order placement</li>
-                        <li>Track order status</li>
-                    </ul>
-                    <div>
-                        <input type="hidden" name="role" value="customer" />
-                        <!-- // student  qlikhe  -->
-                        <button type="submit" class="role-btn customer-btn">
-                            Continue as Customer
-                        </button>
+            <!-- Role Selection Cards -->
+            <div class="card-wrapper">
+                <!-- Customer Card -->
+                <div class="role-card">
+                    <div class="card-content">
+                        <h2>I'm a Customer</h2>
+                        <p class="muted">Quick orders • Track status • Pickup faster</p>
+                        <ul>
+                            <li>Browse campus cafes</li>
+                            <li>Quick order placement</li>
+                            <li>Track order status</li>
+                        </ul>
+                        <div>
+                            <input type="hidden" name="role" value="customer" />
+                            <!-- // student  qlikhe  -->
+                            <button type="submit" class="role-btn customer-btn">
+                                Continue as Customer
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Canteen Staff Card -->
-            <div class="role-card">
-                <div class="card-content">
-                    <h2>I'm Canteen Staff</h2>
-                    <p class="muted">Manage orders • Update menu • Mark ready</p>
-                    <ul>
-                        <li>Manage customer orders</li>
-                        <li>Update availability</li>
-                        <li>Update menu and pricing</li>
-                    </ul>
-                    <div>
-                        <input type="hidden" name="role" value="staff" />
-                        <button type="submit" class="role-btn staff-btn">
-                            Continue as Staff
-                        </button>
+                <!-- Canteen Staff Card -->
+                <div class="role-card">
+                    <div class="card-content">
+                        <h2>I'm Canteen Staff</h2>
+                        <p class="muted">Manage orders • Update menu • Mark ready</p>
+                        <ul>
+                            <li>Manage customer orders</li>
+                            <li>Update availability</li>
+                            <li>Update menu and pricing</li>
+                        </ul>
+                        <div>
+                            <input type="hidden" name="role" value="staff" />
+                            <button type="submit" class="role-btn staff-btn">
+                                Continue as Staff
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Customer Glass Login Modal -->
-    <div id="customerOverlay" class="overlay"></div>
-    <!--changed id overlay to customerOverlay-->
+        <!-- Customer Glass Login Modal -->
+        <div id="customerOverlay" class="overlay"></div>
+        <!--changed id overlay to customerOverlay-->
 
-    <!-- Customer Modal (Login + Signup with Flip) -->
-    <div id="customerModal" class="loginModal">
-        <div class="modal-flip-container">
+        <!-- Customer Modal (Login + Signup with Flip) -->
+        <div id="customerModal" class="loginModal">
+            <div class="modal-flip-container">
 
-            <!-- Front Side - Login -->
-            <div class="modal-box front">
-                <span class="close-btn" onclick="closeModal('customerModal','customerOverlay')">×</span>
-                <h2>Login as Customer</h2>
+                <!-- Front Side - Login -->
+                <div class="modal-box front">
+                    <span class="close-btn" onclick="closeModal('customerModal','customerOverlay')">×</span>
+                    <h2>Login as Customer</h2>
+                    <p class="login-title">Enter your credentials to access your account</p>
+
+                    <p id="customerLoginError" class="error-msg"></p>
+
+                    <form id="customerLoginForm" method="POST" action="/user-selection">
+                        <div class="input-group">
+                            <i class="fas fa-envelope icon"></i>
+                            <input type="text" id="customerUsername" placeholder="Email Id" name="email" />
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-lock icon"></i>
+                            <input type="password" id="customerPassword" placeholder="Password" name="password" />
+                            <span class="fas fa-eye-slash toggle-password"
+                                onclick="togglePassword('customerPassword', this)"></span>
+                        </div>
+
+                        <div class="options">
+                            <label class="remember"><input type="checkbox" />Remember me</label>
+                            <a href="#" class="forgot">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="login-btn">Login</button>
+                    </form>
+
+                    <div class="altr-signin-label">
+                        <p>Or Continue With</p>
+                    </div>
+                    <div class="altr-signin">
+                        <button class="google">Google</button>
+                        <button class="phn-num">Get OTP</button>
+                    </div>
+
+                    <p class="signup">
+                        Don't have an account? <a href="#" onclick="flipToSignup('customer'); return false;">Sign up
+                            here</a>
+                    </p>
+                </div>
+
+                <!-- Back Side - Signup -->
+                <div class="modal-box back">
+                    <span class="close-btn" onclick="closeModal('customerModal','customerOverlay')">×</span>
+                    <h2>Create Account</h2>
+                    <p class="login-title">Sign up to start ordering</p>
+
+                    <p id="customerSignupError" class="error-msg"
+                        style="color: #ef4444; font-size: 13px; margin-bottom: 10px;"></p>
+
+                    <form id="customerSignupForm">
+                        <div class="input-group">
+                            <i class="fas fa-user icon"></i>
+                            <input type="text" id="signupName" placeholder="Full Name" name="name" required />
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-envelope icon"></i>
+                            <input type="email" id="signupEmail" placeholder="Email Id" name="email" required />
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-phone icon"></i>
+                            <input type="tel" id="signupPhone" placeholder="Phone Number" name="phone" maxlength="10"
+                                required />
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-lock icon"></i>
+                            <input type="password" id="signupPassword" placeholder="Password" name="password"
+                                required />
+                            <span class="fas fa-eye-slash toggle-password"
+                                onclick="togglePassword('signupPassword', this)"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-lock icon"></i>
+                            <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required />
+                            <span class="fas fa-eye-slash toggle-password"
+                                onclick="togglePassword('signupConfirmPassword', this)"></span>
+                        </div>
+
+                        <button type="submit" class="login-btn">Create Account</button>
+                    </form>
+
+                    <p class="signup">
+                        Already have an account? <a href="#" onclick="flipToLogin('customer'); return false;">Login
+                            here</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <!-- Staff Glass Login Modal -->
+        <div id="staffOverlay" class="overlay"></div>
+        <!--changed id overlay to staffOverlay-->
+
+        <div id="staffModal" class="loginModal">
+            <!--changed id loginModal to staffModal-->
+            <div class="modal-box">
+                <span class="close-btn" onclick="closeModal('staffModal','staffOverlay')">x</span>
+                <h2>Login as Staff</h2>
                 <p class="login-title">Enter your credentials to access your account</p>
 
-                <p id="customerLoginError" class="error-msg"></p>
+                <!-- Error Message -->
+                <!--changed id loginError to staffLoginError-->
+                <p id="staffLoginError" class="error-msg"></p>
+                <!--yaha pe pura isliye nhi likha kyuki ye err msg tab ayega jab condition lage aur wo js me hoga-->
 
-                <form id="customerLoginForm" method="POST" action="/user-selection">
+                <!-- ✅ Staff Form start -->
+                <form id="staffLoginForm" method="#" action="#">
+                    <!--changed id loginForm to staffLoginForm-->
                     <div class="input-group">
-                        <i class="fas fa-envelope icon"></i>
-                        <input type="text" id="customerUsername" placeholder="Email Id" name="email" />
+                        <b class="fas fa-envelope icon"></b>
+                        <input type="text" id="staffUsername" placeholder="Email Id" name="email" />
+                        <!--changed id username to staffUsername-->
                     </div>
 
                     <div class="input-group">
-                        <i class="fas fa-lock icon"></i>
-                        <input type="password" id="customerPassword" placeholder="Password" name="password" />
+                        <b class="fas fa-lock icon"></b>
+                        <input type="password" id="staffPassword" placeholder="Password" name="password" />
+                        <!--changed id password to staffPassword-->
                         <span class="fas fa-eye-slash toggle-password"
-                            onclick="togglePassword('customerPassword', this)"></span>
+                            onclick="togglePassword('staffPassword', this)"></span>
                     </div>
 
                     <div class="options">
@@ -94,8 +210,11 @@
                         <a href="#" class="forgot">Forgot Password?</a>
                     </div>
 
-                    <button type="submit" class="login-btn">Login</button>
+                    <button type="submit" class="login-btn">
+                        Login to Manage Orders
+                    </button>
                 </form>
+                <!-- ✅ Form end -->
 
                 <div class="altr-signin-label">
                     <p>Or Continue With</p>
@@ -106,243 +225,137 @@
                 </div>
 
                 <p class="signup">
-                    Don't have an account? <a href="#" onclick="flipToSignup('customer'); return false;">Sign up here</a>
+                    Don't have an account? <a href="#">Sign up here</a>
                 </p>
             </div>
-
-            <!-- Back Side - Signup -->
-            <div class="modal-box back">
-                <span class="close-btn" onclick="closeModal('customerModal','customerOverlay')">×</span>
-                <h2>Create Account</h2>
-                <p class="login-title">Sign up to start ordering</p>
-
-                <p id="customerSignupError" class="error-msg" style="color: #ef4444; font-size: 13px; margin-bottom: 10px;"></p>
-
-                <form id="customerSignupForm">
-                    <div class="input-group">
-                        <i class="fas fa-user icon"></i>
-                        <input type="text" id="signupName" placeholder="Full Name" name="name" required />
-                    </div>
-
-                    <div class="input-group">
-                        <i class="fas fa-envelope icon"></i>
-                        <input type="email" id="signupEmail" placeholder="Email Id" name="email" required />
-                    </div>
-
-                    <div class="input-group">
-                        <i class="fas fa-phone icon"></i>
-                        <input type="tel" id="signupPhone" placeholder="Phone Number" name="phone" maxlength="10"
-                            required />
-                    </div>
-
-                    <div class="input-group">
-                        <i class="fas fa-lock icon"></i>
-                        <input type="password" id="signupPassword" placeholder="Password" name="password" required />
-                        <span class="fas fa-eye-slash toggle-password"
-                            onclick="togglePassword('signupPassword', this)"></span>
-                    </div>
-
-                    <div class="input-group">
-                        <i class="fas fa-lock icon"></i>
-                        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required />
-                        <span class="fas fa-eye-slash toggle-password"
-                            onclick="togglePassword('signupConfirmPassword', this)"></span>
-                    </div>
-
-                    <button type="submit" class="login-btn">Create Account</button>
-                </form>
-
-                <p class="signup">
-                    Already have an account? <a href="#" onclick="flipToLogin('customer'); return false;">Login here</a>
+        </div>
+        <section class="highlight">
+            <div class="highlight-content">
+                <h1>Smart dining, made simple</h1>
+                <p>
+                    No long queues, no confusion — just quick bites and clear updates.
                 </p>
             </div>
+            <img src="images/burger.avif" alt="Burger" class="side-img img-left top" />
+            <img src="images/momos.avif" alt="Momos" class="side-img img-left bottom" />
+            <img src="images/pizza.avif" alt="Pizza" class="side-img img-right top" />
+            <img src="images/chhole bhature.png" alt="Chhole Bhature" class="side-img img-right bottom" />
+        </section>
 
-        </div>
-    </div>
-    <!-- Staff Glass Login Modal -->
-    <div id="staffOverlay" class="overlay"></div>
-    <!--changed id overlay to staffOverlay-->
+        <div class="seperation"></div>
 
-    <div id="staffModal" class="loginModal">
-        <!--changed id loginModal to staffModal-->
-        <div class="modal-box">
-            <span class="close-btn" onclick="closeModal('staffModal','staffOverlay')">x</span>
-            <h2>Login as Staff</h2>
-            <p class="login-title">Enter your credentials to access your account</p>
+        <section class="feature-section-bg">
+            <div class="features">
+                <h1 class="features-title">What's waiting for you on our website?</h1>
+                <p class="features-subtitle">
+                    On Campus? Skip the waiting, explore your cravings, and order smarter
+                    with us.
+                </p>
 
-            <!-- Error Message -->
-            <!--changed id loginError to staffLoginError-->
-            <p id="staffLoginError" class="error-msg"></p>
-            <!--yaha pe pura isliye nhi likha kyuki ye err msg tab ayega jab condition lage aur wo js me hoga-->
-
-            <!-- ✅ Staff Form start -->
-            <form id="staffLoginForm" method="#" action="#">
-                <!--changed id loginForm to staffLoginForm-->
-                <div class="input-group">
-                    <b class="fas fa-envelope icon"></b>
-                    <input type="text" id="staffUsername" placeholder="Email Id" name="email" />
-                    <!--changed id username to staffUsername-->
-                </div>
-
-                <div class="input-group">
-                    <b class="fas fa-lock icon"></b>
-                    <input type="password" id="staffPassword" placeholder="Password" name="password" />
-                    <!--changed id password to staffPassword-->
-                    <span class="fas fa-eye-slash toggle-password"
-                        onclick="togglePassword('staffPassword', this)"></span>
-                </div>
-
-                <div class="options">
-                    <label class="remember"><input type="checkbox" />Remember me</label>
-                    <a href="#" class="forgot">Forgot Password?</a>
-                </div>
-
-                <button type="submit" class="login-btn">
-                    Login to Manage Orders
-                </button>
-            </form>
-            <!-- ✅ Form end -->
-
-            <div class="altr-signin-label">
-                <p>Or Continue With</p>
-            </div>
-            <div class="altr-signin">
-                <button class="google">Google</button>
-                <button class="phn-num">Get OTP</button>
-            </div>
-
-            <p class="signup">
-                Don't have an account? <a href="#">Sign up here</a>
-            </p>
-        </div>
-    </div>
-    <section class="highlight">
-        <div class="highlight-content">
-            <h1>Smart dining, made simple</h1>
-            <p>
-                No long queues, no confusion — just quick bites and clear updates.
-            </p>
-        </div>
-        <img src="images/burger.avif" alt="Burger" class="side-img img-left top" />
-        <img src="images/momos.avif" alt="Momos" class="side-img img-left bottom" />
-        <img src="images/pizza.avif" alt="Pizza" class="side-img img-right top" />
-        <img src="images/chhole bhature.png" alt="Chhole Bhature" class="side-img img-right bottom" />
-    </section>
-
-    <div class="seperation"></div>
-
-    <section class="feature-section-bg">
-        <div class="features">
-            <h1 class="features-title">What's waiting for you on our website?</h1>
-            <p class="features-subtitle">
-                On Campus? Skip the waiting, explore your cravings, and order smarter
-                with us.
-            </p>
-
-            <div class="features-wrapper">
-                <div class="features-left">
-                    <div class="feature">
-                        <img src="images/healthy.avif" alt="Healthy" />
-                        <p>Healthy</p>
+                <div class="features-wrapper">
+                    <div class="features-left">
+                        <div class="feature">
+                            <img src="images/healthy.avif" alt="Healthy" />
+                            <p>Healthy</p>
+                        </div>
+                        <div class="feature">
+                            <img src="images/veg mode.avif" alt="Veg mode" />
+                            <p>Veg Mode</p>
+                        </div>
+                        <div class="feature">
+                            <img src="images/gourmet.avif" alt="Gourmet" />
+                            <p>Gourmet</p>
+                        </div>
                     </div>
-                    <div class="feature">
-                        <img src="images/veg mode.avif" alt="Veg mode" />
-                        <p>Veg Mode</p>
-                    </div>
-                    <div class="feature">
-                        <img src="images/gourmet.avif" alt="Gourmet" />
-                        <p>Gourmet</p>
-                    </div>
-                </div>
 
-                <div class="mobile-image hidden">
-                    <img src="images/mobile.avif" alt="Mobile" />
-                    <div class="feature-center">
-                        <img src="images/schedule.avif" alt="Schedule" />
-                        <p>Schedule your order</p>
+                    <div class="mobile-image hidden">
+                        <img src="images/mobile.avif" alt="Mobile" />
+                        <div class="feature-center">
+                            <img src="images/schedule.avif" alt="Schedule" />
+                            <p>Schedule your order</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="features-right">
-                    <div class="feature">
-                        <img src="images/offers.avif" alt="Offers" />
-                        <p>Offers</p>
-                    </div>
-                    <div class="feature">
-                        <img src="images/collections.avif" alt="Collections" />
-                        <p>Collections</p>
-                    </div>
-                    <div class="feature">
-                        <img src="images/plan party.avif" alt="Plan Party" />
-                        <p>Plan a Party</p>
+                    <div class="features-right">
+                        <div class="feature">
+                            <img src="images/offers.avif" alt="Offers" />
+                            <p>Offers</p>
+                        </div>
+                        <div class="feature">
+                            <img src="images/collections.avif" alt="Collections" />
+                            <p>Collections</p>
+                        </div>
+                        <div class="feature">
+                            <img src="images/plan party.avif" alt="Plan Party" />
+                            <p>Plan a Party</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <div class="footer-container">
-            <!-- Logo & Tagline -->
-            <div class="footer-section">
-                <h2 class="logo">CampusBite</h2>
-                <p class="tagline">College life ka apna cafeteria app</p>
-            </div>
+        <footer>
+            <div class="footer-container">
+                <!-- Logo & Tagline -->
+                <div class="footer-section">
+                    <h2 class="logo">CampusBite</h2>
+                    <p class="tagline">College life ka apna cafeteria app</p>
+                </div>
 
-            <!-- Quick Links -->
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="/user-selection">Home</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Cafeterias / Menu</a></li>
-                    <li><a href="/help">Help & Support</a></li>
-                </ul>
-            </div>
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/user-selection">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Cafeterias / Menu</a></li>
+                        <li><a href="/help">Help & Support</a></li>
+                    </ul>
+                </div>
 
-            <!-- For Partners -->
-            <div class="footer-section">
-                <h4>For Cafes/Partners</h4>
-                <ul>
-                    <li><a href="#">Partner with us</a></li>
-                    <li><a href="#">Add your cafeteria</a></li>
-                    <li><a href="#">Manage your menu</a></li>
-                </ul>
-            </div>
+                <!-- For Partners -->
+                <div class="footer-section">
+                    <h4>For Cafes/Partners</h4>
+                    <ul>
+                        <li><a href="#">Partner with us</a></li>
+                        <li><a href="#">Add your cafeteria</a></li>
+                        <li><a href="#">Manage your menu</a></li>
+                    </ul>
+                </div>
 
-            <!-- Policies -->
-            <div class="footer-section">
-                <h4>Policies</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Refund / Cancellation</a></li>
-                </ul>
-            </div>
+                <!-- Policies -->
+                <div class="footer-section">
+                    <h4>Policies</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Refund / Cancellation</a></li>
+                    </ul>
+                </div>
 
-            <!-- Social Media -->
-            <div class="footer-section">
-                <h4>Connect with us</h4>
-                <div class="social-icons">
-                    <a href="#">Instagram</a> | <a href="#">Facebook</a> |
-                    <a href="#">LinkedIn</a>
+                <!-- Social Media -->
+                <div class="footer-section">
+                    <h4>Connect with us</h4>
+                    <div class="social-icons">
+                        <a href="#">Instagram</a> | <a href="#">Facebook</a> |
+                        <a href="#">LinkedIn</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="footer-bottom">
-            <p>© 2025 CampusBite. All rights reserved.</p>
-            <p class="disclaimer">
-                All logos & names belong to their respective owners. Project made for
-                academic purpose.
-            </p>
-        </div>
-        <div class="credit">
-            <p><i>a Hardik Srivastava production</i></p>
-        </div>
-    </footer>
-    <script src="/js/userselection.js"></script>
+            <div class="footer-bottom">
+                <p>© 2025 CampusBite. All rights reserved.</p>
+                <p class="disclaimer">
+                    All logos & names belong to their respective owners. Project made for
+                    academic purpose.
+                </p>
+            </div>
+            <div class="credit">
+                <p><i>a Hardik Srivastava production</i></p>
+            </div>
+        </footer>
+        <script src="/js/userselection.js"></script>
 </body>
 
 </html>
