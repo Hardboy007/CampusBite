@@ -7,7 +7,7 @@
     /*changed color*/
     /* light warm */
     --bg2: hsl(0, 100%, 91%);
-    /*changed color*/ 
+    /*changed color*/
     /* slightly deeper */
     --accent: #FF7A4A;
     /* coral/orange */
@@ -22,6 +22,14 @@
 
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    /* Tap flash remove */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 html,
@@ -894,7 +902,10 @@ footer {
     }
 
     .role-btn {
-        width: 100%;
+        min-height: 48px;
+        /* Touch-friendly size */
+        font-size: 16px;
+        /* iOS zoom prevent karne ke liye */
     }
 
     /* Highlight */
@@ -928,15 +939,22 @@ footer {
     }
 
     .features-wrapper {
-        gap: 35px;
+        flex-direction: column;
+        gap: 30px;
     }
 
     .features-left,
     .features-right {
         flex-direction: row;
-        flex-wrap: wrap;
         justify-content: center;
-        gap: 20px;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .mobile-image {
+        order: 2;
+        /* Image center me rahega */
+        margin: 20px 0;
     }
 
     /* Footer */
@@ -1127,7 +1145,7 @@ footer {
     .input-group input {
         width: 100%;
         padding: 11px 11px 11px 42px;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .google,
