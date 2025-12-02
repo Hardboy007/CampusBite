@@ -67,6 +67,26 @@ document.addEventListener('DOMContentLoaded', function () {
     showSkeletonLoading();
 });
 
+// Profile dropdown toggle function
+function toggleProfileDropdown() {
+    const dropdown = document.getElementById('profileDropdown');
+    const arrow = document.getElementById('dropdownArrow');
+
+    dropdown.classList.toggle('show-dropdown');
+    arrow.classList.toggle('rotate-180');
+}
+document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('profileDropdown');
+    const profileBtn = document.getElementById('profileBtn');
+
+    // If click is outside both button and dropdown
+    if (dropdown && profileBtn &&
+        !profileBtn.contains(e.target) &&
+        !dropdown.contains(e.target)) {
+        dropdown.classList.remove('show-dropdown');
+        document.getElementById('dropdownArrow')?.classList.remove('rotate-180');
+    }
+});
 // Show skeleton loading
 function showSkeletonLoading() {
     const grid = document.getElementById('menuGrid');
@@ -106,11 +126,11 @@ function renderMenuItems() {
 
         //Price Range Filter
         let matchesPrice = true;
-        if(priceRange === 'budget'){
+        if (priceRange === 'budget') {
             matchesPrice = item.price <= 30;
-        }else if(priceRange === 'medium'){
-            matchesPrice = item.price >=30 && item.price <= 60;
-        }else if(priceRange === 'premium'){
+        } else if (priceRange === 'medium') {
+            matchesPrice = item.price >= 30 && item.price <= 60;
+        } else if (priceRange === 'premium') {
             matchesPrice = item.price > 60;
         }
         return matchesCategory && matchesSearch && matchesPrice;
@@ -137,10 +157,10 @@ function filterByPrice(range, btn) {
             button.className = 'price-filter-btn px-4 py-1.5 text-sm rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium whitespace-nowrap hover:bg-orange-100 dark:hover:bg-gray-700 transition-all';
         }
     });
-    
+
     // Ab filter apply karo
     priceRange = range;
-    
+
     // Debounced render (300ms delay)
     clearTimeout(window.priceFilterTimeout);
     window.priceFilterTimeout = setTimeout(() => {
@@ -160,21 +180,21 @@ document.getElementById('searchMobile').addEventListener('input', (e) => {
 });
 
 //========== SHOW SEARCH SUGGESTIONS ==============
-function showSearchSuggestions(query, device){
+function showSearchSuggestions(query, device) {
     const suggestionsContainer = document.getElementById(`searchSuggestions${device}`);
 
-    if(!query || query.length < 2){
+    if (!query || query.length < 2) {
         suggestionsContainer.classList.add('hidden');
         return;
     }
     //Filters item matching query
-    const matches = menuItems.filter(item => 
-        item.name.toLowerCase().includes(query) || 
+    const matches = menuItems.filter(item =>
+        item.name.toLowerCase().includes(query) ||
         item.description.toLowerCase().includes(query) ||
         item.category.toLowerCase().includes(query)
     ).slice(0, 5);  //show max 5 suggestions
 
-    if(matches.length == 0){
+    if (matches.length == 0) {
         suggestionsContainer.classList.add('hidden');
         return;
     }
@@ -196,7 +216,7 @@ function showSearchSuggestions(query, device){
             </svg>
         </div>
     `).join('');
-    
+
     suggestionsContainer.classList.remove('hidden');
 }
 
@@ -204,21 +224,21 @@ function showSearchSuggestions(query, device){
 function selectSuggestion(itemId, device) {
     const item = menuItems.find(i => i.id === itemId);
     if (!item) return;
-    
+
     // Set search value
     document.getElementById(`search${device}`).value = '';
     searchQuery = '';
-    
+
     // Hide suggestions
     document.getElementById(`searchSuggestions${device}`).classList.add('hidden');
-    
+
     // Filter to item's category
     const categoryBtn = Array.from(document.querySelectorAll('.category-tab'))
         .find(btn => btn.textContent.trim() === item.category);
     if (categoryBtn) {
         filterCategory(item.category, categoryBtn);
     }
-    
+
     // Scroll to item
     setTimeout(() => {
         const itemCard = document.querySelector(`[data-item-id="${itemId}"]`);
@@ -238,28 +258,36 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Mobile Menu Toggle
-document.addEventListener('DOMContentLoaded', function () {
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
+// ========== HAMBURGER MENU TOGGLE ==========
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
 
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function () {
-            mobileMenu.classList.toggle('hidden');
+if (mobileMenuBtn && mobileMenu) {
+    // Toggle menu on hamburger click
+    mobileMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
 
-            // Change icon: hamburger ↔ close
-            const icon = this.querySelector('svg');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.innerHTML = `<line x1="4" x2="20" y1="12" y2="12"></line>
-                                  <line x1="4" x2="20" y1="6" y2="6"></line>
-                                  <line x1="4" x2="20" y1="18" y2="18"></line>`;
-            } else {
-                icon.innerHTML = `<line x1="18" x2="6" y1="6" y2="18"></line>
-                                  <line x1="6" x2="18" y1="6" y2="18"></line>`;
-            }
-        });
-    }
-});
+        // Toggle active class for animation
+        mobileMenuBtn.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+    });
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenuBtn.classList.remove('active');
+            mobileMenu.classList.remove('open');
+            document.body.classList.remove('mobile-menu-open');
+        }
+    });
+    // Close menu on window resize (if switched to desktop)
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            mobileMenuBtn.classList.remove('active');
+            mobileMenu.classList.remove('open');
+            document.body.classList.remove('mobile-menu-open');
+        }
+    });
+}
 //Filter by category
 function filterCategory(category, btn) {
     currentCategory = category;
@@ -423,7 +451,7 @@ function updateCartUI() {
         document.getElementById('floatingCartTotal').textContent = `₹${Math.round(subtotal)}`;  //│  🛒 3 items │  ← Floating button
     } else {                                                                                    //│     ₹88     │
         floatingCart.classList.add('hidden');                                                   //└─────────────┘
-        floatingCart.classList.remove('has-items');                                               
+        floatingCart.classList.remove('has-items');
     }
 
     // Update Cart Sidebar
@@ -569,14 +597,14 @@ function showToast(message) {
 // // ============ USER PROFILE MANAGEMENT ============
 function handleLogout() {
     const confirmed = confirm('Are you sure you want to logout?');
-    
+
     if (confirmed) {
         // Disable button to prevent multiple clicks
         const logoutBtns = document.querySelectorAll('[onclick="handleLogout()"]');
         logoutBtns.forEach(btn => btn.disabled = true);
-        
+
         showToast('Logging out...');
-        
+
         // Fast redirect (300ms instead of 1000ms)
         setTimeout(() => {
             window.location.href = '/user-selection';
@@ -591,7 +619,7 @@ function proceedToCheckout() {
         showToast('Your cart is empty!');
         return;
     }
-    
+
     // Convert cart object to order page format
     const orderCart = Object.values(cart).map(item => ({
         name: item.name,
@@ -600,13 +628,13 @@ function proceedToCheckout() {
         emoji: getItemEmoji(item.category),
         id: item.id
     }));
-    
+
     // Save to localStorage
     localStorage.setItem('campusbite_cart', JSON.stringify(orderCart));
-    
+
     // Show loading toast
     showToast('Proceeding to checkout...');
-    
+
     // Redirect after short delay
     setTimeout(() => {
         window.location.href = '/order';

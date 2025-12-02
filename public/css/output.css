@@ -815,6 +815,14 @@ video {
   display: none;
 }
 
+.h-0 {
+  height: 0px;
+}
+
+.h-0\.5 {
+  height: 0.125rem;
+}
+
 .h-10 {
   height: 2.5rem;
 }
@@ -1992,6 +2000,76 @@ body {
   background: #161616;
 }
 
+/* ========== HAMBURGER MENU ANIMATION ========== */
+
+.hamburger {
+  cursor: pointer;
+}
+
+/* Light mode - Orange gradient */
+
+.hamburger-line {
+  background: linear-gradient(135deg, #FF7A4A, #FFB56B);
+}
+
+/* Dark mode - White solid */
+
+.dark .hamburger-line {
+  background: white;
+}
+
+#mobileMenuBtn:hover {
+  background-color: rgba(255, 183, 107, 0.1);
+}
+
+#mobileMenuBtn:active {
+  background-color: rgba(255, 183, 107, 0.2);
+}
+
+/* Mobile menu button hover - Dark mode */
+
+.dark #mobileMenuBtn:hover {
+  background-color: rgba(75, 85, 99, 0.5);
+}
+
+.dark #mobileMenuBtn:active {
+  background-color: rgba(75, 85, 99, 0.7);
+}
+
+/* When menu is open - X animation */
+
+#mobileMenuBtn.active .hamburger span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+#mobileMenuBtn.active .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+
+#mobileMenuBtn.active .hamburger span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile menu slide animation */
+
+#mobileMenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  opacity: 0;
+}
+
+#mobileMenu.open {
+  max-height: 600px;
+  opacity: 1;
+}
+
+/* Dark mode hamburger */
+
+.dark .hamburger span {
+  background: white;
+}
+
 /* ============ SKELETON LOADING ============ */
 
 @keyframes shimmer {
@@ -2203,8 +2281,14 @@ header {
   border-top-color: rgba(255, 122, 74, 0.2);
 }
 
-.dark #mobileMenu button:hover {
-  background: #303030;
+#mobileMenu a:hover,
+#mobileMenu button:not([onclick*="Logout"]):hover {
+  background: rgba(255, 183, 107, 0.1) !important;
+}
+
+.dark #mobileMenu a:hover,
+.dark #mobileMenu button:not([onclick*="Logout"]):hover {
+  background: rgba(255, 183, 107, 0.15) !important;
 }
 
 /* ============ SEARCH BARS ============ */
@@ -2628,9 +2712,12 @@ header {
   background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
 }
 
+#mobileMenu .bg-orange-50 {
+  background-color: rgb(255, 247, 237) !important;
+}
+
 .dark #mobileMenu .bg-orange-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+  background-color: rgb(55, 65, 81) !important;
 }
 
 /* ============ CRITICAL LIGHT MODE TEXT FIXES ============ */
@@ -2990,6 +3077,139 @@ button.gradient-secondary svg {
   background: rgba(255, 183, 107, 0.2) !important;
 }
 
+/* Horizontal scroll indicator for category tabs */
+
+.overflow-x-auto::-webkit-scrollbar {
+  height: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: rgba(255, 183, 107, 0.1);
+  border-radius: 10px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #ff5d22, #ffac58);
+  border-radius: 10px;
+}
+
+.dark .overflow-x-auto::-webkit-scrollbar-track {
+  background: rgba(255, 183, 107, 0.2);
+}
+
+/* Cart sidebar landscape fix */
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .cart-sidebar {
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  #cartItems {
+    max-height: 40vh;
+    overflow-y: auto;
+  }
+}
+
+/* Search input mobile improvements */
+
+@media (max-width: 768px) {
+  input[type="search"] {
+    font-size: 16px !important;
+    /* Prevent iOS zoom */
+    padding: 12px 12px 12px 40px;
+    min-height: 44px;
+    /* Touch-friendly */
+  }
+
+  #mobileMenu {
+    display: block;
+  }
+
+  #mobileMenu.open {
+    animation: slideDown 0.3s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile menu items stagger animation */
+
+  #mobileMenu.open a,
+  #mobileMenu.open button {
+    animation: fadeInUp 0.3s ease-out forwards;
+    opacity: 0;
+  }
+
+  #mobileMenu:not(.open) {
+    display: none;
+  }
+
+  #mobileMenu.open a:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  #mobileMenu.open a:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  #mobileMenu.open button:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  #mobileMenu.open .border-t {
+    animation-delay: 0.25s;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Price filter mobile improvements */
+
+@media (max-width: 640px) {
+  .price-filter-btn {
+    font-size: 13px;
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+
+  /* Show scroll hint shadow */
+
+  .overflow-x-auto::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.9), transparent);
+    pointer-events: none;
+  }
+
+  .dark .overflow-x-auto::after {
+    background: linear-gradient(to left, rgba(22, 22, 22, 0.9), transparent);
+  }
+}
+
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -3103,10 +3323,6 @@ button.gradient-secondary svg {
   opacity: 0.5;
 }
 
-.group:hover .group-hover\:visible {
-  visibility: visible;
-}
-
 .group:hover .group-hover\:translate-x-0 {
   --tw-translate-x: 0px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -3119,11 +3335,6 @@ button.gradient-secondary svg {
 
 .group:hover .group-hover\:translate-x-full {
   --tw-translate-x: 100%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.group:hover .group-hover\:rotate-180 {
-  --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -3229,11 +3440,6 @@ button.gradient-secondary svg {
   .dark\:border-orange-700 {
     --tw-border-opacity: 1;
     border-color: rgb(194 65 12 / var(--tw-border-opacity, 1));
-  }
-
-  .dark\:bg-gray-700 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
   }
 
   .dark\:bg-gray-800 {
