@@ -45,11 +45,11 @@ app.get("/user-selection", (req, res) => {
 app.post("/user-selection", (req, res) => {
   const { email, password } = req.body;
 
-  if (email === "hardik1234@gmail.com" && password === "1234") {
+  // if (email === "hardik1234@gmail.com" && password === "1234") {
     res.redirect("/cafeSelection");
-  } else {
-    res.send("Invalid Credential !! <a href='/user-selection'>Try again</a>");
-  }
+  // } else {
+    // res.send("Invalid Credential !! <a href='/user-selection'>Try again</a>");
+  // }
 });
 
 
