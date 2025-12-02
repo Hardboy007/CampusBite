@@ -52,7 +52,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 40px;
+    padding: 0 clamp(15px, 4vw, 40px);
+    /* ← RESPONSIVE PADDING */
     z-index: 1000;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
@@ -60,13 +61,12 @@ body {
 .navbar .logo {
     flex-shrink: 1;
     min-width: 80px;
-    /* Prevent too small */
     display: flex;
     white-space: nowrap;
-    /* No line break */
     align-items: center;
     gap: 12px;
-    font-size: 24px;
+    font-size: clamp(18px, 4vw, 24px);
+    /* ← RESPONSIVE */
     font-weight: 700;
     background: linear-gradient(135deg, #FF7A4A, #FFB56B);
     -webkit-background-clip: text;
@@ -467,7 +467,7 @@ footer {
     opacity: 0;
     transform: translateY(60px);
     transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Visible state - Sections */
@@ -481,7 +481,7 @@ footer {
     opacity: 0;
     transform: translateY(40px) scale(0.95);
     transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Visible state - Cards */
@@ -516,6 +516,7 @@ footer {
 
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
+
     .animate-section,
     .animate-card {
         transition: none;
@@ -529,7 +530,7 @@ footer {
     .animate-section {
         transform: translateY(30px);
     }
-    
+
     .animate-card {
         transform: translateY(20px) scale(0.98);
     }
@@ -709,14 +710,156 @@ footer {
     background: rgba(255, 122, 74, 0.15);
 }
 
+/* ========== HAMBURGER MENU (Mobile) ========== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+    order: 2;
+    /* Logo ke baad, nav-links se pehle */
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: linear-gradient(135deg, #FF7A4A, #FFB56B);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger animation when active */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Dark mode hamburger */
+.dark-mode .hamburger span {
+    background: linear-gradient(135deg, #FFB56B, #FF7A4A);
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .team-grid {
         grid-template-columns: 1fr;
         padding: 40px 20px;
     }
-    
+
     .team-card {
         padding: 30px 20px;
+    }
+
+    /* Show hamburger */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Hide default nav-links, show as sidebar */
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        /* Hidden off-screen */
+        width: 250px;
+        height: calc(100vh - 70px);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        gap: 0;
+        padding: 30px 20px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 999;
+    }
+
+    /* Show menu when active */
+    .nav-links.active {
+        right: 0;
+    }
+
+    /* Style links in mobile menu */
+    .nav-links a {
+        width: 100%;
+        padding: 15px 20px;
+        margin: 0;
+        border-radius: 8px;
+        border-bottom: 1px solid rgba(255, 122, 74, 0.1);
+        text-align: left;
+    }
+
+    /* Dark mode mobile menu */
+    .dark-mode .nav-links {
+        background: rgba(24, 24, 24, 0.98);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .dark-mode .nav-links a {
+        color: #ddd;
+        border-bottom-color: rgba(255, 122, 74, 0.2);
+    }
+
+    /* Navbar order: logo -> hamburger -> toggle-btn */
+    .navbar {
+        padding: 0 clamp(15px, 4vw, 40px);
+    }
+
+    .toggle-btn {
+        order: 3;
+        /* Last position */
+        margin-left: auto;
+    }
+}
+
+/* ========== VERY SMALL PHONES (480px) ========== */
+@media (max-width: 480px) {
+    .navbar {
+        height: 60px;
+        padding: 0 12px;
+    }
+
+    .navbar .logo {
+        font-size: clamp(16px, 4vw, 20px);
+        gap: 8px;
+    }
+
+    .navbar .logo i {
+        font-size: 20px;
+    }
+
+    .toggle-btn {
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+    }
+
+    .toggle-btn i {
+        font-size: 16px;
+    }
+
+    .hamburger span {
+        width: 22px;
+        height: 2.5px;
+    }
+
+    .nav-links {
+        top: 60px;
+        height: calc(100vh - 60px);
+        width: 220px;
+        padding: 25px 15px;
+    }
+
+    .nav-links a {
+        padding: 12px 16px;
+        font-size: 15px;
     }
 }
