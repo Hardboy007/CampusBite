@@ -109,3 +109,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// ========== PWA: SERVICE WORKER REGISTRATION ==========
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                console.log('✅ Service Worker registered successfully!');
+                console.log('Scope:', registration.scope);
+                
+                // Check for updates
+                registration.addEventListener('updatefound', () => {
+                    console.log('🔄 New version available!');
+                });
+            })
+            .catch((error) => {
+                console.log('❌ Service Worker registration failed:', error);
+            });
+    });
+    
+    // Listen for service worker updates
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        console.log('🔄 Service Worker updated! Refresh for new version.');
+    });
+}

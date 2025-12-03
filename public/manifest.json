@@ -1,0 +1,27 @@
+{
+  "name": "CampusBite - Campus Food Delivery",
+  "short_name": "CampusBite",
+  "description": "Order food from your campus cafeteria with ease",
+  "start_url": "/user-selection",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FF7A4A",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "lifestyle"],
+  "screenshots": []
+}
