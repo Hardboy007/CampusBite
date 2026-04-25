@@ -60,7 +60,7 @@ document.getElementById('canteenModal').addEventListener('click', function (e) {
   function getTheme() {
     const saved = localStorage.getItem(KEY);
     if (saved === 'light' || saved === 'dark') return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return 'light'; // default hamesha light
   }
 
   function applyTheme(t) {
