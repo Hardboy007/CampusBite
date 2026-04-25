@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express= require("express");
 const app=express();
 // const mongoose =require("mongoose");
@@ -151,4 +152,18 @@ app.use("/js", (req, res, next) => {
   console.log("JS hit:", req.url);
   res.set("Cache-Control", "no-store");
   next();
+});
+
+app.get("/staff/search-images", async (req, res) => {
+  const query = req.query.q;
+  const response = await fetch(`https://api.unsplash.com/search/photos?query=${query}&per_page=9&orientation=landscape`, {
+    headers: {
+      Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`
+    }
+  });
+  const data = await response.json();
+  res.json(data.results.map(img => ({
+    url: img.urls.small,
+    alt: img.alt_description
+  })));
 });

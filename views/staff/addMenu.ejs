@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Menu — CampusBite</title>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('cb-theme') || 'light';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) { }
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="/css/staff.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="nav-inner">
+            <div class="logo">
+                <div class="logo-mark"><i class="fa-solid fa-utensils"></i></div>
+                <span class="logo-text">CampusBite</span>
+            </div>
+            <nav class="nav-links">
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+                    <i class="fa-solid fa-sun icon-sun"></i>
+                    <i class="fa-solid fa-moon icon-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="addmenu-layout">
+
+        <!-- LEFT: Form -->
+        <div class="addmenu-form-side">
+            <div class="card glass animate-in">
+                <div class="header">
+                    <div class="main-logo float"><i class="fa-solid fa-bowl-food"></i></div>
+                    <h1 class="title">Add Menu Items</h1>
+                    <p class="subtitle">Add dishes to your canteen one by one</p>
+                </div>
+
+                <div class="form">
+
+                    <!-- Item Name -->
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-utensils"></i> Item Name</label>
+                        <input type="text" id="itemName" placeholder="e.g. Aloo Paratha" class="form-input" />
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-align-left"></i> Description</label>
+                        <textarea id="itemDesc" placeholder="e.g. Crispy flatbread stuffed with spiced potatoes"
+                            class="form-input" rows="2" style="resize:none;"></textarea>
+                    </div>
+
+                    <!-- Price + Category -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-indian-rupee-sign"></i> Price (₹)</label>
+                            <input type="number" id="itemPrice" placeholder="e.g. 40" class="form-input" min="1" />
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-tag"></i> Category</label>
+                            <div class="select-wrap">
+                                <select id="itemCategory" class="form-select">
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Lunch">Lunch</option>
+                                    <option value="Snacks">Snacks</option>
+                                    <option value="Beverages">Beverages</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down select-caret"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Veg / Non-Veg -->
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-leaf"></i> Type</label>
+                        <div class="toggle-group">
+                            <button type="button" id="vegBtn" class="toggle-btn active" onclick="setVeg(true)">
+                                🟢 Veg
+                            </button>
+                            <button type="button" id="nonVegBtn" class="toggle-btn" onclick="setVeg(false)">
+                                🔴 Non-Veg
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Image Search -->
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-image"></i> Item Image</label>
+                        <div class="search-image-wrap">
+                            <input type="text" id="imageSearch" placeholder="Search image e.g. aloo paratha"
+                                class="form-input" />
+                            <button type="button" class="search-img-btn" onclick="searchImages()">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Image Results -->
+                    <div id="imageResults" class="image-grid hidden"></div>
+
+                    <!-- Selected Image Preview -->
+                    <div id="selectedImageWrap" class="hidden">
+                        <label class="form-group" style="margin-bottom:8px;">
+                            <i class="fa-solid fa-check-circle" style="color:var(--accent)"></i> Selected Image
+                        </label>
+                        <img id="selectedImagePreview" src="" alt="Selected"
+                            style="width:100%; height:160px; object-fit:cover; border-radius:12px; border:2px solid var(--accent);" />
+                    </div>
+
+                    <!-- Add Item Button -->
+                    <button class="next-btn" type="button" onclick="addItem()" style="margin-top:12px;">
+                        <i class="fa-solid fa-plus"></i> Add Item
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Added Items List -->
+        <div class="addmenu-list-side">
+            <div class="addmenu-list-header">
+                <h2 class="title" style="font-size:22px;">Menu Items <span id="itemCount"
+                        class="item-count-badge">0</span></h2>
+                <p class="subtitle">Items you've added so far</p>
+            </div>
+            <div class="empty-list-msg hidden" id="emptyMsg">
+                <i class="fa-solid fa-bowl-food" style="font-size:32px; color:var(--muted);"></i>
+                <p>No items added yet</p>
+            </div>
+            <div id="menuItemsList" class="menu-items-list">
+            </div>
+
+            <!-- Go to Dashboard -->
+            <button class="next-btn" id="dashboardBtn" onclick="goToDashboard()" style="margin-top:24px;" disabled>
+                Go to Dashboard <i class="fa-solid fa-arrow-right btn-arrow"></i>
+            </button>
+        </div>
+
+    </main>
+
+    <script src="/js/staff/addMenu.js"></script>
+</body>
+
+</html>
