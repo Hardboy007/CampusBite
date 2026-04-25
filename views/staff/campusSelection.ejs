@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusBite — Staff Panel</title>
+
+    <!-- Apply theme BEFORE paint to prevent flash -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('cb-theme');
+                if (!t) {
+                    t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                }
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) { }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="/css/staff.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="nav-inner">
+            <div class="logo">
+                <div class="logo-mark"><i class="fa-solid fa-utensils"></i></div>
+                <span class="logo-text">CampusBite</span>
+            </div>
+
+            <nav class="nav-links">
+                <a href="/about"><i class="fa-solid fa-circle-info"></i> About</a>
+                <a href="/help"><i class="fa-regular fa-circle-question"></i> Help</a>
+
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+                    <i class="fa-solid fa-sun icon-sun"></i>
+                    <i class="fa-solid fa-moon icon-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="split-layout">
+
+        <!-- LEFT SIDE -->
+        <div class="split-left">
+            <div class="brand">
+                <div class="logo-mark"><i class="fa-solid fa-utensils"></i></div>
+                <span class="logo-text">CampusBite</span>
+            </div>
+
+            <h2 class="hero-title">Manage your canteen<br />with confidence</h2>
+            <p class="hero-sub">A single panel to handle campuses, canteens, and orders — built for campus staff.</p>
+
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div>
+                        <p class="feature-title">Real-time Orders</p>
+                        <p class="feature-desc">See and manage incoming orders instantly</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-store"></i></div>
+                    <div>
+                        <p class="feature-title">Multi-Canteen Support</p>
+                        <p class="feature-desc">Handle multiple canteens across campuses</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div>
+                        <p class="feature-title">Smart Dashboard</p>
+                        <p class="feature-desc">Track performance with clean analytics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="split-right">
+            <div class="card glass animate-in">
+                <div class="header">
+                    <div class="main-logo float">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <h1 class="title">Welcome back</h1>
+                    <p class="subtitle">Staff Panel · Manage your canteen with ease</p>
+                </div>
+
+                <div class="form">
+                    <div class="form-group">
+                        <label for="campus">
+                            <i class="fa-solid fa-building"></i> Campus
+                        </label>
+                        <div class="select-wrap">
+                            <select id="campus" class="form-select">
+                                <option disabled selected>Select your campus</option>
+                                <% campuses.forEach(function(campus){ %>
+                                    <option value="<%= campus._id %>">
+                                        <%= campus.name %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <i class="fa-solid fa-chevron-down select-caret"></i>
+                        </div>
+                    </div>
+
+                    <div id="canteenSection" class="hidden">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-store"></i> Existing Canteens</label>
+                            <div id="canteenList"></div>
+                        </div>
+                        <button onclick="openModal()" class="next-btn" type="button">
+                            <i class="fa-solid fa-plus"></i> Add New Canteen
+                        </button>
+                    </div>
+
+                    <div id="noCanteenSection" class="hidden">
+                        <div class="error-box">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <span>No canteen found for this campus.</span>
+                        </div>
+                        <button class="next-btn" onclick="openModal()" type="button">
+                            <i class="fa-solid fa-plus"></i> Create Canteen
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <p class="footnote">Secure staff access · Powered by CampusBite</p>
+        </div>
+
+    </main>
+
+    <!-- Modal -->
+    <div id="canteenModal" class="modal" role="dialog" aria-modal="true">
+        <div class="modal-content glass">
+            <button class="close-btn" onclick="closeModal()" aria-label="Close">&times;</button>
+
+            <div class="modal-icon"><i class="fa-solid fa-store"></i></div>
+            <h2>Create Canteen</h2>
+            <p class="modal-sub">Set up a new canteen for this campus.</p>
+
+            <form method="POST" action="/staff/create-canteen">
+                <div class="form-group">
+                    <input type="text" name="canteenName" placeholder="e.g. Central Food Court" class="form-input"
+                        required />
+                </div>
+                <button class="next-btn" type="submit">Create Canteen</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/staff/campusSelection.js"></script>
+</body>
+
+</html>

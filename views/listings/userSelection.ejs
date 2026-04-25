@@ -140,33 +140,33 @@
                     <form id="customerSignupForm">
                         <div class="input-group">
                             <i class="fas fa-user icon"></i>
-                            <input type="text" id="signupName" placeholder="Full Name" name="name" required />
+                            <input type="text" id="customersignupName" placeholder="Full Name" name="name" required />
                         </div>
 
                         <div class="input-group">
                             <i class="fas fa-envelope icon"></i>
-                            <input type="email" id="signupEmail" placeholder="Email Id" name="email" required />
+                            <input type="email" id="customersignupEmail" placeholder="Email Id" name="email" required />
                         </div>
 
                         <div class="input-group">
                             <i class="fas fa-phone icon"></i>
-                            <input type="tel" id="signupPhone" placeholder="Phone Number" name="phone" maxlength="10"
+                            <input type="tel" id="customersignupPhone" placeholder="Phone Number" name="phone" maxlength="10"
                                 required />
                         </div>
 
                         <div class="input-group">
                             <i class="fas fa-lock icon"></i>
-                            <input type="password" id="signupPassword" placeholder="Password" name="password"
+                            <input type="password" id="customersignupPassword" placeholder="Password" name="password"
                                 required />
                             <span class="fas fa-eye-slash toggle-password"
-                                onclick="togglePassword('signupPassword', this)"></span>
+                                onclick="togglePassword('customersignupPassword', this)"></span>
                         </div>
 
                         <div class="input-group">
                             <i class="fas fa-lock icon"></i>
-                            <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required />
+                            <input type="password" id="customersignupConfirmPassword" placeholder="Confirm Password" required />
                             <span class="fas fa-eye-slash toggle-password"
-                                onclick="togglePassword('signupConfirmPassword', this)"></span>
+                                onclick="togglePassword('customersignupConfirmPassword', this)"></span>
                         </div>
 
                         <button type="submit" class="login-btn">Create Account</button>
@@ -186,56 +186,109 @@
 
         <div id="staffModal" class="loginModal">
             <!--changed id loginModal to staffModal-->
-            <div class="modal-box">
-                <span class="close-btn" onclick="closeModal('staffModal','staffOverlay')">x</span>
-                <h2>Login as Staff</h2>
-                <p class="login-title">Enter your credentials to access your account</p>
+            <div class="modal-flip-container">
+                <div class="modal-box front">
+                    <span class="close-btn" onclick="closeModal('staffModal','staffOverlay')">x</span>
+                    <h2>Login as Staff</h2>
+                    <p class="login-title">Enter your credentials to access your account</p>
 
-                <!-- Error Message -->
-                <!--changed id loginError to staffLoginError-->
-                <p id="staffLoginError" class="error-msg"></p>
-                <!--yaha pe pura isliye nhi likha kyuki ye err msg tab ayega jab condition lage aur wo js me hoga-->
+                    <!-- Error Message -->
+                    <!--changed id loginError to staffLoginError-->
+                    <p id="staffLoginError" class="error-msg"></p>
+                    <!--yaha pe pura isliye nhi likha kyuki ye err msg tab ayega jab condition lage aur wo js me hoga-->
 
-                <!-- ✅ Staff Form start -->
-                <form id="staffLoginForm" method="#" action="#">
-                    <!--changed id loginForm to staffLoginForm-->
-                    <div class="input-group">
-                        <b class="fas fa-envelope icon"></b>
-                        <input type="text" id="staffUsername" placeholder="Email Id" name="email" />
-                        <!--changed id username to staffUsername-->
+                    <!-- ✅ Staff Form start -->
+                    <form id="staffLoginForm" method="POST" action="/user-selection">
+                        <!--changed id loginForm to staffLoginForm-->
+                        <input type="hidden" name="role" value="staff">
+                        <div class="input-group">
+                            <b class="fas fa-envelope icon"></b>
+                            <input type="text" id="staffUsername" placeholder="Email Id" name="email" />
+                            <!--changed id username to staffUsername-->
+                        </div>
+
+                        <div class="input-group">
+                            <b class="fas fa-lock icon"></b>
+                            <input type="password" id="staffPassword" placeholder="Password" name="password" />
+                            <!--changed id password to staffPassword-->
+                            <span class="fas fa-eye-slash toggle-password"
+                                onclick="togglePassword('staffPassword', this)"></span>
+                        </div>
+
+                        <div class="options">
+                            <label class="remember"><input type="checkbox" />Remember me</label>
+                            <a href="#" class="forgot">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="login-btn">
+                            Login to Manage Orders
+                        </button>
+                    </form>
+                    <!-- ✅ Form end -->
+
+                    <div class="altr-signin-label">
+                        <p>Or Continue With</p>
+                    </div>
+                    <div class="altr-signin">
+                        <button class="google">Google</button>
+                        <button class="phn-num">Get OTP</button>
                     </div>
 
-                    <div class="input-group">
-                        <b class="fas fa-lock icon"></b>
-                        <input type="password" id="staffPassword" placeholder="Password" name="password" />
-                        <!--changed id password to staffPassword-->
-                        <span class="fas fa-eye-slash toggle-password"
-                            onclick="togglePassword('staffPassword', this)"></span>
-                    </div>
-
-                    <div class="options">
-                        <label class="remember"><input type="checkbox" />Remember me</label>
-                        <a href="#" class="forgot">Forgot Password?</a>
-                    </div>
-
-                    <button type="submit" class="login-btn">
-                        Login to Manage Orders
-                    </button>
-                </form>
-                <!-- ✅ Form end -->
-
-                <div class="altr-signin-label">
-                    <p>Or Continue With</p>
+                    <p class="signup">Don't have an account? 
+                        <a href="#" onclick="flipToSignup('staff'); return false;">Sign up here</a>
+                    </p>
                 </div>
-                <div class="altr-signin">
-                    <button class="google">Google</button>
-                    <button class="phn-num">Get OTP</button>
-                </div>
+                <!-- Back Side - Signup -->
+                <div class="modal-box back">
+                    <span class="close-btn" onclick="closeModal('staffModal','staffOverlay')">×</span>
+                    <h2>Create Account</h2>
+                    <p class="login-title">Sign up to start ordering</p>
 
-                <p class="signup">
-                    Don't have an account? <a href="#">Sign up here</a>
-                </p>
+                    <p id="staffSignupError" class="error-msg"
+                        style="color: #ef4444; font-size: 13px; margin-bottom: 10px;"></p>
+
+                    <form id="staffSignupForm">
+                        <div class="input-group">
+                            <i class="fas fa-user icon"></i>
+                            <input type="text" id="staffsignupName" placeholder="Full Name" name="name" required />
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-envelope icon"></i>
+                            <input type="email" id="staffsignupEmail" placeholder="Email Id" name="email" required />
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-phone icon"></i>
+                            <input type="tel" id="staffsignupPhone" placeholder="Phone Number" name="phone" maxlength="10"
+                                required />
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-lock icon"></i>
+                            <input type="password" id="staffsignupPassword" placeholder="Password" name="password"
+                                required />
+                            <span class="fas fa-eye-slash toggle-password"
+                                onclick="togglePassword('staffsignupPassword', this)"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-lock icon"></i>
+                            <input type="password" id="staffsignupConfirmPassword" placeholder="Confirm Password" required />
+                            <span class="fas fa-eye-slash toggle-password"
+                                onclick="togglePassword('staffsignupConfirmPassword', this)"></span>
+                        </div>
+
+                        <button type="submit" class="login-btn">Create Account</button>
+                    </form>
+
+                    <p class="signup">
+                        Already have an account? <a href="#" onclick="flipToLogin('staff'); return false;">Login here</a>
+                    </p>
+                </div>
             </div>
+
+            
         </div>
         <section class="highlight">
             <div class="highlight-content">

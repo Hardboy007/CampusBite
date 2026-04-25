@@ -114,7 +114,7 @@ function togglePassword(passwordId, iconElement) {
 }
 
 
-// Flip to Signup
+// Flip to Signup for customer
 function flipToSignup(role) {
     if (window.event) window.event.preventDefault();
 
@@ -147,16 +147,16 @@ function flipToLogin(role) {
     const loginError = document.getElementById(role + 'LoginError');
     if (signupError) signupError.textContent = '';
     if (loginError) loginError.textContent = '';
-    
+
     return false;
 }
 
-// Handle Signup Form Submission
-document.addEventListener('DOMContentLoaded', function() {
+// Handle Signup Form Submission for customer
+document.addEventListener('DOMContentLoaded', function () {
     const customerSignupForm = document.getElementById('customerSignupForm');
-    
+
     if (customerSignupForm) {
-        customerSignupForm.addEventListener('submit', function(e) {
+        customerSignupForm.addEventListener('submit', function (e) {
             e.preventDefault();
             console.log('📝 Signup form submitted');
             handleCustomerSignup(e);
@@ -167,16 +167,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function handleCustomerSignup(e){
+// Handle Signup Form Submission for staff
+document.addEventListener('DOMContentLoaded', function () {
+    const staffSignupForm = document.getElementById('staffSignupForm');
+
+    if (staffSignupForm) {
+        staffSignupForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            console.log('📝 Signup form submitted');
+            handleCustomerSignup(e);
+        });
+        console.log('✅ Signup form handler attached');
+    } else {
+        console.error('❌ Signup form not found!');
+    }
+});
+function handleCustomerSignup(e) {
     if (e) e.preventDefault();
 
-    const name = document.getElementById('signupName').value.trim();
-    const email = document.getElementById('signupEmail').value.trim();
-    const phone = document.getElementById('signupPhone').value.trim();
-    const password = document.getElementById('signupPassword').value;
-    const confirmPassword = document.getElementById('signupConfirmPassword').value;
+    // Form identify karo
+    const form = e.target;
+    const isStaff = form.id === 'staffSignupForm';
 
-    const errorMsg = document.getElementById('customerSignupError');
+    const errorMsg = document.getElementById(
+        isStaff ? 'staffSignupError' : 'customerSignupError'
+    );
+    
+    const prefix = isStaff ? 'staffsignup' : 'customersignup';
+
+    const name = document.getElementById(prefix + 'Name').value.trim();
+    const email = document.getElementById(prefix + 'Email').value.trim();
+    const phone = document.getElementById(prefix + 'Phone').value.trim();
+    const password = document.getElementById(prefix + 'Password').value;
+    const confirmPassword = document.getElementById(prefix + 'ConfirmPassword').value;
 
     // Clear previous errors
     errorMsg.textContent = '';
@@ -239,7 +262,7 @@ function handleCustomerSignup(e){
     // Flip back to login after 1.5 seconds
     setTimeout(() => {
         flipToLogin('customer');
-        
+
         // Clear form after flip animation completes
         setTimeout(() => {
             document.getElementById('customerSignupForm').reset();
@@ -249,14 +272,13 @@ function handleCustomerSignup(e){
 }
 
 // ========== PWA: SERVICE WORKER REGISTRATION ==========
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && location.hostname !== "localhost") {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
             .then((registration) => {
                 console.log('✅ Service Worker registered successfully!');
                 console.log('Scope:', registration.scope);
-                
-                // Check for updates
+
                 registration.addEventListener('updatefound', () => {
                     console.log('🔄 New version available!');
                 });
@@ -265,9 +287,13 @@ if ('serviceWorker' in navigator) {
                 console.log('❌ Service Worker registration failed:', error);
             });
     });
-    
-    // Listen for service worker updates
+
     navigator.serviceWorker.addEventListener('controllerchange', () => {
         console.log('🔄 Service Worker updated! Refresh for new version.');
     });
+}
+
+if (location.hostname === "localhost" && 'serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations()
+        .then(regs => regs.forEach(reg => reg.unregister()));
 }

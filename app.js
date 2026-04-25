@@ -43,13 +43,13 @@ app.get("/user-selection", (req, res) => {
 });
 
 app.post("/user-selection", (req, res) => {
-  const { email, password } = req.body;
+  const { role } = req.body;
 
-  // if (email === "hardik1234@gmail.com" && password === "1234") {
-    res.redirect("/cafeSelection");
-  // } else {
-    // res.send("Invalid Credential !! <a href='/user-selection'>Try again</a>");
-  // }
+  if (role === "staff") {
+    return res.redirect("/staff/campus");
+  } else {
+    return res.redirect("/cafeSelection");
+  }
 });
 
 
@@ -104,4 +104,47 @@ app.get("/profile", (req, res) => {
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+});
+
+app.get("/staff/campus", (req, res) => {
+  const campuses = [
+    { _id: 1, name: "DBUU" },
+    { _id: 2, name: "North Campus" }
+  ];
+
+  res.render("staff/campusSelection", { campuses });
+});
+
+app.get("/staff/get-canteens/:id", (req, res) => {
+  const campusId = req.params.id;
+
+  if (campusId == "1") {
+    return res.json([
+      { _id: 101, name: "BBC Cafeteria" },
+      { _id: 102, name: "Main Block Cafe" }
+    ]);
+  }
+
+  res.json([]);
+});
+
+app.post("/staff/create-canteen", (req, res) => {
+  const { canteenName } = req.body;
+
+  console.log("Canteen:", canteenName);
+
+  res.redirect("/staff/dashboard");
+});
+
+//no cache
+app.use("/css", (req, res, next) => {
+  console.log("CSS hit:", req.url);
+  res.set("Cache-Control", "no-store");
+  next();
+});
+
+app.use("/js", (req, res, next) => {
+  console.log("JS hit:", req.url);
+  res.set("Cache-Control", "no-store");
+  next();
 });
