@@ -129,11 +129,15 @@ app.get("/staff/get-canteens/:id", (req, res) => {
 });
 
 app.post("/staff/create-canteen", (req, res) => {
-  const { canteenName } = req.body;
+  const { canteenName, description, openTime, closeTime, location, contact } = req.body;
 
-  console.log("Canteen:", canteenName);
+  console.log("Canteen Details:", req.body);
 
-  res.redirect("/staff/dashboard");
+  res.redirect("/staff/add-menu");
+});
+
+app.get("/staff/add-menu", (req, res) => {
+  res.render("staff/addMenu");
 });
 
 //no cache

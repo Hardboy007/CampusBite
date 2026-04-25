@@ -145,14 +145,49 @@
 
             <div class="modal-icon"><i class="fa-solid fa-store"></i></div>
             <h2>Create Canteen</h2>
-            <p class="modal-sub">Set up a new canteen for this campus.</p>
+            <p class="modal-sub">Fill in your canteen details to get started.</p>
 
             <form method="POST" action="/staff/create-canteen">
+
                 <div class="form-group">
+                    <label><i class="fa-solid fa-store"></i> Canteen Name</label>
                     <input type="text" name="canteenName" placeholder="e.g. Central Food Court" class="form-input"
                         required />
                 </div>
-                <button class="next-btn" type="submit">Create Canteen</button>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-align-left"></i> Description</label>
+                    <textarea name="description" placeholder="e.g. Serving fresh meals since 2018" class="form-input"
+                        rows="2" style="resize:none;" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-clock"></i> Opening Time</label>
+                        <input type="time" name="openTime" class="form-input" required />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-clock"></i> Closing Time</label>
+                        <input type="time" name="closeTime" class="form-input" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-location-dot"></i> Location</label>
+                    <input type="text" name="location" placeholder="e.g. Block A, Ground Floor" class="form-input"
+                        required />
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-phone"></i> Contact Number</label>
+                    <input type="tel" name="contact" placeholder="e.g. 9876543210" class="form-input"
+                        pattern="[0-9]{10}" required />
+                </div>
+
+                <button class="next-btn" type="submit">
+                    Continue to Menu Setup <i class="fa-solid fa-arrow-right btn-arrow"></i>
+                </button>
+
             </form>
         </div>
     </div>
