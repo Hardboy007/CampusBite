@@ -1,3 +1,7 @@
+body::after {
+    opacity: 0.15;
+}
+
 /* ===== LAYOUT ===== */
 .dashboard-wrapper {
     display: grid;
