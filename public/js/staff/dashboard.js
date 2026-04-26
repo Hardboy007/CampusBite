@@ -72,7 +72,7 @@ function loadMenuItems() {
     </div>`
     }).join('');
 
-    // Canteen name from first load
+    // loadMenuItems ke andar ye block move karo — grid check se pehle
     const canteenName = localStorage.getItem('cb_canteen_name') || 'My Canteen';
     document.getElementById('sidebarCanteenName').textContent = canteenName;
     document.getElementById('dashCanteenName').textContent = canteenName + ' — Dashboard';
