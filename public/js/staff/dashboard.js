@@ -1,10 +1,10 @@
 // ===== MOCK DATA =====
 const mockOrders = [
-    { id: '#001', items: 'Aloo Paratha x2, Chai x1', total: 95, time: '9:15 AM', status: 'completed' },
-    { id: '#002', items: 'Chole Bhature x1, Coffee x1', total: 90, time: '10:30 AM', status: 'completed' },
-    { id: '#003', items: 'Samosa x2, Chai x2', total: 70, time: '11:00 AM', status: 'pending' },
+    { id: '#001', items: 'Aloo Paratha x2, Chai x1', total: 95, time: '9:15 AM', status: 'incoming' },
+    { id: '#002', items: 'Chole Bhature x1, Coffee x1', total: 90, time: '10:30 AM', status: 'incoming' },
+    { id: '#003', items: 'Samosa x2, Chai x2', total: 70, time: '11:00 AM', status: 'preparing' },
     { id: '#004', items: 'Paneer Butter Masala x1', total: 80, time: '12:15 PM', status: 'completed' },
-    { id: '#005', items: 'White Sauce Pasta x1, Coffee x1', total: 70, time: '1:00 PM', status: 'pending' },
+    { id: '#005', items: 'White Sauce Pasta x1, Coffee x1', total: 70, time: '1:00 PM', status: 'completed' },
 ];
 
 const weeklyEarnings = [320, 480, 290, 610, 540, 390, 720];
@@ -61,9 +61,6 @@ function loadMenuItems() {
         <p class="dash-menu-meta">${item.category} · ₹${item.price} · ${item.isVeg ? '🟢' : '🔴'}</p>
       </div>
       <div class="dash-menu-actions">
-        <button class="edit-btn" onclick="openEditModal(${i})">
-            <i class="fa-solid fa-pen"></i>
-        </button>
         <label class="avail-toggle" title="${available ? 'Mark Unavailable' : 'Mark Available'}">
           <input type="checkbox" ${available ? 'checked' : ''} onchange="toggleAvailability(${i}, this.checked)" />
           <span class="avail-slider"></span>
@@ -152,30 +149,40 @@ function renderPopularItems() {
 
 // ===== ORDERS =====
 function renderOrders() {
-    document.getElementById('ordersList').innerHTML = mockOrders.map((order, i) => `
-    <div class="order-card glass" id="orderCard${i}">
+    const statusOrder = { incoming: 0, preparing: 1, completed: 2, unavailable: 3 };
+    const sorted = [...mockOrders].sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
+
+    document.getElementById('ordersList').innerHTML = sorted.map(o => {
+        const realIndex = mockOrders.indexOf(o);
+        return `
+    <div class="order-card glass">
       <div class="order-left">
-        <p class="order-id">${order.id}</p>
-        <p class="order-items">${order.items}</p>
-        <p class="order-time"><i class="fa-regular fa-clock"></i> ${order.time}</p>
+        <p class="order-id">${o.id}</p>
+        <p class="order-items">${o.items}</p>
+        <p class="order-time"><i class="fa-regular fa-clock"></i> ${o.time}</p>
       </div>
       <div class="order-right">
-        <p class="order-total">₹${order.total}</p>
-        ${order.status === 'pending' ? `
+        <p class="order-total">₹${o.total}</p>
+        ${o.status === 'incoming' ? `
           <div class="order-actions">
-            <button class="accept-btn" onclick="updateOrder(${i}, 'completed')">
+            <button class="accept-btn" onclick="updateOrder(${realIndex}, 'preparing')">
               <i class="fa-solid fa-check"></i> Accept
             </button>
-            <button class="reject-btn" onclick="updateOrder(${i}, 'unavailable')">
-                <i class="fa-solid fa-ban"></i> Unavailable
+            <button class="reject-btn" onclick="updateOrder(${realIndex}, 'unavailable')">
+              <i class="fa-solid fa-ban"></i> Unavailable
             </button>
           </div>
+        ` : o.status === 'preparing' ? `
+          <button class="accept-btn" onclick="updateOrder(${realIndex}, 'completed')">
+            <i class="fa-solid fa-bell"></i> Mark Done
+          </button>
+          <span class="order-status preparing">Preparing</span>
         ` : `
-          <span class="order-status ${order.status}">${order.status}</span>
+          <span class="order-status ${o.status}">${o.status}</span>
         `}
       </div>
-    </div>
-  `).join('');
+    </div>`;
+    }).join('');
 }
 
 function updateOrder(index, status) {
@@ -217,66 +224,26 @@ function setActive(el) {
 // ===== SCROLL SPY =====
 function initScrollSpy() {
     const sections = document.querySelectorAll('.dash-section');
-    const links = document.querySelectorAll('.sidebar-link[href^="#"]');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link[href^="#"]');
+    const bottomLinks = document.querySelectorAll('.bottom-nav-link');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                links.forEach(l => l.classList.remove('active'));
-                const active = document.querySelector(`.sidebar-link[href="#${entry.target.id}"]`);
-                if (active) active.classList.add('active');
+                const id = entry.target.id;
+
+                sidebarLinks.forEach(l => l.classList.remove('active'));
+                const sidebarActive = document.querySelector(`.sidebar-link[href="#${id}"]`);
+                if (sidebarActive) sidebarActive.classList.add('active');
+
+                bottomLinks.forEach(l => l.classList.remove('active'));
+                const bottomActive = document.querySelector(`.bottom-nav-link[href="#${id}"]`);
+                if (bottomActive) bottomActive.classList.add('active');
             }
         });
     }, { threshold: 0.4 });
 
     sections.forEach(s => observer.observe(s));
-}
-
-// ===== SEARCH MENU ITEMS =====
-function searchMenuItems(query) {
-    const cards = document.querySelectorAll('.dash-menu-card');
-    const q = query.toLowerCase();
-    cards.forEach(card => {
-        const name = card.querySelector('.dash-menu-name').textContent.toLowerCase();
-        card.style.display = name.includes(q) ? 'flex' : 'none';
-    });
-}
-
-// ===== EDIT MENU ITEM =====
-let editingIndex = -1;
-
-function openEditModal(index) {
-    const saved = localStorage.getItem('cb_menu');
-    const items = saved ? JSON.parse(saved) : [];
-    const item = items[index];
-    if (!item) return;
-
-    editingIndex = index;
-    document.getElementById('editName').value = item.name;
-    document.getElementById('editDesc').value = item.desc;
-    document.getElementById('editPrice').value = item.price;
-    document.getElementById('editCategory').value = item.category;
-    document.getElementById('editModal').classList.remove('hidden');
-}
-
-function closeEditModal() {
-    document.getElementById('editModal').classList.add('hidden');
-    editingIndex = -1;
-}
-
-function saveEdit() {
-    if (editingIndex === -1) return;
-    const saved = localStorage.getItem('cb_menu');
-    const items = saved ? JSON.parse(saved) : [];
-
-    items[editingIndex].name = document.getElementById('editName').value.trim();
-    items[editingIndex].desc = document.getElementById('editDesc').value.trim();
-    items[editingIndex].price = Number(document.getElementById('editPrice').value);
-    items[editingIndex].category = document.getElementById('editCategory').value;
-
-    localStorage.setItem('cb_menu', JSON.stringify(items));
-    closeEditModal();
-    loadMenuItems();
 }
 
 // ===== THEME =====
