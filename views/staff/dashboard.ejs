@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — CampusBite</title>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('cb-theme') || 'light';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) { }
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="/css/staff.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="nav-inner">
+            <div class="logo">
+                <div class="logo-mark"><i class="fa-solid fa-utensils"></i></div>
+                <span class="logo-text">CampusBite</span>
+            </div>
+            <nav class="nav-links">
+                <a href="/about"><i class="fa-solid fa-circle-info"></i> About</a>
+                <a href="/help"><i class="fa-regular fa-circle-question"></i> Help</a>
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+                    <i class="fa-solid fa-sun icon-sun"></i>
+                    <i class="fa-solid fa-moon icon-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-wrapper">
+
+        <!-- Sidebar -->
+        <aside class="sidebar glass">
+            <div class="sidebar-logo">
+                <div class="main-logo" style="width:44px;height:44px;font-size:20px;">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <div>
+                    <p class="sidebar-canteen-name" id="sidebarCanteenName">My Canteen</p>
+                    <p class="sidebar-sub">Staff Panel</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#overview" class="sidebar-link active" onclick="setActive(this)">
+                    <i class="fa-solid fa-grid-2"></i> Overview
+                </a>
+                <a href="#analytics" class="sidebar-link" onclick="setActive(this)">
+                    <i class="fa-solid fa-chart-line"></i> Analytics
+                </a>
+                <a href="#menu" class="sidebar-link" onclick="setActive(this)">
+                    <i class="fa-solid fa-bowl-food"></i> Menu Items
+                </a>
+                <a href="#orders" class="sidebar-link" onclick="setActive(this)">
+                    <i class="fa-solid fa-bag-shopping"></i> Orders
+                </a>
+            </nav>
+            <!-- Edit Modal -->
+            <div id="editModal" class="edit-modal-overlay hidden" onclick="closeEditModal()">
+                <div class="edit-modal glass" onclick="event.stopPropagation()">
+                    <button class="close-btn" onclick="closeEditModal()">&times;</button>
+                    <div class="modal-icon"><i class="fa-solid fa-pen"></i></div>
+                    <h2>Edit Item</h2>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-utensils"></i> Item Name</label>
+                        <input type="text" id="editName" class="form-input" />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-align-left"></i> Description</label>
+                        <textarea id="editDesc" class="form-input" rows="2" style="resize:none;"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-indian-rupee-sign"></i> Price (₹)</label>
+                            <input type="number" id="editPrice" class="form-input" min="1" />
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-tag"></i> Category</label>
+                            <div class="select-wrap">
+                                <select id="editCategory" class="form-select">
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Lunch">Lunch</option>
+                                    <option value="Snacks">Snacks</option>
+                                    <option value="Beverages">Beverages</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down select-caret"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="next-btn" onclick="saveEdit()">
+                        Save Changes <i class="fa-solid fa-check"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <a href="/staff/campus" class="sidebar-link" style="color:var(--danger);">
+                    <i class="fa-solid fa-right-from-bracket"></i> Exit Dashboard
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+
+            <!-- Top Bar -->
+            <div class="dash-topbar">
+                <div>
+                    <h1 class="dash-title" id="dashCanteenName">Dashboard</h1>
+                    <p class="dash-sub" id="dashDate"></p>
+                </div>
+                <div class="topbar-right">
+                    <!-- Open/Closed Toggle -->
+                    <div class="status-toggle-wrap">
+                        <span class="status-label" id="statusLabel">Open</span>
+                        <button class="status-toggle open" id="statusToggle" onclick="toggleStatus()">
+                            <span class="status-dot"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview" class="dash-section">
+                <div class="overview-cards">
+                    <div class="ov-card glass">
+                        <div class="ov-icon" style="background:rgba(255,122,74,0.15);color:var(--accent);">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                        <div>
+                            <p class="ov-label">Today's Orders</p>
+                            <p class="ov-value" id="totalOrders">0</p>
+                        </div>
+                    </div>
+                    <div class="ov-card glass">
+                        <div class="ov-icon" style="background:rgba(34,197,94,0.12);color:#22c55e;">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </div>
+                        <div>
+                            <p class="ov-label">Today's Revenue</p>
+                            <p class="ov-value" id="totalRevenue">₹0</p>
+                        </div>
+                    </div>
+                    <div class="ov-card glass">
+                        <div class="ov-icon" style="background:rgba(99,102,241,0.12);color:#6366f1;">
+                            <i class="fa-solid fa-bowl-food"></i>
+                        </div>
+                        <div>
+                            <p class="ov-label">Menu Items</p>
+                            <p class="ov-value" id="totalMenuItems">0</p>
+                        </div>
+                    </div>
+                    <div class="ov-card glass">
+                        <div class="ov-icon" style="background:rgba(234,179,8,0.12);color:#eab308;">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div>
+                            <p class="ov-label">Avg. Rating</p>
+                            <p class="ov-value">4.3 ⭐</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="dash-section">
+                <h2 class="section-title"><i class="fa-solid fa-chart-line"></i> Analytics</h2>
+                <div class="analytics-grid">
+
+                    <!-- Earnings Chart -->
+                    <div class="analytics-card glass">
+                        <p class="analytics-card-title">Weekly Earnings (₹)</p>
+                        <div class="bar-chart" id="earningsChart"></div>
+                    </div>
+
+                    <!-- Popular Items -->
+                    <div class="analytics-card glass">
+                        <p class="analytics-card-title">Popular Items</p>
+                        <div id="popularItems" class="popular-list"></div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Menu Items Section -->
+            <section id="menu" class="dash-section">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fa-solid fa-bowl-food"></i> Menu Items</h2>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <div class="search-wrap">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="menuSearch" placeholder="Search items..." class="form-input"
+                                style="padding:8px 12px 8px 32px; font-size:13px;"
+                                oninput="searchMenuItems(this.value)" />
+                        </div>
+                        <a href="/staff/add-menu" class="next-btn" style="width:auto;padding:10px 18px;font-size:13px;">
+                            <i class="fa-solid fa-plus"></i> Add Items
+                        </a>
+                    </div>
+                </div>
+                <div id="dashMenuGrid" class="dash-menu-grid"></div>
+            </section>
+
+            <!-- Orders Section -->
+            <section id="orders" class="dash-section">
+                <h2 class="section-title"><i class="fa-solid fa-bag-shopping"></i> Recent Orders</h2>
+                <div id="ordersList" class="orders-list"></div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="/js/staff/dashboard.js"></script>
+</body>
+
+</html>

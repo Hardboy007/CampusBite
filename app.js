@@ -167,3 +167,7 @@ app.get("/staff/search-images", async (req, res) => {
     alt: img.alt_description
   })));
 });
+
+app.get("/staff/dashboard", (req, res) => {
+  res.render("staff/dashboard");
+});

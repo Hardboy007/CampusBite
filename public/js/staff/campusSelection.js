@@ -1,9 +1,9 @@
 // ===== DOM REFS =====
-const campusSelect     = document.getElementById('campus');
-const canteenSelect    = document.getElementById('canteen');
-const canteenSection   = document.getElementById('canteenSection');
+const campusSelect = document.getElementById('campus');
+const canteenSelect = document.getElementById('canteen');
+const canteenSection = document.getElementById('canteenSection');
 const noCanteenSection = document.getElementById('noCanteenSection');
-const dashboardBtn     = document.getElementById('dashboardBtn');
+const dashboardBtn = document.getElementById('dashboardBtn');
 
 // ===== CAMPUS CHANGE =====
 campusSelect.addEventListener('change', async function () {
@@ -37,7 +37,7 @@ campusSelect.addEventListener('change', async function () {
 // ===== DASHBOARD NAVIGATION =====
 if (dashboardBtn) {
   dashboardBtn.addEventListener('click', function () {
-    const campusId  = campusSelect.value;
+    const campusId = campusSelect.value;
     const canteenId = canteenSelect.value;
     if (!campusId || !canteenId) return;
     window.location.href = `/staff/dashboard?campus=${campusId}&canteen=${canteenId}`;
@@ -45,7 +45,7 @@ if (dashboardBtn) {
 }
 
 // ===== MODAL =====
-function openModal()  { document.getElementById('canteenModal').classList.add('active'); }
+function openModal() { document.getElementById('canteenModal').classList.add('active'); }
 function closeModal() { document.getElementById('canteenModal').classList.remove('active'); }
 
 document.getElementById('canteenModal').addEventListener('click', function (e) {
@@ -54,7 +54,7 @@ document.getElementById('canteenModal').addEventListener('click', function (e) {
 
 // ===== THEME TOGGLE =====
 (function () {
-  const KEY  = 'cb-theme';
+  const KEY = 'cb-theme';
   const root = document.documentElement;
 
   function getTheme() {
@@ -82,3 +82,9 @@ document.getElementById('canteenModal').addEventListener('click', function (e) {
     if (e.key === KEY && e.newValue) applyTheme(e.newValue);
   });
 })();
+
+document.querySelector('form[action="/staff/create-canteen"]')
+  .addEventListener('submit', function () {
+    const name = document.getElementById('canteenName').value;
+    localStorage.setItem('cb_canteen_name', name);
+  });
