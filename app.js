@@ -43,8 +43,13 @@ app.use("/js", (req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname,"/public")));
-
+app.use(express.static('public', {
+  etag: false,
+  lastModified: false,
+  setHeaders: (res) => {
+    res.set('Cache-Control', 'no-store');
+  }
+}));
 
 
 
