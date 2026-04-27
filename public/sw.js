@@ -1,5 +1,5 @@
 // Cache name - version number (update karne ke liye)
-const CACHE_NAME = 'campusbite-v1';
+const CACHE_NAME = 'campusbite-v2';
 
 // Files jo cache karni hain (offline me kaam aayengi)
 const urlsToCache = [
@@ -63,34 +63,41 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  // ❌ skip non-http (chrome-extension, etc.)
   if (!url.protocol.startsWith('http')) return;
-
-  // ❌ only GET requests
   if (req.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(req).then((cached) => {
-      if (cached) {
-        return cached;
-      }
-
-      return fetch(req)
+  // ✅ JS files → NETWORK FIRST
+  if (url.pathname.endsWith('.js')) {
+    event.respondWith(
+      fetch(req)
         .then((res) => {
-
-          // ❌ sirf same-origin files cache karo
-          if (url.origin === location.origin && res.status === 200) {
+          if (res.status === 200) {
             const resClone = res.clone();
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(req, resClone);
             });
           }
-
           return res;
         })
-        .catch(() => {
-          return caches.match('/');
-        });
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // ✅ baaki sab → CACHE FIRST (as it is)
+  event.respondWith(
+    caches.match(req).then((cached) => {
+      if (cached) return cached;
+
+      return fetch(req).then((res) => {
+        if (url.origin === location.origin && res.status === 200) {
+          const resClone = res.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(req, resClone);
+          });
+        }
+        return res;
+      });
     })
   );
 });
