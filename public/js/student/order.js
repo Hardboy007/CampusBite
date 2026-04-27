@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             section.style.transform = 'translateY(0)';
         }, index * 100);  // Staggered animation
     });
+    initUserProfile();
 });
 
 /* ---------------- state ---------------- */
@@ -74,6 +75,15 @@ function selectPay(card) {
     payCards.forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
     selectedPayment = card.getAttribute('data-method');
+
+    const upiWrap = document.getElementById('upiInputWrap');
+    if (selectedPayment === 'upi') {
+        upiWrap.style.display = 'block';
+    } else {
+        upiWrap.style.display = 'none';
+        document.getElementById('upiId').value = '';
+    }
+
     checkPlaceBtnState();
 }
 
@@ -136,7 +146,6 @@ function renderCart() {
     bottomTotal.textContent = `₹${sub + tax}`;
     updateCartBadge();
 }
-renderCart();
 
 // Update cart badge in header
 function updateCartBadge() {
@@ -168,7 +177,9 @@ const confirmList = document.getElementById('confirmList');
 function checkPlaceBtnState() {
     const phoneOk = /^[0-9]{10}$/.test(phoneEl.value);
     const paymentOk = !!selectedPayment;
-    placeBtn.disabled = !(phoneOk && paymentOk);
+    const upiOk = selectedPayment !== 'upi' ||
+        /^[\w.-]+@[\w.-]+$/.test(document.getElementById('upiId').value.trim());
+    placeBtn.disabled = !(phoneOk && paymentOk && upiOk);
 }
 phoneEl.addEventListener('input', checkPlaceBtnState);
 
@@ -218,11 +229,15 @@ function placeOrder() {
         // token, confirm list, qr
         const token = generateToken();
         orderTokenEl.textContent = token;
-        confirmList.innerHTML = '';
-        cart.forEach(it => {
-            confirmList.innerHTML += `<div style="display:flex;justify-content:space-between;padding:6px 0"><div>${it.qty} x ${it.name}</div><div>₹${it.price * it.qty}</div></div>`;
-        });
-        document.getElementById('qrBox').innerHTML = `<svg width='100' height='100' xmlns='http://www.w3.org/2000/svg'><rect width='100' height='100' fill='#fff'/><text x='50' y='55' font-size='10' text-anchor='middle' fill='#111'>${token}</text></svg>`;
+
+        // QR Code — Google Charts API
+        document.getElementById('qrBox').innerHTML = `
+            <img 
+                src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${token}" 
+                alt="QR Code"
+                style="width:120px;height:120px;border-radius:8px;"
+            />
+        `;
         // CLEAR CART after successful order
         cart = [];
         localStorage.removeItem('campusbite_cart');
@@ -261,21 +276,17 @@ let trackingInterval = null;
 
 
 function resetTracking() {
-    // remove active class from items
     steps.forEach((id, index) => {
         const step = document.getElementById(id);
-        if (step) {
-            step.classList.remove('active', 'completed');
-        }
-        // Clear time
+        if (step) step.classList.remove('active', 'completed');
         const timeEl = document.getElementById('time' + (index + 1));
         if (timeEl) timeEl.textContent = '--:--';
     });
-    // Reset progress
+
+    const progressFill = document.getElementById('progressFill');
     if (progressFill) progressFill.style.height = '0%';
 
     currentStep = 0;
-
     if (trackingInterval) {
         clearInterval(trackingInterval);
         trackingInterval = null;
@@ -411,7 +422,7 @@ if ('serviceWorker' in navigator) {
             .then((registration) => {
                 console.log('✅ Service Worker registered successfully!');
                 console.log('Scope:', registration.scope);
-                
+
                 // Check for updates
                 registration.addEventListener('updatefound', () => {
                     console.log('🔄 New version available!');
@@ -421,9 +432,20 @@ if ('serviceWorker' in navigator) {
                 console.log('❌ Service Worker registration failed:', error);
             });
     });
-    
+
     // Listen for service worker updates
     navigator.serviceWorker.addEventListener('controllerchange', () => {
         console.log('🔄 Service Worker updated! Refresh for new version.');
     });
+}
+
+function initUserProfile() {
+    const savedName = localStorage.getItem('user_name') || 'User';
+    const initial = savedName.charAt(0).toUpperCase();
+
+    const userNameEls = document.querySelectorAll('#userName, #userNameMobile, #dropdownUserName');
+    const initialEls = document.querySelectorAll('#userInitial, #userInitialMobile');
+
+    userNameEls.forEach(el => { if (el) el.textContent = savedName; });
+    initialEls.forEach(el => { if (el) el.textContent = initial; });
 }

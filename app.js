@@ -29,6 +29,20 @@ app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 // app.engine("ejs", ejsMate);
+
+//no cache
+app.use("/css", (req, res, next) => {
+  console.log("CSS hit:", req.url);
+  res.set("Cache-Control", "no-store");
+  next();
+});
+
+app.use("/js", (req, res, next) => {
+  console.log("JS hit:", req.url);
+  res.set("Cache-Control", "no-store");
+  next();
+});
+
 app.use(express.static(path.join(__dirname,"/public")));
 
 
@@ -141,18 +155,7 @@ app.get("/staff/add-menu", (req, res) => {
   res.render("staff/addMenu");
 });
 
-//no cache
-app.use("/css", (req, res, next) => {
-  console.log("CSS hit:", req.url);
-  res.set("Cache-Control", "no-store");
-  next();
-});
 
-app.use("/js", (req, res, next) => {
-  console.log("JS hit:", req.url);
-  res.set("Cache-Control", "no-store");
-  next();
-});
 
 app.get("/staff/search-images", async (req, res) => {
   const query = req.query.q;
