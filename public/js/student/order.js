@@ -1,3 +1,6 @@
+import { requireAuth } from '/js/authGuard.js';
+requireAuth('customer');
+
 /* ---------------- Smooth Page Transitions ---------------- */
 document.addEventListener('DOMContentLoaded', () => {
     // Fade in sections on load

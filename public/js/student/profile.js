@@ -1,3 +1,5 @@
+import { requireAuth } from '/js/authGuard.js';
+requireAuth('customer');
 /* ============================================
    PROFILE PAGE - SIMPLE VERSION
    Future Ready: Signup data se automatically load hoga

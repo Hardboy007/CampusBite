@@ -1,3 +1,6 @@
+import { requireAuth } from '/js/authGuard.js';
+requireAuth('customer');
+
 // Menu Data For DEMO
 const menuItems = [
     { id: "1", name: "Aloo Paratha", description: "Crispy whole wheat flatbread stuffed with spiced potato filling", price: 40, image: "./images/paratha.webp", category: "Breakfast", isVeg: true, isAvailable: true },
@@ -597,18 +600,14 @@ function showToast(message) {
 // // ============ USER PROFILE MANAGEMENT ============
 function handleLogout() {
     const confirmed = confirm('Are you sure you want to logout?');
-
     if (confirmed) {
-        // Disable button to prevent multiple clicks
-        const logoutBtns = document.querySelectorAll('[onclick="handleLogout()"]');
-        logoutBtns.forEach(btn => btn.disabled = true);
-
-        showToast('Logging out...');
-
-        // Fast redirect (300ms instead of 1000ms)
-        setTimeout(() => {
-            window.location.href = '/user-selection';
-        }, 300);
+        import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js")
+            .then(({ getAuth, signOut }) => {
+                const auth = getAuth();
+                signOut(auth).then(() => {
+                    window.location.href = '/user-selection';
+                });
+            });
     }
 }
 
@@ -659,7 +658,7 @@ if ('serviceWorker' in navigator) {
             .then((registration) => {
                 console.log('✅ Service Worker registered successfully!');
                 console.log('Scope:', registration.scope);
-                
+
                 // Check for updates
                 registration.addEventListener('updatefound', () => {
                     console.log('🔄 New version available!');
@@ -669,7 +668,7 @@ if ('serviceWorker' in navigator) {
                 console.log('❌ Service Worker registration failed:', error);
             });
     });
-    
+
     // Listen for service worker updates
     navigator.serviceWorker.addEventListener('controllerchange', () => {
         console.log('🔄 Service Worker updated! Refresh for new version.');

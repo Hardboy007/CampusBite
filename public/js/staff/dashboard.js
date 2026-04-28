@@ -1,3 +1,6 @@
+import { requireAuth } from '/js/authGuard.js';
+requireAuth('staff');
+
 // ===== MOCK DATA =====
 const mockOrders = [
     { id: '#001', items: 'Aloo Paratha x2, Chai x1', total: 95, time: '9:15 AM', status: 'incoming' },

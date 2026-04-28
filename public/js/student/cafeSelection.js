@@ -1,15 +1,41 @@
+import { requireAuth } from '/js/authGuard.js';
+requireAuth('customer');
+
+// Page load pe dark mode sync karo
+if (localStorage.getItem('darkMode') === 'on') {
+    document.body.classList.add('dark-mode');
+}
+
 function toggleDarkMode() {
     const body = document.body;
     const toggleBtn = document.querySelector('.toggle-btn');
-
     body.classList.toggle('dark-mode');
 
     if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'on');
         toggleBtn.textContent = 'Light Mode';
     } else {
+        localStorage.setItem('darkMode', 'off');
         toggleBtn.textContent = 'Dark Mode';
     }
 }
+
+const collegeCanteens = {
+    'dbuu': [
+        { value: 'bbc', label: 'BBC Cafeteria' },
+        { value: 'main', label: 'Main Block Cafe' }
+    ]
+};
+
+document.getElementById('college').addEventListener('change', function () {
+    const cafe = document.getElementById('cafe');
+    const canteens = collegeCanteens[this.value] || [];
+
+    cafe.innerHTML = '<option value="" selected disabled>Select your cafe</option>';
+    canteens.forEach(c => {
+        cafe.innerHTML += `<option value="${c.value}">${c.label}</option>`;
+    });
+});
 
 // ========== HAMBURGER MENU TOGGLE ==========
 const hamburger = document.querySelector('.hamburger');
@@ -47,7 +73,7 @@ if ('serviceWorker' in navigator) {
             .then((registration) => {
                 console.log('✅ Service Worker registered successfully!');
                 console.log('Scope:', registration.scope);
-                
+
                 // Check for updates
                 registration.addEventListener('updatefound', () => {
                     console.log('🔄 New version available!');
@@ -57,7 +83,7 @@ if ('serviceWorker' in navigator) {
                 console.log('❌ Service Worker registration failed:', error);
             });
     });
-    
+
     // Listen for service worker updates
     navigator.serviceWorker.addEventListener('controllerchange', () => {
         console.log('🔄 Service Worker updated! Refresh for new version.');

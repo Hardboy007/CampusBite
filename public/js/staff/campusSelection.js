@@ -1,3 +1,6 @@
+import { requireAuth } from '/js/authGuard.js';
+requireAuth('staff');
+
 // ===== DOM REFS =====
 const campusSelect = document.getElementById('campus');
 const canteenSelect = document.getElementById('canteen');

@@ -1,3 +1,28 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBXEfqZ_XR5vdKMWhrL_Jgl9I0pm0OOcT4",
+    authDomain: "campusbite-b0225.firebaseapp.com",
+    projectId: "campusbite-b0225",
+    storageBucket: "campusbite-b0225.firebasestorage.app",
+    messagingSenderId: "23993036703",
+    appId: "1:23993036703:web:66f5372560f035b9f297aa"
+};
+// Logout function
+window.handleLogout = async function () {
+    try {
+        await signOut(auth);
+        window.location.href = '/user-selection';
+    } catch (err) {
+        console.error('Logout error:', err);
+    }
+}
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
 document.addEventListener("DOMContentLoaded", function () {   //jab pura html content load ho jaye tab ye chale
     setTimeout(function () {        //added this to fix the LATE ANIMATION BUG after linking backend on page
         // Role cards animation trigger ← YE ADD KARO
@@ -60,19 +85,36 @@ function closeModal(modalId, overlayId) {
 //Login customer form submission (UPDATED)
 const customerForm = document.getElementById("customerLoginForm");
 if (customerForm) {
-    customerForm.addEventListener("submit", function (e) {
+    customerForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
         const email = document.getElementById("customerUsername").value.trim();
         const password = document.getElementById("customerPassword").value.trim();
         const errorMsg = document.getElementById("customerLoginError");
 
-        // Clear old error
-        errorMsg.style.display = "none";
-        errorMsg.textContent = "";
+        errorMsg.textContent = '';
 
         if (!email || !password) {
-            e.preventDefault();
-            errorMsg.textContent = "Please enter both email and password.";
-            errorMsg.style.display = "block";
+            errorMsg.textContent = 'Please enter both email and password.';
+            errorMsg.style.display = 'block';
+            return;
+        }
+
+        try {
+            errorMsg.style.color = '#10b981';
+            errorMsg.style.display = 'block';
+            errorMsg.textContent = 'Logging in...';
+
+            await signInWithEmailAndPassword(auth, email, password);
+            window.location.href = '/cafeSelection';
+
+        } catch (err) {
+            errorMsg.style.color = '#ef4444';
+            errorMsg.style.display = 'block';
+            if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+                errorMsg.textContent = 'Invalid email or password.';
+            } else {
+                errorMsg.textContent = err.message;
+            }
         }
     });
 }
@@ -80,19 +122,46 @@ if (customerForm) {
 //Login staff form submission (UPDATED)
 const staffForm = document.getElementById("staffLoginForm");
 if (staffForm) {
-    staffForm.addEventListener("submit", function (e) {
-        const staffId = document.getElementById("staffUsername").value.trim();
+    staffForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const email = document.getElementById("staffUsername").value.trim();
         const password = document.getElementById("staffPassword").value.trim();
         const errorMsg = document.getElementById("staffLoginError");
 
-        // Clear old error
-        errorMsg.style.display = "none";
-        errorMsg.textContent = "";
+        errorMsg.textContent = '';
 
-        if (!staffId || !password) {
-            e.preventDefault();
-            errorMsg.textContent = "Please enter both Staff ID and Password.";
-            errorMsg.style.display = "block";
+        if (!email || !password) {
+            errorMsg.textContent = 'Please enter both email and password.';
+            errorMsg.style.display = 'block';
+            return;
+        }
+
+        try {
+            errorMsg.style.color = '#10b981';
+            errorMsg.style.display = 'block';
+            errorMsg.textContent = 'Logging in...';
+
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // Firestore se role check karo
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            if (userDoc.exists() && userDoc.data().role === 'staff') {
+                window.location.href = '/staff/campus';
+            } else {
+                errorMsg.style.color = '#ef4444';
+                errorMsg.textContent = 'Not authorized as staff.';
+                await auth.signOut();
+            }
+
+        } catch (err) {
+            errorMsg.style.color = '#ef4444';
+            errorMsg.style.display = 'block';
+            if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+                errorMsg.textContent = 'Invalid email or password.';
+            } else {
+                errorMsg.textContent = err.message;
+            }
         }
     });
 }
@@ -182,18 +251,14 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('❌ Signup form not found!');
     }
 });
-function handleCustomerSignup(e) {
+
+async function handleCustomerSignup(e) {
     if (e) e.preventDefault();
 
-    // Form identify karo
     const form = e.target;
     const isStaff = form.id === 'staffSignupForm';
-
-    const errorMsg = document.getElementById(
-        isStaff ? 'staffSignupError' : 'customerSignupError'
-    );
-    
     const prefix = isStaff ? 'staffsignup' : 'customersignup';
+    const errorMsg = document.getElementById(isStaff ? 'staffSignupError' : 'customerSignupError');
 
     const name = document.getElementById(prefix + 'Name').value.trim();
     const email = document.getElementById(prefix + 'Email').value.trim();
@@ -201,74 +266,57 @@ function handleCustomerSignup(e) {
     const password = document.getElementById(prefix + 'Password').value;
     const confirmPassword = document.getElementById(prefix + 'ConfirmPassword').value;
 
-    // Clear previous errors
     errorMsg.textContent = '';
-    errorMsg.style.color = '#ef4444';
 
     // Validation
     if (!name || !email || !phone || !password || !confirmPassword) {
-        errorMsg.textContent = 'Please fill all fields';
-        errorMsg.style.color = '#ef4444';
-        return false;
+        errorMsg.textContent = 'Please fill all fields'; return;
     }
-
-    // Phone validation (Indian numbers)
     if (!/^[6-9][0-9]{9}$/.test(phone)) {
-        errorMsg.textContent = 'Please enter a valid 10-digit phone number';
-        errorMsg.style.color = '#ef4444';
-        return false;
+        errorMsg.textContent = 'Enter valid 10-digit phone number'; return;
     }
-
-    // Email validation
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        errorMsg.textContent = 'Please enter a valid email address';
-        errorMsg.style.color = '#ef4444';
-        return false;
+        errorMsg.textContent = 'Enter valid email'; return;
     }
-
-    // Password match validation
     if (password !== confirmPassword) {
-        errorMsg.textContent = 'Passwords do not match';
-        errorMsg.style.color = '#ef4444';
-        return false;
+        errorMsg.textContent = 'Passwords do not match'; return;
     }
-
-    // Password strength validation (min 6 characters)
     if (password.length < 6) {
-        errorMsg.textContent = 'Password must be at least 6 characters';
-        errorMsg.style.color = '#ef4444';
-        return false;
+        errorMsg.textContent = 'Password must be at least 6 characters'; return;
     }
 
-    // Clear error
-    errorMsg.textContent = '';
+    try {
+        errorMsg.style.color = '#10b981';
+        errorMsg.textContent = 'Creating account...';
 
-    // Save user data to localStorage (Demo - Baad me backend API call hogi)
-    const userData = {
-        fullName: name,
-        email: email,
-        phone: phone,
-        phoneVerified: false,
-        emailVerified: false,
-        joinDate: new Date().toISOString()
-    };
+        // Firebase Auth mein user banao
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
 
-    localStorage.setItem('userData', JSON.stringify(userData));
+        // Firestore mein save karo
+        await setDoc(doc(db, 'users', user.uid), {
+            name,
+            email,
+            phone,
+            role: isStaff ? 'staff' : 'customer',
+            createdAt: new Date().toISOString()
+        });
 
-    // Show success message
-    errorMsg.textContent = 'Account created successfully! Redirecting to login...';
-    errorMsg.style.color = '#10b981';
+        errorMsg.textContent = 'Account created! Redirecting...';
 
-    // Flip back to login after 1.5 seconds
-    setTimeout(() => {
-        flipToLogin('customer');
-
-        // Clear form after flip animation completes
+        // Redirect
         setTimeout(() => {
-            document.getElementById('customerSignupForm').reset();
-            errorMsg.textContent = '';
-        }, 800);
-    }, 1200);
+            window.location.href = isStaff ? '/staff/campus' : '/cafeSelection';
+        }, 1000);
+
+    } catch (err) {
+        errorMsg.style.color = '#ef4444';
+        if (err.code === 'auth/email-already-in-use') {
+            errorMsg.textContent = 'Email already registered. Please login.';
+        } else {
+            errorMsg.textContent = err.message;
+        }
+    }
 }
 
 // ========== PWA: SERVICE WORKER REGISTRATION ==========
@@ -297,3 +345,9 @@ if (location.hostname === "localhost" && 'serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations()
         .then(regs => regs.forEach(reg => reg.unregister()));
 }
+
+// Global scope mein expose karo
+window.closeModal = closeModal;
+window.flipToSignup = flipToSignup;
+window.flipToLogin = flipToLogin;
+window.togglePassword = togglePassword;

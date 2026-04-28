@@ -72,7 +72,13 @@ app.post("/user-selection", (req, res) => {
   }
 });
 
+app.get("/login", (req, res) => {
+  res.render("listings/login");
+});
 
+app.get("/staff/login", (req, res) => {
+  res.render("staff/staffLogin");
+});
 
 //cafe selection route
 app.get("/cafeSelection", (req, res) => {
