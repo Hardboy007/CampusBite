@@ -1,6 +1,5 @@
-🍽️ CampusBite
+#CampusBite
 
-Smart campus dining, simplified.
 A full-stack PWA for college students to order food from campus canteens — and for canteen staff to manage everything from a single dashboard.
 
 🔗 Live Demo: https://campusbite-1eqe.onrender.com/
