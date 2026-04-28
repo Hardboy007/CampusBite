@@ -1,5 +1,5 @@
 // Cache name - version number (update karne ke liye)
-const CACHE_NAME = 'campusbite-v2';
+const CACHE_NAME = 'campusbite-v3';
 
 // Files jo cache karni hain (offline me kaam aayengi)
 const urlsToCache = [
