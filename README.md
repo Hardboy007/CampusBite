@@ -60,18 +60,18 @@ Firebase project (Auth + Firestore enabled)
 Unsplash API key
 
 Installation
-bash# Clone the repo
+#### Clone the repo
 git clone https://github.com/yourusername/campusbite.git
 cd campusbite
 
-# Install dependencies
+##### Install dependencies
 npm install
 
-# Create .env file
+#### Create .env file
 cp .env.example .env
-# Add your keys in .env
+#### Add your keys in .env
 
-# Start development server
+#### Start development server
 nodemon app.js
 Environment Variables
 Create a .env file in root:
