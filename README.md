@@ -4,8 +4,8 @@ A full-stack PWA for college students to order food from campus canteens — and
 
 🔗 Live Demo: https://campusbite-1eqe.onrender.com/
 
-✨ Features
-👨‍🎓 Student Side
+## ✨ Features
+### 👨‍🎓 Student Side
 
 Browse campus canteens and full menu
 Filter by category (Breakfast, Lunch, Snacks, Beverages) and price range
@@ -16,7 +16,7 @@ Real-time order tracking (Placed → Preparing → Ready → Completed)
 Search dishes with live suggestions
 Dark mode support
 
-👨‍🍳 Staff Side
+### 👨‍🍳 Staff Side
 
 Campus and canteen selection flow
 Create new canteen with details (name, timing, location, contact)
@@ -33,7 +33,7 @@ Canteen Open/Closed toggle
 
 Responsive sidebar with scroll spy
 
-🔐 Auth & Security
+### 🔐 Auth & Security
 
 Firebase Authentication (Email/Password)
 Role-based access control (Student / Staff)
@@ -41,7 +41,7 @@ Firestore security rules — users can only access their own data
 Auth guards on all protected routes
 Persistent login state
 
-📱 PWA
+### 📱 PWA
 
 Installable on mobile and desktop
 Service Worker for offline support
@@ -49,10 +49,10 @@ App manifest with icons
 Mobile-optimized UI
 
 
-🛠️ Tech Stack
+### 🛠️ Tech Stack
 LayerTechnologyFrontendHTML, CSS, Vanilla JS, Tailwind CSSTemplatingEJSBackendNode.js, Express.jsAuthFirebase AuthenticationDatabaseFirebase FirestoreImage SearchUnsplash APIAnalyticsGoogle Analytics (gtag)DeploymentRender
 
-🚀 Getting Started
+### 🚀 Getting Started
 Prerequisites
 
 Node.js v18+
@@ -117,14 +117,14 @@ campusbite/
 ├── package.json
 └── README.md
 
-🗺️ App Flow
+### 🗺️ App Flow
 Landing Page (User Selection)
 ├── Student Flow
 │   └── Login/Signup → Cafe Selection → Menu → Cart → Order → Tracking
 └── Staff Flow
     └── Login/Signup → Campus Selection → Create Canteen → Add Menu → Dashboard
 
-🔮 Planned Features
+### 🔮 Planned Features
 
  MongoDB integration for persistent orders
  Real-time order updates using WebSockets
@@ -136,7 +136,7 @@ Landing Page (User Selection)
  Multi-language support (Hindi / English)
 
 
-👨‍💻 Author
+### 👨‍💻 Author
 Hardik Srivastava
 3rd Year CSE Student
 GitHub • LinkedIn
