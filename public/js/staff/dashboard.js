@@ -260,3 +260,16 @@ function initTheme() {
         applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     });
 }
+
+window.toggleAvailability = toggleAvailability;
+window.deleteMenuItem = deleteMenuItem;
+window.openEditModal = openEditModal;
+window.closeEditModal = closeEditModal;
+window.saveEdit = saveEdit;
+window.toggleStatus = toggleStatus;
+window.updateOrder = updateOrder;
+window.openTracking = openTracking;
+window.closeTracking = closeTracking;
+window.refreshTracking = refreshTracking;
+window.searchMenuItems = searchMenuItems;
+window.setActive = setActive;
