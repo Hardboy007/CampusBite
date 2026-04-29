@@ -91,3 +91,6 @@ document.querySelector('form[action="/staff/create-canteen"]')
     const name = document.getElementById('canteenName').value;
     localStorage.setItem('cb_canteen_name', name);
   });
+
+window.openModal = openModal;
+window.closeModal = closeModal;
