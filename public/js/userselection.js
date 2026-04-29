@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -345,6 +345,38 @@ if (location.hostname === "localhost" && 'serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations()
         .then(regs => regs.forEach(reg => reg.unregister()));
 }
+
+
+const provider = new GoogleAuthProvider();
+
+async function handleGoogleLogin(role) {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    // Check if user already exists in Firestore
+    const userDoc = await getDoc(doc(db, 'users', user.uid));
+    
+    if (!userDoc.exists()) {
+      // Naya user — Firestore mein save karo
+      await setDoc(doc(db, 'users', user.uid), {
+        name: user.displayName,
+        email: user.email,
+        phone: '',
+        role: role,
+        createdAt: new Date().toISOString()
+      });
+    }
+
+    // Redirect
+    window.location.href = role === 'staff' ? '/staff/campus' : '/cafeSelection';
+
+  } catch (err) {
+    console.error('Google login error:', err);
+  }
+}
+
+window.handleGoogleLogin = handleGoogleLogin;
 
 // Global scope mein expose karo
 window.closeModal = closeModal;
