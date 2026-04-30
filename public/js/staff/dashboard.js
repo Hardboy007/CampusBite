@@ -70,7 +70,7 @@ function loadMenuItems() {
         </label>
         <button class="edit-btn" onclick="openEditModal(${i})">
           <i class="fa-solid fa-pen"></i>
-        /button>
+        </button>
         <button class="remove-btn" onclick="deleteMenuItem(${i})">
           <i class="fa-solid fa-trash"></i>
         </button>
