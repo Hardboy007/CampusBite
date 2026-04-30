@@ -70,6 +70,15 @@ document.addEventListener('DOMContentLoaded', function () {
     showSkeletonLoading();
 });
 
+function initUserProfile() {
+  const savedName = localStorage.getItem('user_name') || 'User';
+  const initial = savedName.charAt(0).toUpperCase();
+  document.querySelectorAll('#userName, #userNameMobile, #dropdownUserName')
+    .forEach(el => { if (el) el.textContent = savedName; });
+  document.querySelectorAll('#userInitial, #userInitialMobile')
+    .forEach(el => { if (el) el.textContent = initial; });
+}
+
 // Profile dropdown toggle function
 function toggleProfileDropdown() {
     const dropdown = document.getElementById('profileDropdown');
@@ -674,3 +683,16 @@ if ('serviceWorker' in navigator) {
         console.log('🔄 Service Worker updated! Refresh for new version.');
     });
 }
+
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.clearCart = clearCart;
+window.toggleCart = toggleCart;
+window.filterCategory = filterCategory;
+window.filterByPrice = filterByPrice;
+window.selectSuggestion = selectSuggestion;
+window.toggleDarkMode = toggleDarkMode;
+window.toggleProfileDropdown = toggleProfileDropdown;
+window.handleLogout = handleLogout;
+window.proceedToCheckout = proceedToCheckout;
+window.browseFullMenu = browseFullMenu;
