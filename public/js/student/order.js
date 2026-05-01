@@ -452,3 +452,11 @@ function initUserProfile() {
     userNameEls.forEach(el => { if (el) el.textContent = savedName; });
     initialEls.forEach(el => { if (el) el.textContent = initial; });
 }
+
+window.checkPlaceBtnState = checkPlaceBtnState;
+window.closeConfirm = closeConfirm;
+window.openTracking = openTracking;
+window.closeTracking = closeTracking;
+window.refreshTracking = refreshTracking;
+window.goEditCart = goEditCart;
+window.useSavedPhone = useSavedPhone;
